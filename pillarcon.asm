@@ -1287,232 +1287,21 @@ CheckGameInProgress:
   STA movementEnabled
 EndCheckGameInProgress:
 
-CheckIntroScene:
-  LDA introSceneTimer
-  CMP #$01
-  BCC .SkipIntroSceneCheck
+LoadIntroScene:
+  LDA introScene
+  BEQ EndLoadIntroScene
 
   LDA introSceneLoaded
-  BNE .SkipIntroSceneCheck
+  BNE EndLoadIntroScene
 
-  LDA introScene
-  BNE .LoadIntroScene
+  JSR DisableGraphics
+  JSR ClearBackground
 
-.SkipIntroSceneCheck:
-  LDA introSceneTimer
-  CMP #$C0
-  BCS .EndFrame
-  CMP #$60
-  BCC .HideBubble
+  JSR LoadIntroSequence
 
-  JSR AlternateBubbleAndTraveler
-  JMP EndCheckIntroScene
-
-.HideBubble:
-  JSR HideTravelerTimeBubbleSprite
-
-.EndFrame:
-  JMP EndCheckIntroScene
-
-.LoadIntroScene:
   LDA #$01
   STA introSceneLoaded
-
-  JSR DisableGraphics
-
-  JSR LoadPlayerSprite
-  JSR LoadTravelerSprite
-  JSR HideTravelerSprite
-  JSR LoadTravelerTimeBubbleSprite
-
-  LDA #LOW(background)
-  STA pointerBackgroundLowByte
-  LDA #HIGH(background)
-  STA pointerBackgroundHighByte
-  JSR LoadBackground
-
-  JSR LoadAttribute
-  JSR LoadPalettes
-
-  LDA #$F0
-  STA introSceneTimer
-EndCheckIntroScene:
-
-CheckIntroScene2:
-  LDA introSceneTimer2
-  CMP #$01
-  BCC .SkipIntroSceneCheck
-
-  LDA introSceneLoaded2
-  BNE .SkipIntroSceneCheck
-
-  LDA introScene2
-  BNE .LoadIntroScene
-
-  JMP EndCheckIntroScene2
-
-.SkipIntroSceneCheck:
-  LDA introScene2
-  BEQ EndCheckIntroScene2
-
-  LDA introSceneTimer2
-  CMP #$C0
-  BCS .EndFrame
-  CMP #$60
-  BCC .ShowBubble
-
-  JSR AlternateBubbleAndPlayer
-  JMP EndCheckIntroScene2
-
-.ShowBubble:
-  JSR ShowPlayerTimeBubbleSprite
-  JSR HidePlayerSprite
-
-.EndFrame:
-  JMP EndCheckIntroScene2
-
-.LoadIntroScene:
-  LDA #$01
-  STA introSceneLoaded2
-
-  JSR DisableGraphics
-
-  JSR ShowPlayerSprite
-  JSR LoadTravelerSprite
-  JSR LoadPlayerTimeBubbleSprite
-  JSR HidePlayerTimeBubbleSprite
-
-  LDA #LOW(background)
-  STA pointerBackgroundLowByte
-  LDA #HIGH(background)
-  STA pointerBackgroundHighByte
-  JSR LoadBackground
-
-  JSR LoadAttribute
-  JSR LoadPalettes
-
-  LDA #$F0
-  STA introSceneTimer2
-EndCheckIntroScene2:
-
-CheckIntroTimer:
-  LDA introScene
-  BEQ EndCheckIntroTimer
-
-  LDA introSceneTimer
-  CMP #$01
-  BEQ .LoadIntroDialog
-
-  DEC introSceneTimer
-  JMP EndCheckIntroTimer
-
-.LoadIntroDialog:
-  LDA #$00
-  STA introScene
-  STA introSceneTimer
-  LDA #$01
-  STA introDialog
-
-EndCheckIntroTimer:
-
-CheckIntroTimer2:
-  LDA introScene2
-  BEQ EndCheckIntroTimer2
-
-  LDA introSceneTimer2
-  CMP #$01
-  BEQ .LoadTravelTransition
-
-  DEC introSceneTimer2
-  JMP EndCheckIntroTimer2
-
-.LoadTravelTransition:
-  LDA #$00
-  STA introScene2
-  STA introSceneTimer2
-  JSR HidePlayerTimeBubbleSprite
-  JSR HideTravelerSprite
-
-  LDA #$01
-  STA travelTransition
-
-EndCheckIntroTimer2:
-
-CheckTravelTransition:
-  LDA travelTransitionTimer
-  CMP #$01
-  BCC .SkipTransitionCheck
-
-  LDA travelTransitionLoaded
-  BNE .SkipTransitionCheck
-
-  LDA travelTransition
-  BNE .LoadTravelTransition
-
-.SkipTransitionCheck:
-  JMP EndCheckTravelTransition
-
-.LoadTravelTransition:
-  LDA #$01
-  STA travelTransitionLoaded
-
-  JSR DisableGraphics
-
-  JSR ClearBackground
-  JSR LoadTimeTravelTransition
-  JSR HideSprites
-  JSR HidePlayerSprite
-
-  LDA #$FF
-  STA travelTransitionTimer
-EndCheckTravelTransition:
-
-CheckTravelTransitionTimer:
-  LDA travelTransition
-  BEQ EndCheckTravelTransitionTimer
-
-  LDA travelTransitionTimer
-  CMP #$01
-  BEQ .LoadGame
-
-  DEC travelTransitionTimer
-  JMP EndCheckTravelTransitionTimer
-
-.LoadGame:
-  LDA #$00
-  STA travelTransition
-
-EndCheckTravelTransitionTimer:
-
-CheckIntroDialog:
-  LDA dialogDelay
-  BEQ .EndCheckingDelay
-
-  JMP EndCheckIntroDialog
-
-.EndCheckingDelay:
-
-  LDA advanceDialog
-  BNE .DrawDialog
-
-  LDA #$01
-  STA dialogDelay
-
-  LDA introDialog
-  BEQ EndCheckIntroDialog
-
-  LDA introDialogLoaded
-  BNE EndCheckIntroDialog
-
-.DrawDialog:
-  JSR DrawNextDialogScreen
-
-  LDA #$01
-  STA introDialogLoaded
-
-  LDA #$00
-  STA advanceDialog
-EndCheckIntroDialog:
+EndLoadIntroScene:
 
   LDA introSceneLoaded
   BEQ .TitleScreenBackground
@@ -1622,6 +1411,9 @@ backgroundDialogIntro11:
 
 timeTravelTransition:
   .include "graphics/timeTravelTransition.asm"
+
+introSequence:
+  .include "graphics/introSequence.asm"
 
 attribute:
   .include "graphics/attributes.asm"

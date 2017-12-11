@@ -43,7 +43,7 @@ ClearBackground:
   BNE .Loop
   RTS
 
-LoadTimeTravelTransition:
+LoadIntroSequence:
   LDA $2002
   LDA #$21
   STA $2006
@@ -52,7 +52,7 @@ LoadTimeTravelTransition:
 
   LDX #$00
 .Loop:
-  LDA timeTravelTransition, x
+  LDA introSequence, x
   STA $2007
 
   INX
