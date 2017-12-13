@@ -8,6 +8,9 @@ ReadA:
   AND #%00000001
   BEQ FallingTime
 
+  LDA #$01
+  STA buttonPressedA
+
   LDA titleScreen
   BNE ReadADone
 

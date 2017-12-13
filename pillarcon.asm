@@ -57,6 +57,7 @@ playerVisibility  .rs 1
 travelTransition  .rs 1
 travelTransitionLoaded  .rs 1
 travelTransitionTimer  .rs 1
+buttonPressedA  .rs 1
 buttonPressedB  .rs 1
 buttonBReleased  .rs 1
 runAnimationTimer  .rs 1
@@ -1291,6 +1292,18 @@ LoadIntroScene1:
   LDA introScene
   BEQ EndLoadIntroScene1
 
+  LDA buttonPressedA
+  BEQ .LoadScene
+
+  LDA #$00
+  STA introScene
+
+  LDA #$01
+  STA introScene2
+  JMP LoadIntroScene2
+
+.LoadScene:
+
   LDA introSceneLoaded
   BNE EndLoadIntroScene1
 
@@ -1311,14 +1324,23 @@ LoadIntroScene1:
   STA introSceneLoaded
 EndLoadIntroScene1:
 
-;   LDA introSceneLoaded
-;   BEQ .TitleScreenBackground
-;
-;   JSR EnableGraphics
-;   JMP EndCurrentFrame
-;
-; .TitleScreenBackground:
-;   JSR EnableGraphicsPattern2
+LoadIntroScene2:
+  LDA introScene2
+  BEQ EndLoadIntroScene2
+
+  LDA introSceneLoaded2
+  BNE EndLoadIntroScene2
+
+  JSR DisableGraphics
+  JSR ClearBackground
+
+
+
+  JSR EnableGraphics
+
+  LDA #$01
+  STA introSceneLoaded2
+EndLoadIntroScene2:
 
 EndCurrentFrame:
   JSR musicPlay
