@@ -1250,67 +1250,75 @@ CheckTitleScreen:
 
 EndCheckTitleScreen:
 
-CheckGameInProgress:
-  LDA titleScreen
-  BNE EndCheckGameInProgress
+; CheckGameInProgress:
+;   LDA titleScreen
+;   BNE EndCheckGameInProgress
+;
+;   LDA introDialog
+;   BNE EndCheckGameInProgress
+;
+;   LDA gameInProgress
+;   BNE EndCheckGameInProgress
+;
+;   LDA introScene
+;   BNE EndCheckGameInProgress
+;
+;   LDA introScene2
+;   BNE EndCheckGameInProgress
+;
+;   LDA travelTransition
+;   BNE EndCheckGameInProgress
+;
+;   JSR DisableGraphics
+;
+;   JSR LoadSprites
+;
+;   LDA #LOW(background)
+;   STA pointerBackgroundLowByte
+;   LDA #HIGH(background)
+;   STA pointerBackgroundHighByte
+;   JSR LoadBackground
+;
+;   JSR LoadAttribute
+;   JSR LoadFuturePalettes
+;
+;   LDA #$01
+;   STA gameInProgress
+;   STA movementEnabled
+; EndCheckGameInProgress:
 
-  LDA introDialog
-  BNE EndCheckGameInProgress
-
-  LDA gameInProgress
-  BNE EndCheckGameInProgress
-
+LoadIntroScene1:
   LDA introScene
-  BNE EndCheckGameInProgress
-
-  LDA introScene2
-  BNE EndCheckGameInProgress
-
-  LDA travelTransition
-  BNE EndCheckGameInProgress
-
-  JSR DisableGraphics
-
-  JSR LoadSprites
-
-  LDA #LOW(background)
-  STA pointerBackgroundLowByte
-  LDA #HIGH(background)
-  STA pointerBackgroundHighByte
-  JSR LoadBackground
-
-  JSR LoadAttribute
-  JSR LoadFuturePalettes
-
-  LDA #$01
-  STA gameInProgress
-  STA movementEnabled
-EndCheckGameInProgress:
-
-LoadIntroScene:
-  LDA introScene
-  BEQ EndLoadIntroScene
+  BEQ EndLoadIntroScene1
 
   LDA introSceneLoaded
-  BNE EndLoadIntroScene
+  BNE EndLoadIntroScene1
 
   JSR DisableGraphics
   JSR ClearBackground
 
-  JSR LoadIntroSequence
+  JSR LoadZeroAttribute
+
+  LDA #LOW(introSequence)
+  STA pointerBackgroundLowByte
+  LDA #HIGH(introSequence)
+  STA pointerBackgroundHighByte
+  JSR LoadBackground
+
+  JSR EnableGraphics
 
   LDA #$01
   STA introSceneLoaded
-EndLoadIntroScene:
+EndLoadIntroScene1:
 
-  LDA introSceneLoaded
-  BEQ .TitleScreenBackground
-
-  JSR EnableGraphics
-  JMP EndCurrentFrame
-
-.TitleScreenBackground:
-  JSR EnableGraphicsPattern2
+;   LDA introSceneLoaded
+;   BEQ .TitleScreenBackground
+;
+;   JSR EnableGraphics
+;   JMP EndCurrentFrame
+;
+; .TitleScreenBackground:
+;   JSR EnableGraphicsPattern2
 
 EndCurrentFrame:
   JSR musicPlay
@@ -1377,37 +1385,37 @@ backgroundDialogTemplate:
   .include "graphics/dialog/dialogTemplate.asm"
 
 backgroundDialogIntro1:
-  .include "graphics/dialog/intro01.asm"
+  ; .include "graphics/dialog/intro01.asm"
 
 backgroundDialogIntro2:
-  .include "graphics/dialog/intro02.asm"
+  ; .include "graphics/dialog/intro02.asm"
 
 backgroundDialogIntro3:
-  .include "graphics/dialog/intro03.asm"
+  ; .include "graphics/dialog/intro03.asm"
 
 backgroundDialogIntro4:
-  .include "graphics/dialog/intro04.asm"
+  ; .include "graphics/dialog/intro04.asm"
 
 backgroundDialogIntro5:
-  .include "graphics/dialog/intro05.asm"
+  ; .include "graphics/dialog/intro05.asm"
 
 backgroundDialogIntro6:
-  .include "graphics/dialog/intro06.asm"
+  ; .include "graphics/dialog/intro06.asm"
 
 backgroundDialogIntro7:
-  .include "graphics/dialog/intro07.asm"
+  ; .include "graphics/dialog/intro07.asm"
 
 backgroundDialogIntro8:
-  .include "graphics/dialog/intro08.asm"
+  ; .include "graphics/dialog/intro08.asm"
 
 backgroundDialogIntro9:
-  .include "graphics/dialog/intro09.asm"
+  ; .include "graphics/dialog/intro09.asm"
 
 backgroundDialogIntro10:
-  .include "graphics/dialog/intro10.asm"
+  ; .include "graphics/dialog/intro10.asm"
 
 backgroundDialogIntro11:
-  .include "graphics/dialog/intro11.asm"
+  ; .include "graphics/dialog/intro11.asm"
 
 timeTravelTransition:
   .include "graphics/timeTravelTransition.asm"
