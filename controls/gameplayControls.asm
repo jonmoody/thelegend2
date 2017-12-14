@@ -56,6 +56,7 @@ FallingTime:
   STA falling
 
   LDA #$00
+  STA buttonPressedA
   STA dialogDelay
 
   JMP ReadADone
@@ -81,6 +82,9 @@ ReadB:
   AND #%00000001
   BEQ .ReleaseButton
 
+  LDA #$01
+  STA buttonPressedB
+
 .CheckIntro:
   LDA introScene
   BEQ .CheckIntro2
@@ -94,9 +98,6 @@ ReadB:
   JMP ReadBDone
 
 .EndCheckIntro:
-
-  LDA #$01
-  STA buttonPressedB
 
   LDA buttonBReleased
   BNE .CanFireProjectile

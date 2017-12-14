@@ -44,6 +44,8 @@ introSceneLoaded2  .rs 1
 introSceneTimer2  .rs 1
 introDialog  .rs 1
 introDialogLoaded  .rs 1
+forgeScene  .rs 1
+forgeSceneLoaded  .rs 1
 advanceDialog  .rs 1
 currentDialogScreen  .rs 1
 endOfDialog  .rs 1
@@ -1328,6 +1330,17 @@ LoadIntroScene2:
   LDA introScene2
   BEQ EndLoadIntroScene2
 
+  LDA buttonPressedB ; fix this
+  BEQ .LoadScene
+
+  LDA #$00
+  STA introScene2
+
+  LDA #$01
+  STA forgeScene
+  JMP LoadForgeScene
+
+.LoadScene:
   LDA introSceneLoaded2
   BNE EndLoadIntroScene2
 
@@ -1341,6 +1354,30 @@ LoadIntroScene2:
   LDA #$01
   STA introSceneLoaded2
 EndLoadIntroScene2:
+
+LoadForgeScene:
+  LDA forgeScene
+  BEQ EndLoadForgeScene
+
+  LDA forgeSceneLoaded
+  BNE EndLoadForgeScene
+
+  JSR DisableGraphics
+  JSR ClearBackground
+
+  JSR LoadZeroAttribute
+
+  LDA #LOW(background)
+  STA pointerBackgroundLowByte
+  LDA #HIGH(background)
+  STA pointerBackgroundHighByte
+  JSR LoadBackground
+
+  JSR EnableGraphics
+
+  LDA #$01
+  STA forgeSceneLoaded
+EndLoadForgeScene:
 
 EndCurrentFrame:
   JSR musicPlay
