@@ -1334,7 +1334,7 @@ LoadIntroScene2:
   JSR DisableGraphics
   JSR ClearBackground
 
-
+  JSR LoadCapturedTextScreen
 
   JSR EnableGraphics
 
@@ -1439,8 +1439,8 @@ backgroundDialogIntro10:
 backgroundDialogIntro11:
   ; .include "graphics/dialog/intro11.asm"
 
-timeTravelTransition:
-  .include "graphics/timeTravelTransition.asm"
+capturedTextScreen:
+  .include "graphics/capturedTextScreen.asm"
 
 introSequence:
   .include "graphics/introSequence.asm"

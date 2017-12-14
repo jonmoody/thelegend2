@@ -43,7 +43,7 @@ ClearBackground:
   BNE .Loop
   RTS
 
-LoadIntroSequence:
+LoadCapturedTextScreen:
   LDA $2002
   LDA #$21
   STA $2006
@@ -52,10 +52,10 @@ LoadIntroSequence:
 
   LDX #$00
 .Loop:
-  LDA introSequence, x
+  LDA capturedTextScreen, x
   STA $2007
 
   INX
-  CPX #$E0
+  CPX #$52
   BNE .Loop
   RTS
