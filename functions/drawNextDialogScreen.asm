@@ -11,13 +11,7 @@ DrawNextDialogScreen:
   BNE LoadIntro2
 
 LoadIntro1:
-  LDA #LOW(backgroundDialogTemplate)
-  STA pointerBackgroundLowByte
-  LDA #HIGH(backgroundDialogTemplate)
-  STA pointerBackgroundHighByte
-  JSR LoadBackground
-  JSR LoadAttributeDialog
-  JSR LoadDialogPalettes
+  JSR DrawDialogBackground
 
   LDA #LOW(backgroundDialogIntro1)
   STA pointerBackgroundLowByte
@@ -29,131 +23,133 @@ LoadIntro1:
 LoadIntro2:
   LDA currentDialogScreen
   CMP #$02
-  BNE LoadIntro3
+  ; BNE LoadIntro3
+  BNE EndLoadingDialogBackground
 
-  JSR WipeTopDialog
+  JSR DrawDialogBackground
+
   LDA #LOW(backgroundDialogIntro2)
   STA pointerBackgroundLowByte
   LDA #HIGH(backgroundDialogIntro2)
   STA pointerBackgroundHighByte
   JSR LoadBottomDialog
-  JMP EndLoadingDialogBackground
+  ; JMP EndLoadingDialogBackground
 
-LoadIntro3:
-  LDA currentDialogScreen
-  CMP #$03
-  BNE LoadIntro4
-
-  JSR WipeBottomDialog
-  LDA #LOW(backgroundDialogIntro3)
-  STA pointerBackgroundLowByte
-  LDA #HIGH(backgroundDialogIntro3)
-  STA pointerBackgroundHighByte
-  JSR LoadTopDialog
-  JMP EndLoadingDialogBackground
-
-LoadIntro4:
-  LDA currentDialogScreen
-  CMP #$04
-  BNE LoadIntro5
-
-  JSR WipeTopDialog
-  LDA #LOW(backgroundDialogIntro4)
-  STA pointerBackgroundLowByte
-  LDA #HIGH(backgroundDialogIntro4)
-  STA pointerBackgroundHighByte
-  JSR LoadBottomDialog
-  JMP EndLoadingDialogBackground
-
-LoadIntro5:
-  LDA currentDialogScreen
-  CMP #$05
-  BNE LoadIntro6
-
-  JSR WipeBottomDialog
-  LDA #LOW(backgroundDialogIntro5)
-  STA pointerBackgroundLowByte
-  LDA #HIGH(backgroundDialogIntro5)
-  STA pointerBackgroundHighByte
-  JSR LoadBottomDialog
-  JMP EndLoadingDialogBackground
-
-LoadIntro6:
-  LDA currentDialogScreen
-  CMP #$06
-  BNE LoadIntro7
-
-  JSR WipeBottomDialog
-  LDA #LOW(backgroundDialogIntro6)
-  STA pointerBackgroundLowByte
-  LDA #HIGH(backgroundDialogIntro6)
-  STA pointerBackgroundHighByte
-  JSR LoadBottomDialog
-  JMP EndLoadingDialogBackground
-
-LoadIntro7:
-  LDA currentDialogScreen
-  CMP #$07
-  BNE LoadIntro8
-
-  JSR WipeBottomDialog
-  LDA #LOW(backgroundDialogIntro7)
-  STA pointerBackgroundLowByte
-  LDA #HIGH(backgroundDialogIntro7)
-  STA pointerBackgroundHighByte
-  JSR LoadTopDialog
-  JMP EndLoadingDialogBackground
-
-LoadIntro8:
-  LDA currentDialogScreen
-  CMP #$08
-  BNE LoadIntro9
-
-  JSR WipeTopDialog
-  LDA #LOW(backgroundDialogIntro8)
-  STA pointerBackgroundLowByte
-  LDA #HIGH(backgroundDialogIntro8)
-  STA pointerBackgroundHighByte
-  JSR LoadBottomDialog
-  JMP EndLoadingDialogBackground
-
-LoadIntro9:
-  LDA currentDialogScreen
-  CMP #$09
-  BNE LoadIntro10
-
-  JSR WipeBottomDialog
-  LDA #LOW(backgroundDialogIntro9)
-  STA pointerBackgroundLowByte
-  LDA #HIGH(backgroundDialogIntro9)
-  STA pointerBackgroundHighByte
-  JSR LoadBottomDialog
-  JMP EndLoadingDialogBackground
-
-LoadIntro10:
-  LDA currentDialogScreen
-  CMP #$0A
-  BNE LoadIntro11
-
-  JSR WipeBottomDialog
-  LDA #LOW(backgroundDialogIntro10)
-  STA pointerBackgroundLowByte
-  LDA #HIGH(backgroundDialogIntro10)
-  STA pointerBackgroundHighByte
-  JSR LoadTopDialog
-  JMP EndLoadingDialogBackground
-
-LoadIntro11:
-  LDA currentDialogScreen
-  CMP #$0B
-  BNE EndLoadingDialogBackground
-
-  JSR WipeTopDialog
-  LDA #LOW(backgroundDialogIntro11)
-  STA pointerBackgroundLowByte
-  LDA #HIGH(backgroundDialogIntro11)
-  STA pointerBackgroundHighByte
-  JSR LoadBottomDialog
+; LoadIntro3:
+;   LDA currentDialogScreen
+;   CMP #$03
+;   BNE LoadIntro4
+;
+;   JSR WipeBottomDialog
+;   LDA #LOW(backgroundDialogIntro3)
+;   STA pointerBackgroundLowByte
+;   LDA #HIGH(backgroundDialogIntro3)
+;   STA pointerBackgroundHighByte
+;   JSR LoadTopDialog
+;   JMP EndLoadingDialogBackground
+;
+; LoadIntro4:
+;   LDA currentDialogScreen
+;   CMP #$04
+;   BNE LoadIntro5
+;
+;   JSR WipeTopDialog
+;   LDA #LOW(backgroundDialogIntro4)
+;   STA pointerBackgroundLowByte
+;   LDA #HIGH(backgroundDialogIntro4)
+;   STA pointerBackgroundHighByte
+;   JSR LoadBottomDialog
+;   JMP EndLoadingDialogBackground
+;
+; LoadIntro5:
+;   LDA currentDialogScreen
+;   CMP #$05
+;   BNE LoadIntro6
+;
+;   JSR WipeBottomDialog
+;   LDA #LOW(backgroundDialogIntro5)
+;   STA pointerBackgroundLowByte
+;   LDA #HIGH(backgroundDialogIntro5)
+;   STA pointerBackgroundHighByte
+;   JSR LoadBottomDialog
+;   JMP EndLoadingDialogBackground
+;
+; LoadIntro6:
+;   LDA currentDialogScreen
+;   CMP #$06
+;   BNE LoadIntro7
+;
+;   JSR WipeBottomDialog
+;   LDA #LOW(backgroundDialogIntro6)
+;   STA pointerBackgroundLowByte
+;   LDA #HIGH(backgroundDialogIntro6)
+;   STA pointerBackgroundHighByte
+;   JSR LoadBottomDialog
+;   JMP EndLoadingDialogBackground
+;
+; LoadIntro7:
+;   LDA currentDialogScreen
+;   CMP #$07
+;   BNE LoadIntro8
+;
+;   JSR WipeBottomDialog
+;   LDA #LOW(backgroundDialogIntro7)
+;   STA pointerBackgroundLowByte
+;   LDA #HIGH(backgroundDialogIntro7)
+;   STA pointerBackgroundHighByte
+;   JSR LoadTopDialog
+;   JMP EndLoadingDialogBackground
+;
+; LoadIntro8:
+;   LDA currentDialogScreen
+;   CMP #$08
+;   BNE LoadIntro9
+;
+;   JSR WipeTopDialog
+;   LDA #LOW(backgroundDialogIntro8)
+;   STA pointerBackgroundLowByte
+;   LDA #HIGH(backgroundDialogIntro8)
+;   STA pointerBackgroundHighByte
+;   JSR LoadBottomDialog
+;   JMP EndLoadingDialogBackground
+;
+; LoadIntro9:
+;   LDA currentDialogScreen
+;   CMP #$09
+;   BNE LoadIntro10
+;
+;   JSR WipeBottomDialog
+;   LDA #LOW(backgroundDialogIntro9)
+;   STA pointerBackgroundLowByte
+;   LDA #HIGH(backgroundDialogIntro9)
+;   STA pointerBackgroundHighByte
+;   JSR LoadBottomDialog
+;   JMP EndLoadingDialogBackground
+;
+; LoadIntro10:
+;   LDA currentDialogScreen
+;   CMP #$0A
+;   BNE LoadIntro11
+;
+;   JSR WipeBottomDialog
+;   LDA #LOW(backgroundDialogIntro10)
+;   STA pointerBackgroundLowByte
+;   LDA #HIGH(backgroundDialogIntro10)
+;   STA pointerBackgroundHighByte
+;   JSR LoadTopDialog
+;   JMP EndLoadingDialogBackground
+;
+; LoadIntro11:
+;   LDA currentDialogScreen
+;   CMP #$0B
+;   BNE EndLoadingDialogBackground
+;
+;   JSR WipeTopDialog
+;   LDA #LOW(backgroundDialogIntro11)
+;   STA pointerBackgroundLowByte
+;   LDA #HIGH(backgroundDialogIntro11)
+;   STA pointerBackgroundHighByte
+;   JSR LoadBottomDialog
 
   LDA #$01
   STA endOfDialog
@@ -216,4 +212,14 @@ DrawBottomSprite:
   STA travelerSprite12Y
 
 EndDrawBottomSprite:
+  RTS
+
+DrawDialogBackground:
+  LDA #LOW(backgroundDialogTemplate)
+  STA pointerBackgroundLowByte
+  LDA #HIGH(backgroundDialogTemplate)
+  STA pointerBackgroundHighByte
+  JSR LoadBackground
+  JSR LoadAttributeDialog
+  JSR LoadDialogPalettes
   RTS

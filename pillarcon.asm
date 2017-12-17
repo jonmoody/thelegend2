@@ -1359,18 +1359,25 @@ LoadForgeDialogSequence:
   LDA forgeScene
   BEQ EndLoadForgeDialogSequence
 
+  LDA advanceDialog
+  BNE .DrawDialog
+
   LDA forgeSceneLoaded
   BNE EndLoadForgeDialogSequence
 
+.DrawDialog:
   JSR DisableGraphics
   JSR ClearBackground
 
   LDA #$01
   STA introDialog
-  
+
   JSR DrawNextDialogScreen
 
   JSR EnableGraphics
+
+  LDA #$00
+  STA advanceDialog
 
   LDA #$01
   STA forgeSceneLoaded
