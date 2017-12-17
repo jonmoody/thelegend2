@@ -60,6 +60,7 @@ travelTransition  .rs 1
 travelTransitionLoaded  .rs 1
 travelTransitionTimer  .rs 1
 buttonPressedA  .rs 1
+previousButtonStateA  .rs 1
 buttonPressedB  .rs 1
 buttonBReleased  .rs 1
 runAnimationTimer  .rs 1
@@ -1366,15 +1367,10 @@ LoadForgeDialogSequence:
   BNE EndLoadForgeDialogSequence
 
 .DrawDialog:
-  JSR DisableGraphics
-  JSR ClearBackground
-
   LDA #$01
   STA introDialog
 
   JSR DrawNextDialogScreen
-
-  JSR EnableGraphics
 
   LDA #$00
   STA advanceDialog
@@ -1454,7 +1450,7 @@ backgroundDialogIntro2:
   .include "graphics/dialog/intro02.asm"
 
 backgroundDialogIntro3:
-  ; .include "graphics/dialog/intro03.asm"
+  .include "graphics/dialog/intro03.asm"
 
 backgroundDialogIntro4:
   ; .include "graphics/dialog/intro04.asm"

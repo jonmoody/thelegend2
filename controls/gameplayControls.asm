@@ -63,7 +63,11 @@ FallingTime:
 
 AdvanceDialog:
   LDA endOfDialog
-  BNE DialogComplete
+  BNE ReadADone
+
+  LDA previousButtonStateA
+  AND buttonPressedA
+  BNE ReadADone
 
   LDA #$01
   STA advanceDialog
@@ -76,6 +80,8 @@ DialogComplete:
   STA introScene2
 
 ReadADone:
+  LDA buttonPressedA
+  STA previousButtonStateA
 
 ReadB:
   LDA $4016       ; Player 1 - B

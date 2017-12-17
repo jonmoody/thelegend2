@@ -6,11 +6,11 @@ DrawNextDialogScreen:
   JSR DrawTopSprite
   JSR DrawBottomSprite
 
+LoadIntro1:
   LDA currentDialogScreen
   CMP #$01
   BNE LoadIntro2
 
-LoadIntro1:
   JSR DrawDialogBackground
 
   LDA #LOW(backgroundDialogIntro1)
@@ -18,13 +18,13 @@ LoadIntro1:
   LDA #HIGH(backgroundDialogIntro1)
   STA pointerBackgroundHighByte
   JSR LoadTopDialog
+
   JMP EndLoadingDialogBackground
 
 LoadIntro2:
   LDA currentDialogScreen
   CMP #$02
-  ; BNE LoadIntro3
-  BNE EndLoadingDialogBackground
+  BNE LoadIntro3
 
   JSR DrawDialogBackground
 
@@ -33,7 +33,50 @@ LoadIntro2:
   LDA #HIGH(backgroundDialogIntro2)
   STA pointerBackgroundHighByte
   JSR LoadBottomDialog
-  ; JMP EndLoadingDialogBackground
+
+  JMP EndLoadingDialogBackground
+
+LoadIntro3: ; Actually put in real text here and beyond - transitions seem to be ok now
+  LDA currentDialogScreen
+  CMP #$03
+  BNE LoadIntro4
+
+  JSR DrawDialogBackground
+
+  LDA #LOW(backgroundDialogIntro3)
+  STA pointerBackgroundLowByte
+  LDA #HIGH(backgroundDialogIntro3)
+  STA pointerBackgroundHighByte
+  JSR LoadBottomDialog
+  JMP EndLoadingDialogBackground
+
+LoadIntro4:
+  LDA currentDialogScreen
+  CMP #$04
+  BNE LoadIntro5
+
+  JSR DrawDialogBackground
+
+  LDA #LOW(backgroundDialogIntro2)
+  STA pointerBackgroundLowByte
+  LDA #HIGH(backgroundDialogIntro2)
+  STA pointerBackgroundHighByte
+  JSR LoadTopDialog
+  JMP EndLoadingDialogBackground
+
+LoadIntro5:
+  LDA currentDialogScreen
+  CMP #$05
+  BNE EndLoadingDialogBackground
+
+  JSR DrawDialogBackground
+
+  LDA #LOW(backgroundDialogIntro1)
+  STA pointerBackgroundLowByte
+  LDA #HIGH(backgroundDialogIntro1)
+  STA pointerBackgroundHighByte
+  JSR LoadBottomDialog
+  JMP EndLoadingDialogBackground
 
 ; LoadIntro3:
 ;   LDA currentDialogScreen
@@ -153,7 +196,10 @@ LoadIntro2:
 
   LDA #$01
   STA endOfDialog
+  LDA #$00
+  STA forgeScene
 EndLoadingDialogBackground:
+  JSR EnableGraphics
   RTS
 
 DrawTopSprite:
