@@ -1365,16 +1365,7 @@ LoadForgeDialogSequence:
   JSR DisableGraphics
   JSR ClearBackground
 
-  JSR HideSprites
-
-  LDA #LOW(backgroundDialogTemplate)
-  STA pointerBackgroundLowByte
-  LDA #HIGH(backgroundDialogTemplate)
-  STA pointerBackgroundHighByte
-  JSR LoadBackground
-
-  JSR LoadDialogPalettes
-  JSR LoadAttributeDialog
+  JSR DrawNextDialogScreen
 
   JSR EnableGraphics
 
