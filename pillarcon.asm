@@ -1338,7 +1338,7 @@ LoadIntroScene2:
 
   LDA #$01
   STA forgeScene
-  JMP LoadForgeScene
+  JMP LoadForgeDialogSequence
 
 .LoadScene:
   LDA introSceneLoaded2
@@ -1355,29 +1355,32 @@ LoadIntroScene2:
   STA introSceneLoaded2
 EndLoadIntroScene2:
 
-LoadForgeScene:
+LoadForgeDialogSequence:
   LDA forgeScene
-  BEQ EndLoadForgeScene
+  BEQ EndLoadForgeDialogSequence
 
   LDA forgeSceneLoaded
-  BNE EndLoadForgeScene
+  BNE EndLoadForgeDialogSequence
 
   JSR DisableGraphics
   JSR ClearBackground
 
-  JSR LoadZeroAttribute
+  JSR HideSprites
 
-  LDA #LOW(background)
+  LDA #LOW(backgroundDialogTemplate)
   STA pointerBackgroundLowByte
-  LDA #HIGH(background)
+  LDA #HIGH(backgroundDialogTemplate)
   STA pointerBackgroundHighByte
   JSR LoadBackground
+
+  JSR LoadDialogPalettes
+  JSR LoadAttributeDialog
 
   JSR EnableGraphics
 
   LDA #$01
   STA forgeSceneLoaded
-EndLoadForgeScene:
+EndLoadForgeDialogSequence:
 
 EndCurrentFrame:
   JSR musicPlay
@@ -1444,7 +1447,7 @@ backgroundDialogTemplate:
   .include "graphics/dialog/dialogTemplate.asm"
 
 backgroundDialogIntro1:
-  ; .include "graphics/dialog/intro01.asm"
+  .include "graphics/dialog/intro01.asm"
 
 backgroundDialogIntro2:
   ; .include "graphics/dialog/intro02.asm"
