@@ -1365,6 +1365,9 @@ LoadForgeDialogSequence:
   JSR DisableGraphics
   JSR ClearBackground
 
+  LDA #$01
+  STA introDialog
+  
   JSR DrawNextDialogScreen
 
   JSR EnableGraphics
@@ -1441,7 +1444,7 @@ backgroundDialogIntro1:
   .include "graphics/dialog/intro01.asm"
 
 backgroundDialogIntro2:
-  ; .include "graphics/dialog/intro02.asm"
+  .include "graphics/dialog/intro02.asm"
 
 backgroundDialogIntro3:
   ; .include "graphics/dialog/intro03.asm"
