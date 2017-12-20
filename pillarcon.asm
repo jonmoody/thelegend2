@@ -1453,28 +1453,10 @@ backgroundDialogIntro3:
   .include "graphics/dialog/intro03.asm"
 
 backgroundDialogIntro4:
-  ; .include "graphics/dialog/intro04.asm"
+  .include "graphics/dialog/intro04.asm"
 
 backgroundDialogIntro5:
-  ; .include "graphics/dialog/intro05.asm"
-
-backgroundDialogIntro6:
-  ; .include "graphics/dialog/intro06.asm"
-
-backgroundDialogIntro7:
-  ; .include "graphics/dialog/intro07.asm"
-
-backgroundDialogIntro8:
-  ; .include "graphics/dialog/intro08.asm"
-
-backgroundDialogIntro9:
-  ; .include "graphics/dialog/intro09.asm"
-
-backgroundDialogIntro10:
-  ; .include "graphics/dialog/intro10.asm"
-
-backgroundDialogIntro11:
-  ; .include "graphics/dialog/intro11.asm"
+  .include "graphics/dialog/intro05.asm"
 
 capturedTextScreen:
   .include "graphics/capturedTextScreen.asm"

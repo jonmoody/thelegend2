@@ -36,7 +36,7 @@ LoadIntro2:
 
   JMP EndLoadingDialogBackground
 
-LoadIntro3: ; Actually put in real text here and beyond - transitions seem to be ok now
+LoadIntro3:
   LDA currentDialogScreen
   CMP #$03
   BNE LoadIntro4
@@ -47,7 +47,7 @@ LoadIntro3: ; Actually put in real text here and beyond - transitions seem to be
   STA pointerBackgroundLowByte
   LDA #HIGH(backgroundDialogIntro3)
   STA pointerBackgroundHighByte
-  JSR LoadBottomDialog
+  JSR LoadTopDialog
   JMP EndLoadingDialogBackground
 
 LoadIntro4:
@@ -57,11 +57,11 @@ LoadIntro4:
 
   JSR DrawDialogBackground
 
-  LDA #LOW(backgroundDialogIntro2)
+  LDA #LOW(backgroundDialogIntro4)
   STA pointerBackgroundLowByte
-  LDA #HIGH(backgroundDialogIntro2)
+  LDA #HIGH(backgroundDialogIntro4)
   STA pointerBackgroundHighByte
-  JSR LoadTopDialog
+  JSR LoadBottomDialog
   JMP EndLoadingDialogBackground
 
 LoadIntro5:
@@ -71,11 +71,11 @@ LoadIntro5:
 
   JSR DrawDialogBackground
 
-  LDA #LOW(backgroundDialogIntro1)
+  LDA #LOW(backgroundDialogIntro5)
   STA pointerBackgroundLowByte
-  LDA #HIGH(backgroundDialogIntro1)
+  LDA #HIGH(backgroundDialogIntro5)
   STA pointerBackgroundHighByte
-  JSR LoadBottomDialog
+  JSR LoadTopDialog
 
   LDA #$01
   STA endOfDialog
@@ -83,7 +83,7 @@ LoadIntro5:
   STA forgeScene
 
 
-  
+
 
 EndLoadingDialogBackground:
   JSR EnableGraphics
