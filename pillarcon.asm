@@ -159,7 +159,7 @@ ClearAudio:
 InfiniteLoop:
   JMP InfiniteLoop
 
-
+; Can put 8 full backgrounds here
 teslaBackground:
   .include "graphics/teslaBackground.asm"
 
