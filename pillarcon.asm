@@ -1,5 +1,5 @@
   .inesprg 2
-  .ineschr 1
+  .ineschr 2
   .inesmap 3
   .inesmir 0
 
@@ -1418,7 +1418,7 @@ EndCurrentFrame:
   RTI
 
 
-BankswitchCHR:
+Bankswitch:
   TAX
   STA Bankvalues, X
   RTS
@@ -1529,3 +1529,7 @@ attributeDialog:
   .bank 4
   .org $0000
   .incbin "sprites.chr"
+
+  .bank 5
+  .org $0000
+  .incbin "sprites2.chr"
