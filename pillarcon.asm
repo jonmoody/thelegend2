@@ -1,5 +1,5 @@
   .inesprg 2
-  .ineschr 2
+  .ineschr 1
   .inesmap 3
   .inesmir 0
 
@@ -158,6 +158,10 @@ ClearAudio:
 
 InfiniteLoop:
   JMP InfiniteLoop
+
+
+teslaBackground:
+  .include "graphics/teslaBackground.asm"
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -1394,6 +1398,9 @@ LoadTeslaScene:
   JSR DisableGraphics
   JSR ClearBackground
 
+  JSR LoadZeroAttribute
+  JSR LoadFuturePalettes
+
   LDA #LOW(teslaBackground)
   STA pointerBackgroundLowByte
   LDA #HIGH(teslaBackground)
@@ -1511,17 +1518,6 @@ attributeCredits:
 
 attributeDialog:
   .include "graphics/dialog/attributesIntro.asm"
-
-  .org $FFFA
-  .dw NMI
-  .dw RESET
-  .dw 0
-
-  .bank 5
-  .org $E000
-
-teslaBackground:
-  .include "graphics/teslaBackground.asm"
 
   .org $FFFA
   .dw NMI
