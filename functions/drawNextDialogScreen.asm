@@ -67,7 +67,7 @@ LoadIntro4:
 LoadIntro5:
   LDA currentDialogScreen
   CMP #$05
-  BNE EndLoadingDialogBackground
+  BNE LeaveIntroDialog
 
   JSR DrawDialogBackground
 
@@ -76,14 +76,19 @@ LoadIntro5:
   LDA #HIGH(backgroundDialogIntro5)
   STA pointerBackgroundHighByte
   JSR LoadTopDialog
+  JMP EndLoadingDialogBackground
+
+LeaveIntroDialog:
+  LDA currentDialogScreen
+  CMP #$06
+  BNE EndLoadingDialogBackground
 
   LDA #$01
   STA endOfDialog
   LDA #$00
   STA forgeScene
-
-
-
+  LDA #$01
+  STA teslaScene
 
 EndLoadingDialogBackground:
   JSR EnableGraphics

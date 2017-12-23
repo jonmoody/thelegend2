@@ -68,6 +68,9 @@ buttonLeftPressed  .rs 1
 buttonRightPressed  .rs 1
 facingRight  .rs 1
 enemyAnimationTimer  .rs 1
+teslaScene  .rs 1
+teslaSceneLoaded  .rs 1
+
 
   .include "reference/spriteMemoryLocations.asm"
 
@@ -1378,6 +1381,26 @@ LoadForgeDialogSequence:
   LDA #$01
   STA forgeSceneLoaded
 EndLoadForgeDialogSequence:
+
+LoadTeslaScene:
+  LDA teslaScene
+  BEQ EndLoadTeslaScene
+
+.LoadScene:
+  LDA teslaSceneLoaded
+  BNE EndLoadTeslaScene
+
+  JSR HideSprites
+  JSR DisableGraphics
+  JSR ClearBackground
+
+  JSR LoadCapturedTextScreen ; Change to tesla scene
+
+  JSR EnableGraphics
+
+  LDA #$01
+  STA teslaSceneLoaded
+EndLoadTeslaScene:
 
 EndCurrentFrame:
   JSR musicPlay
