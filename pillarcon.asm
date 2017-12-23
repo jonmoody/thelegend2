@@ -1,6 +1,6 @@
   .inesprg 2
-  .ineschr 1
-  .inesmap 0
+  .ineschr 2
+  .inesmap 3
   .inesmir 0
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -1394,7 +1394,11 @@ LoadTeslaScene:
   JSR DisableGraphics
   JSR ClearBackground
 
-  JSR LoadCapturedTextScreen ; Change to tesla scene
+  LDA #LOW(teslaBackground)
+  STA pointerBackgroundLowByte
+  LDA #HIGH(teslaBackground)
+  STA pointerBackgroundHighByte
+  JSR LoadBackground
 
   JSR EnableGraphics
 
@@ -1405,6 +1409,15 @@ EndLoadTeslaScene:
 EndCurrentFrame:
   JSR musicPlay
   RTI
+
+
+BankswitchCHR:
+  TAX
+  STA Bankvalues, X
+  RTS
+
+Bankvalues:
+  .db $00, $01, $02, $03
 
   .include "functions/enableGraphics.asm"
   .include "functions/disableGraphics.asm"
@@ -1498,6 +1511,17 @@ attributeCredits:
 
 attributeDialog:
   .include "graphics/dialog/attributesIntro.asm"
+
+  .org $FFFA
+  .dw NMI
+  .dw RESET
+  .dw 0
+
+  .bank 5
+  .org $E000
+
+teslaBackground:
+  .include "graphics/teslaBackground.asm"
 
   .org $FFFA
   .dw NMI
