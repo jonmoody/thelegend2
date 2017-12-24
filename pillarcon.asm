@@ -60,6 +60,8 @@ travelTransition  .rs 1
 travelTransitionLoaded  .rs 1
 travelTransitionTimer  .rs 1
 buttonPressedA  .rs 1
+buttonHeldA  .rs 1
+buttonPressedAThisFrame  .rs 1
 previousButtonStateA  .rs 1
 buttonPressedB  .rs 1
 buttonBReleased  .rs 1
@@ -70,6 +72,8 @@ facingRight  .rs 1
 enemyAnimationTimer  .rs 1
 teslaScene  .rs 1
 teslaSceneLoaded  .rs 1
+teslaLandingScene  .rs 1
+teslaLandingSceneLoaded  .rs 1
 
 
   .include "reference/spriteMemoryLocations.asm"
@@ -162,6 +166,9 @@ InfiniteLoop:
 ; Can put 8 full backgrounds here
 teslaBackground:
   .include "graphics/teslaBackground.asm"
+
+teslaLandingBackground:
+  .include "graphics/teslaLandingBackground.asm"
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -1390,6 +1397,15 @@ LoadTeslaScene:
   LDA teslaScene
   BEQ EndLoadTeslaScene
 
+  LDA buttonPressedB ; fix this
+  BEQ .LoadScene
+
+  LDA #$00
+  STA teslaScene
+  LDA #$01
+  STA teslaLandingScene
+  JMP EndLoadTeslaScene
+
 .LoadScene:
   LDA teslaSceneLoaded
   BNE EndLoadTeslaScene
@@ -1412,6 +1428,32 @@ LoadTeslaScene:
   LDA #$01
   STA teslaSceneLoaded
 EndLoadTeslaScene:
+
+LoadTeslaLandingScene:
+  LDA teslaLandingScene
+  BEQ EndLoadTeslaLandingScene
+
+.LoadScene:
+  LDA teslaLandingSceneLoaded
+  BNE EndLoadTeslaLandingScene
+
+  JSR DisableGraphics
+  JSR ClearBackground
+
+  JSR LoadZeroAttribute
+  JSR LoadFuturePalettes
+
+  LDA #LOW(teslaLandingBackground)
+  STA pointerBackgroundLowByte
+  LDA #HIGH(teslaLandingBackground)
+  STA pointerBackgroundHighByte
+  JSR LoadBackground
+
+  JSR EnableGraphics
+
+  LDA #$01
+  STA teslaLandingSceneLoaded
+EndLoadTeslaLandingScene:
 
 EndCurrentFrame:
   JSR musicPlay
