@@ -74,7 +74,8 @@ teslaScene  .rs 1
 teslaSceneLoaded  .rs 1
 teslaLandingScene  .rs 1
 teslaLandingSceneLoaded  .rs 1
-
+approachingTheForge  .rs 1
+approachingTheForgeLoaded  .rs 1
 
   .include "reference/spriteMemoryLocations.asm"
 
@@ -1414,14 +1415,14 @@ LoadTeslaScene:
   JSR DisableGraphics
   JSR ClearBackground
 
-  JSR LoadZeroAttribute
-  JSR LoadFuturePalettes
-
   LDA #LOW(teslaBackground)
   STA pointerBackgroundLowByte
   LDA #HIGH(teslaBackground)
   STA pointerBackgroundHighByte
   JSR LoadBackground
+
+  JSR LoadZeroAttribute
+  JSR LoadFuturePalettes
 
   JSR EnableGraphics
 
@@ -1433,6 +1434,15 @@ LoadTeslaLandingScene:
   LDA teslaLandingScene
   BEQ EndLoadTeslaLandingScene
 
+  LDA buttonPressedA ; fix this
+  BEQ .LoadScene
+
+  LDA #$00
+  STA teslaLandingScene
+  LDA #$01
+  STA approachingTheForge
+  JMP EndLoadTeslaLandingScene
+
 .LoadScene:
   LDA teslaLandingSceneLoaded
   BNE EndLoadTeslaLandingScene
@@ -1440,20 +1450,51 @@ LoadTeslaLandingScene:
   JSR DisableGraphics
   JSR ClearBackground
 
-  JSR LoadZeroAttribute
-  JSR LoadFuturePalettes
-
   LDA #LOW(teslaLandingBackground)
   STA pointerBackgroundLowByte
   LDA #HIGH(teslaLandingBackground)
   STA pointerBackgroundHighByte
   JSR LoadBackground
 
+  JSR LoadZeroAttribute
+  JSR LoadFuturePalettes
+
   JSR EnableGraphics
 
   LDA #$01
   STA teslaLandingSceneLoaded
 EndLoadTeslaLandingScene:
+
+ApproachingTheForge:
+  LDA approachingTheForge
+  BEQ EndApproachingTheForge
+
+.LoadScene:
+  LDA approachingTheForgeLoaded
+  BNE EndApproachingTheForge
+
+  JSR LoadSprites
+
+  JSR DisableGraphics
+  JSR ClearBackground
+
+  LDA #LOW(background)
+  STA pointerBackgroundLowByte
+  LDA #HIGH(background)
+  STA pointerBackgroundHighByte
+  JSR LoadBackground
+
+  JSR LoadAttribute
+  JSR LoadFuturePalettes
+
+  JSR EnableGraphics
+
+  LDA #$01
+  STA gameInProgress
+  STA movementEnabled
+  STA approachingTheForgeLoaded
+
+EndApproachingTheForge:
 
 EndCurrentFrame:
   JSR musicPlay
