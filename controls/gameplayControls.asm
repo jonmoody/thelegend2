@@ -24,10 +24,10 @@ ReadA:
 
 .DoneCheckingCredits:
 
-  LDA gameOver
-  BEQ .DoneCheckingGameOver
-
-  JMP RESET
+  ; LDA gameOver
+  ; BEQ .DoneCheckingGameOver
+  ;
+  ; JMP RESET
 
 .DoneCheckingGameOver:
 
@@ -73,11 +73,11 @@ AdvanceDialog:
   STA advanceDialog
   JMP ReadADone
 
-DialogComplete:
-  LDA #$00
-  STA introDialog
-  LDA #$01
-  STA introScene2
+; DialogComplete:
+;   LDA #$00
+;   STA introDialog
+;   LDA #$01
+;   STA introScene2
 
 ReadADone:
   LDA buttonPressedA

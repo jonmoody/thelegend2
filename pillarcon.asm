@@ -78,6 +78,8 @@ approachingTheForge  .rs 1
 approachingTheForgeLoaded  .rs 1
 moodyAppearsScene  .rs 1
 moodyAppearsSceneLoaded  .rs 1
+moodyDialog  .rs 1
+moodyDialogLoaded  .rs 1
 
   .include "reference/spriteMemoryLocations.asm"
 
@@ -1513,14 +1515,18 @@ MoodyAppearsScene:
   LDA moodyAppearsScene
   BEQ EndMoodyAppearsScene
 
-  ; LDA buttonPressedA ; fix this
-  ; BEQ .LoadScene
-  ;
-  ; LDA #$00
-  ; STA moodyAppearsScene
-  ; LDA #$01
-  ; STA approachingTheForge
-  ; JMP EndLoadTeslaLandingScene
+  LDA buttonPressedA ; fix this
+  BEQ .LoadScene
+
+  LDA #$00
+  STA moodyAppearsScene
+  STA gameOver
+  STA currentDialogScreen
+  STA introDialog
+  LDA #$01
+  STA moodyDialog
+
+  JMP EndMoodyAppearsScene
 
 .LoadScene:
   LDA moodyAppearsSceneLoaded
@@ -1545,6 +1551,29 @@ MoodyAppearsScene:
   LDA #$01
   STA moodyAppearsSceneLoaded
 EndMoodyAppearsScene:
+
+LoadMoodyDialogSequence:
+  LDA moodyDialog
+  BEQ EndLoadMoodyDialogSequence
+
+  LDA advanceDialog
+  BNE .DrawDialog
+
+  LDA moodyDialogLoaded
+  BNE EndLoadMoodyDialogSequence
+
+.DrawDialog:
+  LDA #$01
+  STA introDialog
+
+  JSR DrawNextDialogScreen
+
+  LDA #$00
+  STA advanceDialog
+
+  LDA #$01
+  STA moodyDialogLoaded
+EndLoadMoodyDialogSequence:
 
 EndCurrentFrame:
   JSR musicPlay
