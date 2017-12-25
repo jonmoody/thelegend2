@@ -76,6 +76,8 @@ teslaLandingScene  .rs 1
 teslaLandingSceneLoaded  .rs 1
 approachingTheForge  .rs 1
 approachingTheForgeLoaded  .rs 1
+moodyAppearsScene  .rs 1
+moodyAppearsSceneLoaded  .rs 1
 
   .include "reference/spriteMemoryLocations.asm"
 
@@ -171,6 +173,9 @@ teslaBackground:
 teslaLandingBackground:
   .include "graphics/teslaLandingBackground.asm"
 
+insideTheForgeBackground:
+  .include "graphics/insideTheForgeBackground.asm"
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
   .bank 1
@@ -203,26 +208,26 @@ ReadGameplayControls:
   .include "controls/gameplayControls.asm"
 EndReadController:
 
-GameVictory:
-  LDA gameWin
-  BEQ EndGameVictory
+; GameVictory:
+;   LDA gameWin
+;   BEQ EndGameVictory
+;
+;   JMP EndCurrentFrame
+; EndGameVictory:
 
-  JMP EndCurrentFrame
-EndGameVictory:
+; GameOver:
+;   LDA gameOver
+;   BEQ EndGameOver
+;
+;   JMP EndCurrentFrame
+; EndGameOver:
 
-GameOver:
-  LDA gameOver
-  BEQ EndGameOver
-
-  JMP EndCurrentFrame
-EndGameOver:
-
-Credits:
-  LDA creditsScreen
-  BEQ EndCredits
-
-  JMP EndCurrentFrame
-EndCredits:
+; Credits:
+;   LDA creditsScreen
+;   BEQ EndCredits
+;
+;   JMP EndCurrentFrame
+; EndCredits:
 
   LDA playerHealth
   BNE MoveProjectile
@@ -1469,6 +1474,15 @@ ApproachingTheForge:
   LDA approachingTheForge
   BEQ EndApproachingTheForge
 
+  LDA approachingTheForgeLoaded
+  BEQ .LoadScene
+
+  LDA gameOver
+  BEQ .LoadScene
+
+  LDA #$01
+  STA moodyAppearsScene
+
 .LoadScene:
   LDA approachingTheForgeLoaded
   BNE EndApproachingTheForge
@@ -1493,8 +1507,44 @@ ApproachingTheForge:
   STA gameInProgress
   STA movementEnabled
   STA approachingTheForgeLoaded
-
 EndApproachingTheForge:
+
+MoodyAppearsScene:
+  LDA moodyAppearsScene
+  BEQ EndMoodyAppearsScene
+
+  ; LDA buttonPressedA ; fix this
+  ; BEQ .LoadScene
+  ;
+  ; LDA #$00
+  ; STA moodyAppearsScene
+  ; LDA #$01
+  ; STA approachingTheForge
+  ; JMP EndLoadTeslaLandingScene
+
+.LoadScene:
+  LDA moodyAppearsSceneLoaded
+  BNE EndMoodyAppearsScene
+
+  JSR HideSprites
+
+  JSR DisableGraphics
+  JSR ClearBackground
+
+  LDA #LOW(insideTheForgeBackground)
+  STA pointerBackgroundLowByte
+  LDA #HIGH(insideTheForgeBackground)
+  STA pointerBackgroundHighByte
+  JSR LoadBackground
+
+  JSR LoadZeroAttribute
+  JSR LoadFuturePalettes
+
+  JSR EnableGraphics
+
+  LDA #$01
+  STA moodyAppearsSceneLoaded
+EndMoodyAppearsScene:
 
 EndCurrentFrame:
   JSR musicPlay
