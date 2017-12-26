@@ -122,7 +122,7 @@ LoadMoodyDialog1:
 LoadMoodyDialog2:
   LDA currentDialogScreen
   CMP #$02
-  BNE LeaveMoodyDialog
+  BNE LoadMoodyDialog3
 
   JSR DrawDialogBackground
 
@@ -134,15 +134,30 @@ LoadMoodyDialog2:
 
   JMP EndDrawNextMoodyDialogScreen
 
-LeaveMoodyDialog:
+LoadMoodyDialog3:
   LDA currentDialogScreen
   CMP #$03
+  BNE LeaveMoodyDialog
+
+  JSR DrawDialogBackground
+
+  LDA #LOW(bossBattleDialog3)
+  STA pointerBackgroundLowByte
+  LDA #HIGH(bossBattleDialog3)
+  STA pointerBackgroundHighByte
+  JSR LoadBottomDialog
+
+  JMP EndDrawNextMoodyDialogScreen
+
+LeaveMoodyDialog:
+  LDA currentDialogScreen
+  CMP #$04
   BNE EndDrawNextMoodyDialogScreen
 
-  ; LDA #$01
-  ; STA endOfDialog
-  ; LDA #$00
-  ; STA forgeScene
+  LDA #$01
+  STA endOfDialog
+  LDA #$00
+  STA moodyDialog
   ; LDA #$01
   ; STA teslaScene
 

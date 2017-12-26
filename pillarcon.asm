@@ -185,6 +185,9 @@ bossBattleDialog1:
 bossBattleDialog2:
   .include "graphics/dialog/bossBattle02.asm"
 
+bossBattleDialog3:
+  .include "graphics/dialog/bossBattle03.asm"
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
   .bank 1
@@ -1572,13 +1575,13 @@ LoadMoodyDialogSequence:
   BNE EndLoadMoodyDialogSequence
 
 .DrawDialog:
-  LDA #$01
-  STA introDialog
+  ; LDA #$01
+  ; STA introDialog
 
   JSR DrawNextMoodyDialogScreen
 
   LDA #$00
-  STA advanceDialog
+  STA advanceMoodyDialog
 
   LDA #$01
   STA moodyDialogLoaded
