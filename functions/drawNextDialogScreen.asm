@@ -94,6 +94,65 @@ EndLoadingDialogBackground:
   JSR EnableGraphics
   RTS
 
+
+
+DrawNextMoodyDialogScreen:
+  INC currentDialogScreen
+
+  JSR DisableGraphics
+
+  JSR DrawTopSprite
+  JSR DrawBottomSprite
+
+LoadMoodyDialog1:
+  LDA currentDialogScreen
+  CMP #$01
+  BNE LoadMoodyDialog2
+
+  JSR DrawDialogBackground
+
+  LDA #LOW(bossBattleDialog1)
+  STA pointerBackgroundLowByte
+  LDA #HIGH(bossBattleDialog1)
+  STA pointerBackgroundHighByte
+  JSR LoadTopDialog
+
+  JMP EndDrawNextMoodyDialogScreen
+
+LoadMoodyDialog2:
+  LDA currentDialogScreen
+  CMP #$02
+  BNE LeaveMoodyDialog
+
+  JSR DrawDialogBackground
+
+  LDA #LOW(bossBattleDialog2)
+  STA pointerBackgroundLowByte
+  LDA #HIGH(bossBattleDialog2)
+  STA pointerBackgroundHighByte
+  JSR LoadBottomDialog
+
+  JMP EndDrawNextMoodyDialogScreen
+
+LeaveMoodyDialog:
+  LDA currentDialogScreen
+  CMP #$03
+  BNE EndDrawNextMoodyDialogScreen
+
+  ; LDA #$01
+  ; STA endOfDialog
+  ; LDA #$00
+  ; STA forgeScene
+  ; LDA #$01
+  ; STA teslaScene
+
+EndDrawNextMoodyDialogScreen:
+  JSR EnableGraphics
+  RTS
+
+
+
+
 DrawTopSprite:
   JSR LoadPlayerSprite
 

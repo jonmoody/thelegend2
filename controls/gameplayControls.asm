@@ -69,6 +69,14 @@ AdvanceDialog:
   AND buttonPressedA
   BNE ReadADone
 
+  LDA moodyDialog
+  BEQ .IntroDialog
+
+  LDA #$01
+  STA advanceMoodyDialog
+  JMP ReadADone
+
+.IntroDialog:
   LDA #$01
   STA advanceDialog
   JMP ReadADone

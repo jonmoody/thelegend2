@@ -47,6 +47,7 @@ introDialogLoaded  .rs 1
 forgeScene  .rs 1
 forgeSceneLoaded  .rs 1
 advanceDialog  .rs 1
+advanceMoodyDialog  .rs 1
 currentDialogScreen  .rs 1
 endOfDialog  .rs 1
 dialogDelay  .rs 1
@@ -177,6 +178,12 @@ teslaLandingBackground:
 
 insideTheForgeBackground:
   .include "graphics/insideTheForgeBackground.asm"
+
+bossBattleDialog1:
+  .include "graphics/dialog/bossBattle01.asm"
+
+bossBattleDialog2:
+  .include "graphics/dialog/bossBattle02.asm"
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -1521,10 +1528,12 @@ MoodyAppearsScene:
   LDA #$00
   STA moodyAppearsScene
   STA gameOver
+  STA endOfDialog
+  STA gameWin
   STA currentDialogScreen
-  STA introDialog
   LDA #$01
   STA moodyDialog
+  ; STA introDialog
 
   JMP EndMoodyAppearsScene
 
@@ -1556,7 +1565,7 @@ LoadMoodyDialogSequence:
   LDA moodyDialog
   BEQ EndLoadMoodyDialogSequence
 
-  LDA advanceDialog
+  LDA advanceMoodyDialog
   BNE .DrawDialog
 
   LDA moodyDialogLoaded
@@ -1566,7 +1575,7 @@ LoadMoodyDialogSequence:
   LDA #$01
   STA introDialog
 
-  JSR DrawNextDialogScreen
+  JSR DrawNextMoodyDialogScreen
 
   LDA #$00
   STA advanceDialog
