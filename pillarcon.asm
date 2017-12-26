@@ -81,6 +81,8 @@ moodyAppearsScene  .rs 1
 moodyAppearsSceneLoaded  .rs 1
 moodyDialog  .rs 1
 moodyDialogLoaded  .rs 1
+lincRescueScene  .rs 1
+lincRescueSceneLoaded  .rs 1
 
   .include "reference/spriteMemoryLocations.asm"
 
@@ -178,6 +180,9 @@ teslaLandingBackground:
 
 insideTheForgeBackground:
   .include "graphics/insideTheForgeBackground.asm"
+
+lincRescueSceneBackground:
+  .include "graphics/lincRescueSceneBackground.asm"
 
 bossBattleDialog1:
   .include "graphics/dialog/bossBattle01.asm"
@@ -1586,6 +1591,43 @@ LoadMoodyDialogSequence:
   LDA #$01
   STA moodyDialogLoaded
 EndLoadMoodyDialogSequence:
+
+
+LoadLincRescueScene:
+  LDA lincRescueScene
+  BEQ EndLoadLincRescueScene
+
+  ; LDA buttonPressedA ; fix this
+  ; BEQ .LoadScene
+  ;
+  ; LDA #$00
+  ; STA teslaLandingScene
+  ; LDA #$01
+  ; STA approachingTheForge
+  ; JMP EndLoadLincRescueScene
+
+.LoadScene:
+  LDA lincRescueSceneLoaded
+  BNE EndLoadLincRescueScene
+
+  JSR DisableGraphics
+  JSR ClearBackground
+
+  LDA #LOW(lincRescueSceneBackground)
+  STA pointerBackgroundLowByte
+  LDA #HIGH(lincRescueSceneBackground)
+  STA pointerBackgroundHighByte
+  JSR LoadBackground
+
+  JSR LoadZeroAttribute
+  JSR LoadFuturePalettes
+
+  JSR EnableGraphics
+
+  LDA #$01
+  STA lincRescueSceneLoaded
+EndLoadLincRescueScene:
+
 
 EndCurrentFrame:
   JSR musicPlay

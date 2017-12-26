@@ -158,8 +158,8 @@ LeaveMoodyDialog:
   STA endOfDialog
   LDA #$00
   STA moodyDialog
-  ; LDA #$01
-  ; STA teslaScene
+  LDA #$01
+  STA lincRescueScene
 
 EndDrawNextMoodyDialogScreen:
   JSR EnableGraphics
