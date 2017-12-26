@@ -193,6 +193,27 @@ bossBattleDialog2:
 bossBattleDialog3:
   .include "graphics/dialog/bossBattle03.asm"
 
+bossBattleDialog4:
+  .include "graphics/dialog/bossBattle04.asm"
+
+bossBattleDialog5:
+  .include "graphics/dialog/bossBattle05.asm"
+
+bossBattleDialog6:
+  .include "graphics/dialog/bossBattle06.asm"
+
+bossBattleDialog7:
+  .include "graphics/dialog/bossBattle07.asm"
+
+bossBattleDialog8:
+  .include "graphics/dialog/bossBattle08.asm"
+
+bossBattleDialog9:
+  .include "graphics/dialog/bossBattle09.asm"
+
+bossBattleDialog10:
+  .include "graphics/dialog/bossBattle10.asm"
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
   .bank 1
