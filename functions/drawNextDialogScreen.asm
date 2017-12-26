@@ -138,7 +138,7 @@ LoadMoodyDialog2:
 LoadMoodyDialog3:
   LDA currentDialogScreen
   CMP #$03
-  BNE LeaveMoodyDialog
+  BNE LoadMoodyDialog4
 
   JSR DrawDialogBackground
 
@@ -150,9 +150,114 @@ LoadMoodyDialog3:
 
   JMP EndDrawNextMoodyDialogScreen
 
-LeaveMoodyDialog:
+LoadMoodyDialog4:
   LDA currentDialogScreen
   CMP #$04
+  BNE LoadMoodyDialog5
+
+  JSR DrawDialogBackground
+
+  LDA #LOW(bossBattleDialog4)
+  STA pointerBackgroundLowByte
+  LDA #HIGH(bossBattleDialog4)
+  STA pointerBackgroundHighByte
+  JSR LoadBottomDialog
+
+  JMP EndDrawNextMoodyDialogScreen
+
+LoadMoodyDialog5:
+  LDA currentDialogScreen
+  CMP #$05
+  BNE LoadMoodyDialog6
+
+  JSR DrawDialogBackground
+
+  LDA #LOW(bossBattleDialog5)
+  STA pointerBackgroundLowByte
+  LDA #HIGH(bossBattleDialog5)
+  STA pointerBackgroundHighByte
+  JSR LoadBottomDialog
+
+  JMP EndDrawNextMoodyDialogScreen
+
+LoadMoodyDialog6:
+  LDA currentDialogScreen
+  CMP #$06
+  BNE LoadMoodyDialog7
+
+  JSR DrawDialogBackground
+
+  LDA #LOW(bossBattleDialog6)
+  STA pointerBackgroundLowByte
+  LDA #HIGH(bossBattleDialog6)
+  STA pointerBackgroundHighByte
+  JSR LoadBottomDialog
+
+  JMP EndDrawNextMoodyDialogScreen
+
+LoadMoodyDialog7:
+  LDA currentDialogScreen
+  CMP #$07
+  BNE LoadMoodyDialog8
+
+  JSR DrawDialogBackground
+
+  LDA #LOW(bossBattleDialog7)
+  STA pointerBackgroundLowByte
+  LDA #HIGH(bossBattleDialog7)
+  STA pointerBackgroundHighByte
+  JSR LoadBottomDialog
+
+  JMP EndDrawNextMoodyDialogScreen
+
+LoadMoodyDialog8:
+  LDA currentDialogScreen
+  CMP #$08
+  BNE LoadMoodyDialog9
+
+  JSR DrawDialogBackground
+
+  LDA #LOW(bossBattleDialog8)
+  STA pointerBackgroundLowByte
+  LDA #HIGH(bossBattleDialog8)
+  STA pointerBackgroundHighByte
+  JSR LoadBottomDialog
+
+  JMP EndDrawNextMoodyDialogScreen
+
+LoadMoodyDialog9:
+  LDA currentDialogScreen
+  CMP #$09
+  BNE LoadMoodyDialog10
+
+  JSR DrawDialogBackground
+
+  LDA #LOW(bossBattleDialog9)
+  STA pointerBackgroundLowByte
+  LDA #HIGH(bossBattleDialog9)
+  STA pointerBackgroundHighByte
+  JSR LoadBottomDialog
+
+  JMP EndDrawNextMoodyDialogScreen
+
+LoadMoodyDialog10:
+  LDA currentDialogScreen
+  CMP #$0A
+  BNE LeaveMoodyDialog
+
+  JSR DrawDialogBackground
+
+  LDA #LOW(bossBattleDialog10)
+  STA pointerBackgroundLowByte
+  LDA #HIGH(bossBattleDialog10)
+  STA pointerBackgroundHighByte
+  JSR LoadBottomDialog
+
+  JMP EndDrawNextMoodyDialogScreen
+
+LeaveMoodyDialog:
+  LDA currentDialogScreen
+  CMP #$0B
   BNE EndDrawNextMoodyDialogScreen
 
   LDA #$01
