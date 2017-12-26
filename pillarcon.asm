@@ -1538,10 +1538,8 @@ MoodyAppearsScene:
   STA gameOver
   STA endOfDialog
   STA gameWin
-  STA currentDialogScreen
   LDA #$01
   STA moodyDialog
-  ; STA introDialog
 
   JMP EndMoodyAppearsScene
 

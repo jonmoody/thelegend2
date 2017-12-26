@@ -38,6 +38,9 @@ ReadA:
 
 .DoneCheckingGameWin:
 
+  LDA moodyDialog
+  BNE AdvanceDialog
+
   LDA introDialog
   BNE AdvanceDialog
 

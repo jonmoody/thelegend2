@@ -87,6 +87,7 @@ LeaveIntroDialog:
   STA endOfDialog
   LDA #$00
   STA forgeScene
+  STA currentDialogScreen
   LDA #$01
   STA teslaScene
 
