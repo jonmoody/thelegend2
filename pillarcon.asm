@@ -48,7 +48,6 @@ advanceDialog  .rs 1
 advanceMoodyDialog  .rs 1
 currentDialogScreen  .rs 1
 endOfDialog  .rs 1
-dialogDelay  .rs 1
 creditsOptionSelected  .rs 1
 selectButtonHeldDown  .rs 1
 enemyFireTimer  .rs 1

@@ -57,7 +57,6 @@ FallingTime:
 
   LDA #$00
   STA buttonPressedA
-  STA dialogDelay
 
   JMP ReadADone
 
