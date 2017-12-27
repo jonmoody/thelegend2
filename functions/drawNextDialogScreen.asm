@@ -146,7 +146,7 @@ LoadMoodyDialog3:
   STA pointerBackgroundLowByte
   LDA #HIGH(bossBattleDialog3)
   STA pointerBackgroundHighByte
-  JSR LoadBottomDialog
+  JSR LoadTopDialog
 
   JMP EndDrawNextMoodyDialogScreen
 
@@ -251,7 +251,7 @@ LoadMoodyDialog10:
   STA pointerBackgroundLowByte
   LDA #HIGH(bossBattleDialog10)
   STA pointerBackgroundHighByte
-  JSR LoadBottomDialog
+  JSR LoadTopDialog
 
   JMP EndDrawNextMoodyDialogScreen
 
