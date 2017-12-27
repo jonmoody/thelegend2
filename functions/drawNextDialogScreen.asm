@@ -264,6 +264,7 @@ LeaveMoodyDialog:
   STA endOfDialog
   LDA #$00
   STA moodyDialog
+  STA currentDialogScreen
   LDA #$01
   STA moodyBattleSequence
   ; LDA #$01
