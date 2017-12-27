@@ -265,7 +265,9 @@ LeaveMoodyDialog:
   LDA #$00
   STA moodyDialog
   LDA #$01
-  STA lincRescueScene
+  STA moodyBattleSequence
+  ; LDA #$01
+  ; STA lincRescueScene
 
 EndDrawNextMoodyDialogScreen:
   JSR EnableGraphics

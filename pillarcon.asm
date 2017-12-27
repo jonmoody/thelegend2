@@ -81,6 +81,8 @@ moodyAppearsScene  .rs 1
 moodyAppearsSceneLoaded  .rs 1
 moodyDialog  .rs 1
 moodyDialogLoaded  .rs 1
+moodyBattleSequence  .rs 1
+moodyBattleSequenceLoaded  .rs 1
 lincRescueScene  .rs 1
 lincRescueSceneLoaded  .rs 1
 
@@ -1559,6 +1561,7 @@ MoodyAppearsScene:
   STA gameOver
   STA endOfDialog
   STA gameWin
+  STA gameInProgress
   LDA #$01
   STA moodyDialog
 
@@ -1611,6 +1614,51 @@ LoadMoodyDialogSequence:
   STA moodyDialogLoaded
 EndLoadMoodyDialogSequence:
 
+MoodyBattleSequence:
+  LDA moodyBattleSequence
+  BEQ EndMoodyBattleSequence
+
+  LDA moodyBattleSequenceLoaded
+  BEQ .LoadScene
+
+  LDA gameOver
+  BEQ .LoadScene
+
+  LDA #$00
+  STA moodyBattleSequence
+  STA gameOver
+  STA endOfDialog
+  STA gameWin
+  STA gameInProgress
+  LDA #$01
+  STA lincRescueScene
+
+.LoadScene:
+  LDA moodyBattleSequenceLoaded
+  BNE EndMoodyBattleSequence
+
+  JSR LoadSprites
+
+  JSR DisableGraphics
+  JSR ClearBackground
+
+  LDA #LOW(background)
+  STA pointerBackgroundLowByte
+  LDA #HIGH(background)
+  STA pointerBackgroundHighByte
+  JSR LoadBackground
+
+  JSR LoadAttribute
+  JSR LoadFuturePalettes
+
+  JSR EnableGraphics
+
+  LDA #$01
+  STA gameInProgress
+  STA movementEnabled
+  STA moodyBattleSequenceLoaded
+
+EndMoodyBattleSequence:
 
 LoadLincRescueScene:
   LDA lincRescueScene
