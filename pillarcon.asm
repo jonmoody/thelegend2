@@ -29,19 +29,17 @@ projectile1Direction  .rs 1
 projectile2Direction  .rs 1
 projectile3Direction  .rs 1
 gameOver  .rs 1
-gameOverLoaded  .rs 1
+; gameOverLoaded  .rs 1
 gameWin  .rs 1
-gameWinLoaded  .rs 1
+; gameWinLoaded  .rs 1
 titleScreen  .rs 1
 creditsScreen  .rs 1
 creditsScreenLoaded  .rs 1
 gameInProgress  .rs 1
 introScene  .rs 1
 introSceneLoaded  .rs 1
-introSceneTimer  .rs 1
 introScene2  .rs 1
 introSceneLoaded2  .rs 1
-introSceneTimer2  .rs 1
 introDialog  .rs 1
 introDialogLoaded  .rs 1
 forgeScene  .rs 1
@@ -55,11 +53,7 @@ creditsOptionSelected  .rs 1
 selectButtonHeldDown  .rs 1
 enemyFireTimer  .rs 1
 enemyDirection  .rs 1
-travelerVisibility  .rs 1
 playerVisibility  .rs 1
-travelTransition  .rs 1
-travelTransitionLoaded  .rs 1
-travelTransitionTimer  .rs 1
 buttonPressedA  .rs 1
 buttonHeldA  .rs 1
 buttonPressedAThisFrame  .rs 1
