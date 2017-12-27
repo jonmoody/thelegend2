@@ -1629,6 +1629,8 @@ LoadLincRescueScene:
   LDA lincRescueSceneLoaded
   BNE EndLoadLincRescueScene
 
+  JSR HideSprites
+
   JSR DisableGraphics
   JSR ClearBackground
 
