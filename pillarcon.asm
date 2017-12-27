@@ -55,7 +55,6 @@ enemyDirection  .rs 1
 playerVisibility  .rs 1
 buttonPressedA  .rs 1
 buttonHeldA  .rs 1
-buttonPressedAThisFrame  .rs 1
 previousButtonStateA  .rs 1
 buttonPressedB  .rs 1
 buttonBReleased  .rs 1
