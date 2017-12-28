@@ -45,8 +45,6 @@ introDialogLoaded  .rs 1
 forgeScene  .rs 1
 forgeSceneLoaded  .rs 1
 advanceDialog  .rs 1
-advanceMoodyDialog  .rs 1
-advanceLincDialog  .rs 1
 currentDialogScreen  .rs 1
 endOfDialog  .rs 1
 creditsOptionSelected  .rs 1
@@ -1611,7 +1609,7 @@ LoadMoodyDialogSequence:
   LDA moodyDialog
   BEQ EndLoadMoodyDialogSequence
 
-  LDA advanceMoodyDialog
+  LDA advanceDialog
   BNE .DrawDialog
 
   LDA moodyDialogLoaded
@@ -1624,7 +1622,7 @@ LoadMoodyDialogSequence:
   JSR DrawNextMoodyDialogScreen
 
   LDA #$00
-  STA advanceMoodyDialog
+  STA advanceDialog
 
   LDA #$01
   STA moodyDialogLoaded
@@ -1726,7 +1724,7 @@ LincDialogSequence:
   LDA lincDialogSequence
   BEQ EndLincDialogSequence
 
-  LDA advanceLincDialog
+  LDA advanceDialog
   BNE .DrawDialog
 
   LDA lincDialogSequenceLoaded
@@ -1736,7 +1734,7 @@ LincDialogSequence:
   JSR DrawNextLincDialogScreen
 
   LDA #$00
-  STA advanceLincDialog
+  STA advanceDialog
 
   LDA #$01
   STA lincDialogSequenceLoaded

@@ -64,27 +64,17 @@ AdvanceDialog:
   LDA endOfDialog
   BNE ReadADone
 
+  LDA #$00
+  STA advanceDialog
+
   LDA previousButtonStateA
   AND buttonPressedA
   BNE ReadADone
 
-  LDA moodyDialog
-  BEQ .IntroDialog
-
-  LDA #$01
-  STA advanceMoodyDialog
-  JMP ReadADone
-
-.IntroDialog:
   LDA #$01
   STA advanceDialog
-  JMP ReadADone
 
-; DialogComplete:
-;   LDA #$00
-;   STA introDialog
-;   LDA #$01
-;   STA introScene2
+  JMP ReadADone
 
 ReadADone:
   LDA buttonPressedA
