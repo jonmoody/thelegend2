@@ -1610,26 +1610,26 @@ MoodyBattleSequence:
   LDA moodyBattleSequence
   BEQ EndMoodyBattleSequence
 
-  LDA moodyBattleSequenceLoaded
-  BEQ .LoadScene
-
-  LDA gameOver
-  BEQ .LoadScene
-
-  LDA #$00
-  STA moodyBattleSequence
-  STA gameOver
-  STA endOfDialog
-  STA gameWin
-  STA gameInProgress
-  LDA #$01
-  STA lincRescueScene
+  ; LDA moodyBattleSequenceLoaded
+  ; BEQ .LoadScene
+  ;
+  ; LDA gameOver
+  ; BEQ .LoadScene
+  ;
+  ; LDA #$00
+  ; STA moodyBattleSequence
+  ; STA gameOver
+  ; STA endOfDialog
+  ; STA gameWin
+  ; STA gameInProgress
+  ; LDA #$01
+  ; STA lincRescueScene
 
 .LoadScene:
   LDA moodyBattleSequenceLoaded
   BNE EndMoodyBattleSequence
 
-  JSR LoadSprites
+  JSR HideSprites
 
   JSR DisableGraphics
   JSR ClearBackground
@@ -1646,8 +1646,8 @@ MoodyBattleSequence:
   JSR EnableGraphics
 
   LDA #$01
-  STA gameInProgress
-  STA movementEnabled
+  ; STA gameInProgress
+  ; STA movementEnabled
   STA moodyBattleSequenceLoaded
 
 EndMoodyBattleSequence:
