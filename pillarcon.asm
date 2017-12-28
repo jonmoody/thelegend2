@@ -6,7 +6,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
   .rsset $0000
-music  .rs 16
+; music  .rs 16
 pointerBackgroundLowByte  .rs 1
 pointerBackgroundHighByte  .rs 1
 jumping  .rs 1
@@ -1691,7 +1691,7 @@ EndLoadLincRescueScene:
 
 
 EndCurrentFrame:
-  JSR musicPlay
+  ; JSR musicPlay
   RTI
 
 
