@@ -1625,6 +1625,15 @@ MoodyBattleSequence:
   ; LDA #$01
   ; STA lincRescueScene
 
+  LDA buttonPressedB ; fix this
+  BEQ .LoadScene
+
+  LDA #$00
+  STA moodyBattleSequence
+  LDA #$01
+  STA lincRescueScene
+  JMP EndMoodyBattleSequence
+
 .LoadScene:
   LDA moodyBattleSequenceLoaded
   BNE EndMoodyBattleSequence
