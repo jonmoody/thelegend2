@@ -46,6 +46,7 @@ forgeScene  .rs 1
 forgeSceneLoaded  .rs 1
 advanceDialog  .rs 1
 advanceMoodyDialog  .rs 1
+advanceLincDialog  .rs 1
 currentDialogScreen  .rs 1
 endOfDialog  .rs 1
 creditsOptionSelected  .rs 1
@@ -77,6 +78,8 @@ moodyBattleSequence  .rs 1
 moodyBattleSequenceLoaded  .rs 1
 lincRescueScene  .rs 1
 lincRescueSceneLoaded  .rs 1
+lincDialogSequence  .rs 1
+lincDialogSequenceLoaded  .rs 1
 
   .include "reference/spriteMemoryLocations.asm"
 
@@ -207,6 +210,27 @@ bossBattleDialog9:
 
 bossBattleDialog10:
   .include "graphics/dialog/bossBattle10.asm"
+
+awakeningDialog1:
+  .include "graphics/dialog/awakening01.asm"
+
+awakeningDialog2:
+  .include "graphics/dialog/awakening02.asm"
+
+awakeningDialog3:
+  .include "graphics/dialog/awakening03.asm"
+
+awakeningDialog4:
+  .include "graphics/dialog/awakening04.asm"
+
+awakeningDialog5:
+  .include "graphics/dialog/awakening05.asm"
+
+awakeningDialog6:
+  .include "graphics/dialog/awakening06.asm"
+
+awakeningDialog7:
+  .include "graphics/dialog/awakening07.asm"
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -1665,14 +1689,14 @@ LoadLincRescueScene:
   LDA lincRescueScene
   BEQ EndLoadLincRescueScene
 
-  ; LDA buttonPressedA ; fix this
-  ; BEQ .LoadScene
-  ;
-  ; LDA #$00
-  ; STA teslaLandingScene
-  ; LDA #$01
-  ; STA approachingTheForge
-  ; JMP EndLoadLincRescueScene
+  LDA buttonPressedA ; fix this
+  BEQ .LoadScene
+
+  LDA #$00
+  STA lincRescueScene
+  LDA #$01
+  STA lincDialogSequence
+  JMP EndLoadLincRescueScene
 
 .LoadScene:
   LDA lincRescueSceneLoaded
@@ -1697,6 +1721,26 @@ LoadLincRescueScene:
   LDA #$01
   STA lincRescueSceneLoaded
 EndLoadLincRescueScene:
+
+LincDialogSequence:
+  LDA lincDialogSequence
+  BEQ EndLincDialogSequence
+
+  LDA advanceLincDialog
+  BNE .DrawDialog
+
+  LDA lincDialogSequenceLoaded
+  BNE EndLincDialogSequence
+
+.DrawDialog:
+  JSR DrawNextLincDialogScreen
+
+  LDA #$00
+  STA advanceLincDialog
+
+  LDA #$01
+  STA lincDialogSequenceLoaded
+EndLincDialogSequence:
 
 
 EndCurrentFrame:

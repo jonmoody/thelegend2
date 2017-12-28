@@ -275,7 +275,45 @@ EndDrawNextMoodyDialogScreen:
   RTS
 
 
+DrawNextLincDialogScreen:
+  INC currentDialogScreen
 
+  JSR DisableGraphics
+
+  JSR DrawTopSprite
+  JSR DrawBottomSprite
+
+LoadLincDialog1:
+  LDA currentDialogScreen
+  CMP #$01
+  BNE LeaveLincDialog
+
+  JSR DrawDialogBackground
+
+  LDA #LOW(awakeningDialog1)
+  STA pointerBackgroundLowByte
+  LDA #HIGH(awakeningDialog1)
+  STA pointerBackgroundHighByte
+  JSR LoadTopDialog
+
+  JMP EndDrawNextLincDialogScreen
+
+LeaveLincDialog:
+  LDA currentDialogScreen
+  CMP #$02
+  BNE EndDrawNextLincDialogScreen
+
+  LDA #$01
+  STA endOfDialog
+  LDA #$00
+  STA lincDialogSequence
+  STA currentDialogScreen
+  ; LDA #$01
+  ; STA moodyBattleSequence
+
+EndDrawNextLincDialogScreen:
+  JSR EnableGraphics
+  RTS
 
 DrawTopSprite:
   JSR LoadPlayerSprite
