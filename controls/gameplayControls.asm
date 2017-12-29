@@ -14,11 +14,6 @@ ReadA:
   LDA titleScreen
   BNE ReadADone
 
-  LDA gameWin
-  BEQ .DoneCheckingGameWin
-
-  JMP RESET
-
 .DoneCheckingGameWin:
 
   LDA lincDialogSequence

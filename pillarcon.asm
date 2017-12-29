@@ -690,6 +690,14 @@ IdlePose:
 
 EndIdlePose:
 
+
+CheckIfTheLevelIsComplete:
+  LDA gameWin
+  BEQ ChangeEnemyDirection
+
+  JMP LoadIntroScene1
+
+
 ChangeEnemyDirection:
   LDA enemySprite1X
   CMP #$01
@@ -1528,7 +1536,7 @@ ApproachingTheForge:
   LDA approachingTheForge
   BEQ EndApproachingTheForge
 
-  LDA gameOver
+  LDA gameWin
   BEQ .LoadScene
 
   LDA #$00
@@ -1571,9 +1579,7 @@ MoodyAppearsScene:
 
   LDA #$00
   STA moodyAppearsScene
-  STA gameOver
   STA endOfDialog
-  STA gameWin
   STA gameInProgress
   LDA #$01
   STA moodyDialog
@@ -1615,9 +1621,6 @@ LoadMoodyDialogSequence:
   BNE EndLoadMoodyDialogSequence
 
 .DrawDialog:
-  ; LDA #$01
-  ; STA introDialog
-
   JSR DrawNextMoodyDialogScreen
 
   LDA #$00
@@ -1631,20 +1634,8 @@ MoodyBattleSequence:
   LDA moodyBattleSequence
   BEQ EndMoodyBattleSequence
 
-  ; LDA moodyBattleSequenceLoaded
-  ; BEQ .LoadScene
-  ;
-  ; LDA gameOver
-  ; BEQ .LoadScene
-  ;
   LDA #$00
-  ; STA moodyBattleSequence
-  ; STA gameOver
   STA endOfDialog
-  ; STA gameWin
-  ; STA gameInProgress
-  ; LDA #$01
-  ; STA lincRescueScene
 
   LDA buttonPressedB ; fix this
   BEQ .LoadScene
@@ -1676,8 +1667,6 @@ MoodyBattleSequence:
   JSR EnableGraphics
 
   LDA #$01
-  ; STA gameInProgress
-  ; STA movementEnabled
   STA moodyBattleSequenceLoaded
 
 EndMoodyBattleSequence:
