@@ -1743,6 +1743,35 @@ LincDialogSequence:
 EndLincDialogSequence:
 
 
+RollCredits:
+  LDA creditsScreen
+  BEQ EndRollCredits
+
+.LoadScene:
+  LDA creditsScreenLoaded
+  BNE EndRollCredits
+
+  JSR HideSprites
+
+  JSR DisableGraphics
+  JSR ClearBackground
+
+  LDA #LOW(backgroundCredits)
+  STA pointerBackgroundLowByte
+  LDA #HIGH(backgroundCredits)
+  STA pointerBackgroundHighByte
+  JSR LoadBackground
+
+  JSR LoadZeroAttribute
+  JSR LoadFuturePalettes
+
+  JSR EnableGraphics
+
+  LDA #$01
+  STA creditsScreenLoaded
+EndRollCredits:
+
+
 EndCurrentFrame:
   ; JSR musicPlay
   RTI

@@ -14,20 +14,6 @@ ReadA:
   LDA titleScreen
   BNE ReadADone
 
-  LDA creditsScreen
-  BEQ .DoneCheckingCredits
-
-  JMP RESET
-
-.DoneCheckingCredits:
-
-  ; LDA gameOver
-  ; BEQ .DoneCheckingGameOver
-  ;
-  ; JMP RESET
-
-.DoneCheckingGameOver:
-
   LDA gameWin
   BEQ .DoneCheckingGameWin
 

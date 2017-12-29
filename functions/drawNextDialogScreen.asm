@@ -391,6 +391,8 @@ LeaveLincDialog:
   LDA #$00
   STA lincDialogSequence
   STA currentDialogScreen
+  LDA #$01
+  STA creditsScreen
 
 EndDrawNextLincDialogScreen:
   JSR EnableGraphics
