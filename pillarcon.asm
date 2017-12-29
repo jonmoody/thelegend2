@@ -1534,6 +1534,8 @@ ApproachingTheForge:
   LDA gameOver
   BEQ .LoadScene
 
+  LDA #$00
+  STA approachingTheForge
   LDA #$01
   STA moodyAppearsScene
 

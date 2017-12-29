@@ -83,9 +83,8 @@ LeaveIntroDialog:
   CMP #$06
   BNE EndLoadingDialogBackground
 
-  ; LDA #$01
-  ; STA endOfDialog
   LDA #$00
+  STA introDialog
   STA forgeScene
   STA currentDialogScreen
   LDA #$01
@@ -260,8 +259,6 @@ LeaveMoodyDialog:
   CMP #$0B
   BNE EndDrawNextMoodyDialogScreen
 
-  ; LDA #$01
-  ; STA endOfDialog
   LDA #$00
   STA moodyDialog
   STA currentDialogScreen
@@ -301,13 +298,9 @@ LeaveLincDialog:
   CMP #$02
   BNE EndDrawNextLincDialogScreen
 
-  LDA #$01
-  STA endOfDialog
   LDA #$00
   STA lincDialogSequence
   STA currentDialogScreen
-  ; LDA #$01
-  ; STA moodyBattleSequence
 
 EndDrawNextLincDialogScreen:
   JSR EnableGraphics
