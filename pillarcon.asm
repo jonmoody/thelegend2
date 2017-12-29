@@ -1528,9 +1528,6 @@ ApproachingTheForge:
   LDA approachingTheForge
   BEQ EndApproachingTheForge
 
-  LDA approachingTheForgeLoaded
-  BEQ .LoadScene
-
   LDA gameOver
   BEQ .LoadScene
 
