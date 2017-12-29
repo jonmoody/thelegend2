@@ -281,7 +281,7 @@ DrawNextLincDialogScreen:
 LoadLincDialog1:
   LDA currentDialogScreen
   CMP #$01
-  BNE LeaveLincDialog
+  BNE LoadLincDialog2
 
   JSR DrawDialogBackground
 
@@ -293,9 +293,99 @@ LoadLincDialog1:
 
   JMP EndDrawNextLincDialogScreen
 
-LeaveLincDialog:
+LoadLincDialog2:
   LDA currentDialogScreen
   CMP #$02
+  BNE LoadLincDialog3
+
+  JSR DrawDialogBackground
+
+  LDA #LOW(awakeningDialog2)
+  STA pointerBackgroundLowByte
+  LDA #HIGH(awakeningDialog2)
+  STA pointerBackgroundHighByte
+  JSR LoadBottomDialog
+
+  JMP EndDrawNextLincDialogScreen
+
+LoadLincDialog3:
+  LDA currentDialogScreen
+  CMP #$03
+  BNE LoadLincDialog4
+
+  JSR DrawDialogBackground
+
+  LDA #LOW(awakeningDialog3)
+  STA pointerBackgroundLowByte
+  LDA #HIGH(awakeningDialog3)
+  STA pointerBackgroundHighByte
+  JSR LoadTopDialog
+
+  JMP EndDrawNextLincDialogScreen
+
+LoadLincDialog4:
+  LDA currentDialogScreen
+  CMP #$04
+  BNE LoadLincDialog5
+
+  JSR DrawDialogBackground
+
+  LDA #LOW(awakeningDialog4)
+  STA pointerBackgroundLowByte
+  LDA #HIGH(awakeningDialog4)
+  STA pointerBackgroundHighByte
+  JSR LoadBottomDialog
+
+  JMP EndDrawNextLincDialogScreen
+
+LoadLincDialog5:
+  LDA currentDialogScreen
+  CMP #$05
+  BNE LoadLincDialog6
+
+  JSR DrawDialogBackground
+
+  LDA #LOW(awakeningDialog5)
+  STA pointerBackgroundLowByte
+  LDA #HIGH(awakeningDialog5)
+  STA pointerBackgroundHighByte
+  JSR LoadBottomDialog
+
+  JMP EndDrawNextLincDialogScreen
+
+LoadLincDialog6:
+  LDA currentDialogScreen
+  CMP #$06
+  BNE LoadLincDialog7
+
+  JSR DrawDialogBackground
+
+  LDA #LOW(awakeningDialog6)
+  STA pointerBackgroundLowByte
+  LDA #HIGH(awakeningDialog6)
+  STA pointerBackgroundHighByte
+  JSR LoadBottomDialog
+
+  JMP EndDrawNextLincDialogScreen
+
+LoadLincDialog7:
+  LDA currentDialogScreen
+  CMP #$07
+  BNE LeaveLincDialog
+
+  JSR DrawDialogBackground
+
+  LDA #LOW(awakeningDialog7)
+  STA pointerBackgroundLowByte
+  LDA #HIGH(awakeningDialog7)
+  STA pointerBackgroundHighByte
+  JSR LoadBottomDialog
+
+  JMP EndDrawNextLincDialogScreen
+
+LeaveLincDialog:
+  LDA currentDialogScreen
+  CMP #$08
   BNE EndDrawNextLincDialogScreen
 
   LDA #$00
