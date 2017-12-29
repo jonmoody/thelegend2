@@ -1638,10 +1638,10 @@ MoodyBattleSequence:
   ; LDA gameOver
   ; BEQ .LoadScene
   ;
-  ; LDA #$00
+  LDA #$00
   ; STA moodyBattleSequence
   ; STA gameOver
-  ; STA endOfDialog
+  STA endOfDialog
   ; STA gameWin
   ; STA gameInProgress
   ; LDA #$01

@@ -35,6 +35,9 @@ ReadA:
 
 .DoneCheckingGameWin:
 
+  LDA lincDialogSequence
+  BNE AdvanceDialog
+
   LDA moodyDialog
   BNE AdvanceDialog
 
