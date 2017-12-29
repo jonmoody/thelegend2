@@ -29,7 +29,7 @@ projectile1Direction  .rs 1
 projectile2Direction  .rs 1
 projectile3Direction  .rs 1
 gameOver  .rs 1
-; gameOverLoaded  .rs 1
+gameOverLoaded  .rs 1
 gameWin  .rs 1
 ; gameWinLoaded  .rs 1
 titleScreen  .rs 1
@@ -269,12 +269,34 @@ EndReadController:
 ;   JMP EndCurrentFrame
 ; EndGameVictory:
 
-; GameOver:
-;   LDA gameOver
-;   BEQ EndGameOver
-;
-;   JMP EndCurrentFrame
-; EndGameOver:
+GameOver:
+  LDA gameOver
+  BEQ EndGameOver
+
+  LDA gameOverLoaded
+  BNE EndGameOver
+
+  JSR HideSprites
+
+  JSR DisableGraphics
+  JSR ClearBackground
+
+  LDA #LOW(backgroundGameOver)
+  STA pointerBackgroundLowByte
+  LDA #HIGH(backgroundGameOver)
+  STA pointerBackgroundHighByte
+  JSR LoadBackground
+
+  JSR LoadZeroAttribute
+  JSR LoadFuturePalettes
+
+  JSR EnableGraphics
+
+  LDA #$01
+  STA gameOverLoaded
+
+  JMP EndCurrentFrame
+EndGameOver:
 
 ; Credits:
 ;   LDA creditsScreen
