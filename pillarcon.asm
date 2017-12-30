@@ -1781,6 +1781,7 @@ EndRollCredits:
 
 
 EndCurrentFrame:
+  ; Figure out why the music makes the game crash
   ; JSR musicPlay
   RTI
 
