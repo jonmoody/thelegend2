@@ -6,7 +6,8 @@ LoseHealth:
   CMP #$00
   BEQ EndLoseHealth
 
-  JSR DrawHearts
+  ; This is causing the background to jump around wildly
+  ; JSR DrawHearts
   DEC playerHealth
 EndLoseHealth:
   RTS

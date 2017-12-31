@@ -1049,14 +1049,16 @@ EnemyLoseHealth:
 
   DEC enemyHealth
 
-  LDA #$20
-  STA $2006
-  LDA #$39
-  CLC
-  ADC enemyHealth
-  STA $2006
-  LDA #$01
-  STA $2007
+
+  ; This is causing the background to jump around wildly
+  ; LDA #$20
+  ; STA $2006
+  ; LDA #$39
+  ; CLC
+  ; ADC enemyHealth
+  ; STA $2006
+  ; LDA #$01
+  ; STA $2007
 
   LDA #$3C
   STA enemyIFrames
