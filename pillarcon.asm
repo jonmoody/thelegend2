@@ -1501,6 +1501,9 @@ LoadTeslaScene:
   BNE EndLoadTeslaScene
 
   JSR HideSprites
+  JSR HidePlayerSprite
+  JSR HideTravelerSprite
+
   JSR DisableGraphics
   JSR ClearBackground
 
@@ -1536,6 +1539,9 @@ LoadTeslaLandingScene:
   LDA teslaLandingSceneLoaded
   BNE EndLoadTeslaLandingScene
 
+  JSR HideSprites
+  JSR HidePlayerSprite
+  JSR HideTravelerSprite
   JSR DisableGraphics
   JSR ClearBackground
 
@@ -1571,7 +1577,7 @@ ApproachingTheForge:
   BNE EndApproachingTheForge
 
   JSR LoadSprites
-
+  JSR ShowPlayerSprite
   JSR DisableGraphics
   JSR ClearBackground
 
@@ -1613,7 +1619,8 @@ MoodyAppearsScene:
   BNE EndMoodyAppearsScene
 
   JSR HideSprites
-
+  JSR HidePlayerSprite
+  JSR HideTravelerSprite
   JSR DisableGraphics
   JSR ClearBackground
 
@@ -1673,6 +1680,8 @@ MoodyBattleSequence:
   BNE EndMoodyBattleSequence
 
   JSR HideSprites
+  JSR HidePlayerSprite
+  JSR HideTravelerSprite
 
   JSR DisableGraphics
   JSR ClearBackground
@@ -1711,6 +1720,8 @@ LoadLincRescueScene:
   BNE EndLoadLincRescueScene
 
   JSR HideSprites
+  JSR HidePlayerSprite
+  JSR HideTravelerSprite
 
   JSR DisableGraphics
   JSR ClearBackground
@@ -1760,6 +1771,8 @@ RollCredits:
   BNE EndRollCredits
 
   JSR HideSprites
+  JSR HidePlayerSprite
+  JSR HideTravelerSprite
 
   JSR DisableGraphics
   JSR ClearBackground
