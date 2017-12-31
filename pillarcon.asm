@@ -1668,8 +1668,15 @@ MoodyBattleSequence:
   LDA #$00
   STA endOfDialog
 
-  LDA buttonPressedB ; fix this
+  LDA moodyBattleSequenceLoaded
   BEQ .LoadScene
+
+  LDA playerSprite1X
+  CMP #$B0
+  BCC .LoadScene
+
+  ; LDA gameInProgress ; fix this
+  ; BNE .LoadScene
 
   LDA #$00
   STA moodyBattleSequence
@@ -1681,9 +1688,12 @@ MoodyBattleSequence:
   LDA moodyBattleSequenceLoaded
   BNE EndMoodyBattleSequence
 
-  JSR HideSprites
-  JSR HidePlayerSprite
-  JSR HideTravelerSprite
+  JSR LoadPlayerSprite
+  JSR LoadTravelerSprite
+  LDA #$03
+  STA enemyHealth
+  LDA #$01
+  STA gameInProgress
 
   JSR DisableGraphics
   JSR ClearBackground
