@@ -1049,14 +1049,16 @@ EnemyLoseHealth:
 
   DEC enemyHealth
 
-  LDA #$20
-  STA $2006
-  LDA #$39
-  CLC
-  ADC enemyHealth
-  STA $2006
-  LDA #$01
-  STA $2007
+
+  ; This is causing the background to jump around wildly
+  ; LDA #$20
+  ; STA $2006
+  ; LDA #$39
+  ; CLC
+  ; ADC enemyHealth
+  ; STA $2006
+  ; LDA #$01
+  ; STA $2007
 
   LDA #$3C
   STA enemyIFrames
@@ -1501,6 +1503,9 @@ LoadTeslaScene:
   BNE EndLoadTeslaScene
 
   JSR HideSprites
+  JSR HidePlayerSprite
+  JSR HideTravelerSprite
+
   JSR DisableGraphics
   JSR ClearBackground
 
@@ -1536,6 +1541,9 @@ LoadTeslaLandingScene:
   LDA teslaLandingSceneLoaded
   BNE EndLoadTeslaLandingScene
 
+  JSR HideSprites
+  JSR HidePlayerSprite
+  JSR HideTravelerSprite
   JSR DisableGraphics
   JSR ClearBackground
 
@@ -1571,7 +1579,7 @@ ApproachingTheForge:
   BNE EndApproachingTheForge
 
   JSR LoadSprites
-
+  JSR ShowPlayerSprite
   JSR DisableGraphics
   JSR ClearBackground
 
@@ -1613,7 +1621,8 @@ MoodyAppearsScene:
   BNE EndMoodyAppearsScene
 
   JSR HideSprites
-
+  JSR HidePlayerSprite
+  JSR HideTravelerSprite
   JSR DisableGraphics
   JSR ClearBackground
 
@@ -1659,8 +1668,15 @@ MoodyBattleSequence:
   LDA #$00
   STA endOfDialog
 
-  LDA buttonPressedB ; fix this
+  LDA moodyBattleSequenceLoaded
   BEQ .LoadScene
+
+  LDA playerSprite1X
+  CMP #$B0
+  BCC .LoadScene
+
+  ; LDA gameInProgress ; fix this
+  ; BNE .LoadScene
 
   LDA #$00
   STA moodyBattleSequence
@@ -1672,7 +1688,12 @@ MoodyBattleSequence:
   LDA moodyBattleSequenceLoaded
   BNE EndMoodyBattleSequence
 
-  JSR HideSprites
+  JSR LoadPlayerSprite
+  JSR LoadTravelerSprite
+  LDA #$03
+  STA enemyHealth
+  LDA #$01
+  STA gameInProgress
 
   JSR DisableGraphics
   JSR ClearBackground
@@ -1711,6 +1732,8 @@ LoadLincRescueScene:
   BNE EndLoadLincRescueScene
 
   JSR HideSprites
+  JSR HidePlayerSprite
+  JSR HideTravelerSprite
 
   JSR DisableGraphics
   JSR ClearBackground
@@ -1760,6 +1783,8 @@ RollCredits:
   BNE EndRollCredits
 
   JSR HideSprites
+  JSR HidePlayerSprite
+  JSR HideTravelerSprite
 
   JSR DisableGraphics
   JSR ClearBackground
