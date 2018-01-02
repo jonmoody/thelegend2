@@ -161,7 +161,7 @@ ClearAudio:
 
   JSR LoadAttributeTitle
 
-  JSR EnableGraphicsPattern2
+  JSR EnableGraphics
 
 InfiniteLoop:
   JMP InfiniteLoop
@@ -1416,6 +1416,9 @@ LoadIntroScene1:
   LDA introSceneLoaded
   BNE EndLoadIntroScene1
 
+  LDA #$01
+  JSR Bankswitch
+
   JSR DisableGraphics
   JSR ClearBackground
 
@@ -1853,7 +1856,7 @@ futurePalette:
   .include "graphics/futurePalette.asm"
 
 titlePalette:
-  .include "graphics/titlePalette.asm"
+  .incbin "graphics/title/palette.dat"
 
 paletteDialog:
   .include "graphics/dialog/paletteIntro.asm"
@@ -1871,7 +1874,7 @@ backgroundGameWin:
   .include "graphics/backgroundGameWin.asm"
 
 backgroundTitle:
-  .include "graphics/backgroundTitle.asm"
+  .incbin "graphics/title/nametable.dat"
 
 backgroundCredits:
   .include "graphics/backgroundCredits.asm"
@@ -1904,7 +1907,7 @@ attribute:
   .include "graphics/attributes.asm"
 
 attributeTitle:
-  .include "graphics/attributesTitle.asm"
+  .incbin "graphics/title/attribute.dat"
 
 attributeCredits:
   .include "graphics/attributesCredits.asm"
@@ -1921,8 +1924,8 @@ attributeDialog:
 
   .bank 4
   .org $0000
-  .incbin "sprites.chr"
+  .incbin "graphics/title/chr.dat"
 
   .bank 5
   .org $0000
-  .incbin "sprites2.chr"
+  .incbin "sprites.chr"
