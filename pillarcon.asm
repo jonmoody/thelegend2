@@ -287,8 +287,8 @@ GameOver:
   STA pointerBackgroundHighByte
   JSR LoadBackground
 
-  JSR LoadZeroAttribute
-  JSR LoadFuturePalettes
+  JSR LoadAttributeTitle
+  JSR LoadTitlePalettes
 
   JSR EnableGraphics
 
@@ -1422,13 +1422,14 @@ LoadIntroScene1:
   JSR DisableGraphics
   JSR ClearBackground
 
-  JSR LoadZeroAttribute
-
   LDA #LOW(introSequence)
   STA pointerBackgroundLowByte
   LDA #HIGH(introSequence)
   STA pointerBackgroundHighByte
   JSR LoadBackground
+
+  JSR LoadAttributeTitle
+  JSR LoadTitlePalettes
 
   JSR EnableGraphics
 
@@ -1518,8 +1519,8 @@ LoadTeslaScene:
   STA pointerBackgroundHighByte
   JSR LoadBackground
 
-  JSR LoadZeroAttribute
-  JSR LoadFuturePalettes
+  JSR LoadAttributeTitle
+  JSR LoadTitlePalettes
 
   JSR EnableGraphics
 
@@ -1556,8 +1557,8 @@ LoadTeslaLandingScene:
   STA pointerBackgroundHighByte
   JSR LoadBackground
 
-  JSR LoadZeroAttribute
-  JSR LoadFuturePalettes
+  JSR LoadAttributeTitle
+  JSR LoadTitlePalettes
 
   JSR EnableGraphics
 
@@ -1635,8 +1636,8 @@ MoodyAppearsScene:
   STA pointerBackgroundHighByte
   JSR LoadBackground
 
-  JSR LoadZeroAttribute
-  JSR LoadFuturePalettes
+  JSR LoadAttributeTitle
+  JSR LoadTitlePalettes
 
   JSR EnableGraphics
 
@@ -1747,8 +1748,8 @@ LoadLincRescueScene:
   STA pointerBackgroundHighByte
   JSR LoadBackground
 
-  JSR LoadZeroAttribute
-  JSR LoadFuturePalettes
+  JSR LoadAttributeTitle
+  JSR LoadTitlePalettes
 
   JSR EnableGraphics
 
@@ -1798,8 +1799,8 @@ RollCredits:
   STA pointerBackgroundHighByte
   JSR LoadBackground
 
-  JSR LoadZeroAttribute
-  JSR LoadFuturePalettes
+  JSR LoadAttributeTitle
+  JSR LoadTitlePalettes
 
   JSR EnableGraphics
 
