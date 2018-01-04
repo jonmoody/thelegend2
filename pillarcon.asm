@@ -1,5 +1,5 @@
   .inesprg 2
-  .ineschr 3
+  .ineschr 4
   .inesmap 3
   .inesmir 0
 
@@ -177,7 +177,13 @@ teslaPalette:
   .incbin "graphics/tesla/palette.dat"
 
 teslaLandingBackground:
-  .include "graphics/teslaLandingBackground.asm"
+  .incbin "graphics/tesla-arrives/nametable.dat"
+
+teslaLandingAttribute:
+  .incbin "graphics/tesla-arrives/attribute.dat"
+
+teslaLandingPalette:
+  .incbin "graphics/tesla-arrives/palette.dat"
 
 insideTheForgeBackground:
   .include "graphics/insideTheForgeBackground.asm"
@@ -1554,7 +1560,7 @@ LoadTeslaLandingScene:
   LDA teslaLandingSceneLoaded
   BNE EndLoadTeslaLandingScene
 
-  LDA #$01
+  LDA #$03
   JSR Bankswitch
 
   JSR HideSprites
@@ -1569,8 +1575,8 @@ LoadTeslaLandingScene:
   STA pointerBackgroundHighByte
   JSR LoadBackground
 
-  JSR LoadAttributeTitle
-  JSR LoadTitlePalettes
+  JSR LoadTeslaLandingAttribute
+  JSR LoadTeslaLandingPalette
 
   JSR EnableGraphics
 
@@ -1593,6 +1599,9 @@ ApproachingTheForge:
 .LoadScene:
   LDA approachingTheForgeLoaded
   BNE EndApproachingTheForge
+
+  LDA #$01
+  JSR Bankswitch
 
   JSR LoadSprites
   JSR ShowPlayerSprite
@@ -1946,3 +1955,7 @@ attributeDialog:
   .bank 6
   .org $0000
   .incbin "graphics/tesla/chr.dat"
+
+  .bank 7
+  .org $0000
+  .incbin "graphics/tesla-arrives/chr.dat"
