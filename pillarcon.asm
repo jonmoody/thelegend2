@@ -1,5 +1,5 @@
   .inesprg 2
-  .ineschr 2
+  .ineschr 3
   .inesmap 3
   .inesmir 0
 
@@ -168,7 +168,13 @@ InfiniteLoop:
 
 ; Can put 8 full backgrounds here
 teslaBackground:
-  .include "graphics/teslaBackground.asm"
+  .incbin "graphics/tesla/nametable.dat"
+
+teslaAttribute:
+  .incbin "graphics/tesla/attribute.dat"
+
+teslaPalette:
+  .incbin "graphics/tesla/palette.dat"
 
 teslaLandingBackground:
   .include "graphics/teslaLandingBackground.asm"
@@ -1506,6 +1512,9 @@ LoadTeslaScene:
   LDA teslaSceneLoaded
   BNE EndLoadTeslaScene
 
+  LDA #$02
+  JSR Bankswitch
+
   JSR HideSprites
   JSR HidePlayerSprite
   JSR HideTravelerSprite
@@ -1519,8 +1528,8 @@ LoadTeslaScene:
   STA pointerBackgroundHighByte
   JSR LoadBackground
 
-  JSR LoadAttributeTitle
-  JSR LoadTitlePalettes
+  JSR LoadTeslaAttribute
+  JSR LoadTeslaPalette
 
   JSR EnableGraphics
 
@@ -1544,6 +1553,9 @@ LoadTeslaLandingScene:
 .LoadScene:
   LDA teslaLandingSceneLoaded
   BNE EndLoadTeslaLandingScene
+
+  LDA #$01
+  JSR Bankswitch
 
   JSR HideSprites
   JSR HidePlayerSprite
@@ -1930,3 +1942,7 @@ attributeDialog:
   .bank 5
   .org $0000
   .incbin "sprites.chr"
+
+  .bank 6
+  .org $0000
+  .incbin "graphics/tesla/chr.dat"
