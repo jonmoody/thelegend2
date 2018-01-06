@@ -1,4 +1,10 @@
 ScrollBackgroundLeft:
+  LDA approachingTheForge
+  BEQ .End
+
+  LDA gameOver
+  BNE .End
+
   LDA #$00
   STA $2006        ; clean up PPU address registers
   STA $2006
@@ -9,9 +15,17 @@ ScrollBackgroundLeft:
 
   LDA #$00         ; no vertical scrolling
   STA $2005
+
+.End:
   RTS
 
 ScrollBackgroundRight:
+  LDA approachingTheForge
+  BEQ .End
+
+  LDA gameOver
+  BNE .End
+
   LDA #$00
   STA $2006        ; clean up PPU address registers
   STA $2006
@@ -22,4 +36,6 @@ ScrollBackgroundRight:
 
   LDA #$00         ; no vertical scrolling
   STA $2005
+
+.End:
   RTS
