@@ -78,6 +78,7 @@ lincRescueScene  .rs 1
 lincRescueSceneLoaded  .rs 1
 lincDialogSequence  .rs 1
 lincDialogSequenceLoaded  .rs 1
+numberOfEnemySpawns  .rs 1
 
   .include "reference/spriteMemoryLocations.asm"
 
@@ -144,8 +145,11 @@ ClearAudio:
   STA playerHealth
   STA projectileSpeed
 
-  LDA #$06
+  LDA #$03
   STA enemyHealth
+
+  LDA #$02
+  STA numberOfEnemySpawns
 
   LDA #$3C
   STA deathTimer
@@ -1096,8 +1100,24 @@ EnemyDie:
   STA enemySprite8Y
   STA enemySprite9Y
 
+  LDA numberOfEnemySpawns
+  BNE .RespawnEnemy
+
   LDA #$01
   STA gameWin
+  JMP CheckGameVictory
+
+.RespawnEnemy:
+  LDA #$03
+  STA enemyHealth
+
+  LDA #$3C
+  STA deathTimer
+  STA enemyDeathTimer
+
+  DEC numberOfEnemySpawns
+
+  JSR LoadSprites
 
   JMP CheckGameVictory
 
