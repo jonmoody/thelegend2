@@ -1117,7 +1117,7 @@ EnemyDie:
 
   DEC numberOfEnemySpawns
 
-  JSR LoadSprites
+  JSR LoadEnemySprite
 
   JMP CheckGameVictory
 
