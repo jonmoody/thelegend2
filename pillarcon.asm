@@ -1894,6 +1894,7 @@ Bankvalues:
   .include "functions/wipeDialog.asm"
   .include "functions/sounds.asm"
   .include "functions/enemyMovement.asm"
+  .include "functions/scrolling.asm"
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
