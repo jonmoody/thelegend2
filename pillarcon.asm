@@ -1,7 +1,7 @@
   .inesprg 2
   .ineschr 4
   .inesmap 3
-  .inesmir 0
+  .inesmir 1
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -79,6 +79,7 @@ lincRescueSceneLoaded  .rs 1
 lincDialogSequence  .rs 1
 lincDialogSequenceLoaded  .rs 1
 numberOfEnemySpawns  .rs 1
+scroll  .rs 1
 
   .include "reference/spriteMemoryLocations.asm"
 
@@ -1634,7 +1635,14 @@ ApproachingTheForge:
   STA pointerBackgroundHighByte
   JSR LoadBackground
 
+  LDA #LOW(background)
+  STA pointerBackgroundLowByte
+  LDA #HIGH(background)
+  STA pointerBackgroundHighByte
+  JSR LoadBackground2
+
   JSR LoadAttribute
+  JSR LoadAttribute2
   JSR LoadFuturePalettes
 
   JSR EnableGraphics
