@@ -21,7 +21,7 @@ LoadAttribute2:
   STA $2006
   LDX #$00
 .Loop:
-  LDA attribute, x
+  LDA levelSecondAttribute, x
   STA $2007
   INX
   CPX #$40

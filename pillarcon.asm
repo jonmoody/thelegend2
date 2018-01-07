@@ -191,6 +191,12 @@ teslaLandingAttribute:
 teslaLandingPalette:
   .incbin "graphics/tesla-arrives/palette.dat"
 
+levelSecondBackground:
+  .incbin "graphics/level-second-background/nametable.dat"
+
+levelSecondAttribute:
+  .incbin "graphics/level-second-background/attribute.dat"
+
 insideTheForgeBackground:
   .include "graphics/insideTheForgeBackground.asm"
 
@@ -293,6 +299,9 @@ GameOver:
 
   LDA gameOverLoaded
   BNE EndGameOver
+
+  LDA #$01
+  JSR Bankswitch
 
   JSR HideSprites
 
@@ -1622,23 +1631,23 @@ ApproachingTheForge:
   LDA approachingTheForgeLoaded
   BNE EndApproachingTheForge
 
-  LDA #$01
-  JSR Bankswitch
+  ; LDA #$01
+  ; JSR Bankswitch
 
   JSR LoadSprites
   JSR ShowPlayerSprite
   JSR DisableGraphics
   JSR ClearBackground
 
-  LDA #LOW(background)
+  LDA #LOW(teslaLandingBackground)
   STA pointerBackgroundLowByte
-  LDA #HIGH(background)
+  LDA #HIGH(teslaLandingBackground)
   STA pointerBackgroundHighByte
   JSR LoadBackground
 
-  LDA #LOW(background)
+  LDA #LOW(levelSecondBackground)
   STA pointerBackgroundLowByte
-  LDA #HIGH(background)
+  LDA #HIGH(levelSecondBackground)
   STA pointerBackgroundHighByte
   JSR LoadBackground2
 
@@ -1673,6 +1682,9 @@ MoodyAppearsScene:
 .LoadScene:
   LDA moodyAppearsSceneLoaded
   BNE EndMoodyAppearsScene
+
+  LDA #$01
+  JSR Bankswitch
 
   JSR HideSprites
   JSR HidePlayerSprite
@@ -1913,7 +1925,10 @@ palette:
   .include "graphics/palette.asm"
 
 futurePalette:
-  .include "graphics/futurePalette.asm"
+  ; .include "graphics/futurePalette.asm"
+  ; .incbin "graphics/tesla-arrives/palette.dat"
+  .db $0F,$21,$16,$20,  $0F,$27,$27,$17,  $0F,$19,$16,$20,  $29,$2A,$18,$0F ; Background: Text/Hearts, Forge, Unused, Ground
+  .db $0F,$21,$15,$14,  $0F,$37,$30,$0F,  $0F,$15,$10,$0F,  $0F,$0F,$37,$11 ; Sprites: Unused, Traveler, Enemy, Player
 
 titlePalette:
   .incbin "graphics/title/palette.dat"
@@ -1964,7 +1979,8 @@ introSequence:
   .include "graphics/introSequence.asm"
 
 attribute:
-  .include "graphics/attributes.asm"
+  ; .include "graphics/attributes.asm"
+  .incbin "graphics/tesla-arrives/attribute.dat"
 
 attributeTitle:
   .incbin "graphics/title/attribute.dat"
