@@ -1832,9 +1832,16 @@ RollCredits:
   LDA creditsScreen
   BEQ EndRollCredits
 
+  LDA creditsScreenLoaded
+  BEQ .LoadScene
+
+  JSR ScrollBackgroundUp
+
 .LoadScene:
   LDA creditsScreenLoaded
   BNE EndRollCredits
+
+  .inesmir 0
 
   JSR HideSprites
   JSR HidePlayerSprite
@@ -1847,7 +1854,7 @@ RollCredits:
   STA pointerBackgroundLowByte
   LDA #HIGH(backgroundCredits)
   STA pointerBackgroundHighByte
-  JSR LoadBackground
+  JSR LoadBackground3
 
   JSR LoadAttributeTitle
   JSR LoadTitlePalettes

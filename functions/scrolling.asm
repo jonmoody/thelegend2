@@ -39,3 +39,18 @@ ScrollBackgroundRight:
 
 .End:
   RTS
+
+ScrollBackgroundUp:
+  LDA #$00
+  STA $2006        ; clean up PPU address registers
+  STA $2006
+
+  LDA #$00
+  STA $2005        ; write the horizontal scroll count register
+
+  INC scroll       ; add one to our scroll variable each frame
+  LDA scroll
+  STA $2005
+
+.End:
+  RTS
