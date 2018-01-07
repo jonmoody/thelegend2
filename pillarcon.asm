@@ -1,7 +1,7 @@
   .inesprg 2
-  .ineschr 3
+  .ineschr 4
   .inesmap 3
-  .inesmir 0
+  .inesmir 1
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -78,6 +78,9 @@ lincRescueScene  .rs 1
 lincRescueSceneLoaded  .rs 1
 lincDialogSequence  .rs 1
 lincDialogSequenceLoaded  .rs 1
+numberOfEnemySpawns  .rs 1
+scroll  .rs 1
+moveCreditsUp  .rs 1
 
   .include "reference/spriteMemoryLocations.asm"
 
@@ -144,8 +147,11 @@ ClearAudio:
   STA playerHealth
   STA projectileSpeed
 
-  LDA #$06
+  LDA #$03
   STA enemyHealth
+
+  LDA #$02
+  STA numberOfEnemySpawns
 
   LDA #$3C
   STA deathTimer
@@ -177,7 +183,13 @@ teslaPalette:
   .incbin "graphics/tesla/palette.dat"
 
 teslaLandingBackground:
-  .include "graphics/teslaLandingBackground.asm"
+  .incbin "graphics/tesla-arrives/nametable.dat"
+
+teslaLandingAttribute:
+  .incbin "graphics/tesla-arrives/attribute.dat"
+
+teslaLandingPalette:
+  .incbin "graphics/tesla-arrives/palette.dat"
 
 insideTheForgeBackground:
   .include "graphics/insideTheForgeBackground.asm"
@@ -1090,8 +1102,24 @@ EnemyDie:
   STA enemySprite8Y
   STA enemySprite9Y
 
+  LDA numberOfEnemySpawns
+  BNE .RespawnEnemy
+
   LDA #$01
   STA gameWin
+  JMP CheckGameVictory
+
+.RespawnEnemy:
+  LDA #$03
+  STA enemyHealth
+
+  LDA #$3C
+  STA deathTimer
+  STA enemyDeathTimer
+
+  DEC numberOfEnemySpawns
+
+  JSR LoadEnemySprite
 
   JMP CheckGameVictory
 
@@ -1554,7 +1582,7 @@ LoadTeslaLandingScene:
   LDA teslaLandingSceneLoaded
   BNE EndLoadTeslaLandingScene
 
-  LDA #$01
+  LDA #$03
   JSR Bankswitch
 
   JSR HideSprites
@@ -1569,8 +1597,8 @@ LoadTeslaLandingScene:
   STA pointerBackgroundHighByte
   JSR LoadBackground
 
-  JSR LoadAttributeTitle
-  JSR LoadTitlePalettes
+  JSR LoadTeslaLandingAttribute
+  JSR LoadTeslaLandingPalette
 
   JSR EnableGraphics
 
@@ -1594,6 +1622,9 @@ ApproachingTheForge:
   LDA approachingTheForgeLoaded
   BNE EndApproachingTheForge
 
+  LDA #$01
+  JSR Bankswitch
+
   JSR LoadSprites
   JSR ShowPlayerSprite
   JSR DisableGraphics
@@ -1605,7 +1636,14 @@ ApproachingTheForge:
   STA pointerBackgroundHighByte
   JSR LoadBackground
 
+  LDA #LOW(background)
+  STA pointerBackgroundLowByte
+  LDA #HIGH(background)
+  STA pointerBackgroundHighByte
+  JSR LoadBackground2
+
   JSR LoadAttribute
+  JSR LoadAttribute2
   JSR LoadFuturePalettes
 
   JSR EnableGraphics
@@ -1706,6 +1744,7 @@ MoodyBattleSequence:
 
   JSR LoadPlayerSprite
   JSR LoadTravelerSprite
+  JSR ShowTravelerSprite
   LDA #$03
   STA enemyHealth
   LDA #$01
@@ -1794,9 +1833,16 @@ RollCredits:
   LDA creditsScreen
   BEQ EndRollCredits
 
+  LDA creditsScreenLoaded
+  BEQ .LoadScene
+
+  JSR ScrollBackgroundUp
+
 .LoadScene:
   LDA creditsScreenLoaded
   BNE EndRollCredits
+
+  .inesmir 0
 
   JSR HideSprites
   JSR HidePlayerSprite
@@ -1809,7 +1855,7 @@ RollCredits:
   STA pointerBackgroundLowByte
   LDA #HIGH(backgroundCredits)
   STA pointerBackgroundHighByte
-  JSR LoadBackground
+  JSR LoadBackground3
 
   JSR LoadAttributeTitle
   JSR LoadTitlePalettes
@@ -1856,6 +1902,7 @@ Bankvalues:
   .include "functions/wipeDialog.asm"
   .include "functions/sounds.asm"
   .include "functions/enemyMovement.asm"
+  .include "functions/scrolling.asm"
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -1946,3 +1993,7 @@ attributeDialog:
   .bank 6
   .org $0000
   .incbin "graphics/tesla/chr.dat"
+
+  .bank 7
+  .org $0000
+  .incbin "graphics/tesla-arrives/chr.dat"

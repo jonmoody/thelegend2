@@ -290,6 +290,8 @@ ReadLeft:
   JMP ReadLeftDone
 
 CheckMovementEnabledLeft:
+  JSR ScrollBackgroundLeft
+
   LDA movementEnabled
   BNE MovePlayerLeft
 
@@ -427,6 +429,8 @@ ReadRight:
   JMP ReadRightDone
 
 CheckMovementEnabledRight:
+  JSR ScrollBackgroundRight
+
   LDA movementEnabled
   BNE MovePlayerRight
 

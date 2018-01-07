@@ -80,19 +80,19 @@ HideTravelerSprite:
   RTS
 
 ShowTravelerSprite:
-  LDA #$40
+  LDA #$A0
   STA travelerSprite1Y
   STA travelerSprite2Y
   STA travelerSprite3Y
-  LDA #$48
+  LDA #$A8
   STA travelerSprite4Y
   STA travelerSprite5Y
   STA travelerSprite6Y
-  LDA #$50
+  LDA #$B0
   STA travelerSprite7Y
   STA travelerSprite8Y
   STA travelerSprite9Y
-  LDA #$58
+  LDA #$B8
   STA travelerSprite10Y
   STA travelerSprite11Y
   STA travelerSprite12Y
