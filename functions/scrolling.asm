@@ -41,6 +41,9 @@ ScrollBackgroundRight:
   RTS
 
 ScrollBackgroundUp:
+  LDA moveCreditsUp
+  BEQ .End
+
   LDA #$00
   STA $2006        ; clean up PPU address registers
   STA $2006
@@ -53,4 +56,7 @@ ScrollBackgroundUp:
   STA $2005
 
 .End:
+  LDA moveCreditsUp
+  EOR #$01
+  STA moveCreditsUp
   RTS

@@ -80,6 +80,7 @@ lincDialogSequence  .rs 1
 lincDialogSequenceLoaded  .rs 1
 numberOfEnemySpawns  .rs 1
 scroll  .rs 1
+moveCreditsUp  .rs 1
 
   .include "reference/spriteMemoryLocations.asm"
 
