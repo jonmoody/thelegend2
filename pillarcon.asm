@@ -197,6 +197,9 @@ levelSecondBackground:
 levelSecondAttribute:
   .incbin "graphics/level-second-background/attribute.dat"
 
+levelSecondPalette:
+  .incbin "graphics/level-second-background/palette.dat"
+
 insideTheForgeBackground:
   .include "graphics/insideTheForgeBackground.asm"
 
@@ -1653,7 +1656,8 @@ ApproachingTheForge:
 
   JSR LoadAttribute
   JSR LoadAttribute2
-  JSR LoadFuturePalettes
+  JSR LoadTeslaLandingPalette
+  JSR LoadSpritePalettes
 
   JSR EnableGraphics
 
@@ -1921,14 +1925,15 @@ Bankvalues:
   .bank 3
   .org $E000
 
+spritePalette:
+  .db $0F,$21,$15,$14,  $0F,$37,$30,$0F,  $0F,$16,$10,$0F,  $0F,$0F,$37,$11 ; Sprites: Unused, Traveler, Enemy, Player
+
 palette:
   .include "graphics/palette.asm"
 
 futurePalette:
-  ; .include "graphics/futurePalette.asm"
+  .include "graphics/futurePalette.asm"
   ; .incbin "graphics/tesla-arrives/palette.dat"
-  .db $0F,$21,$16,$20,  $0F,$27,$27,$17,  $0F,$19,$16,$20,  $29,$2A,$18,$0F ; Background: Text/Hearts, Forge, Unused, Ground
-  .db $0F,$21,$15,$14,  $0F,$37,$30,$0F,  $0F,$15,$10,$0F,  $0F,$0F,$37,$11 ; Sprites: Unused, Traveler, Enemy, Player
 
 titlePalette:
   .incbin "graphics/title/palette.dat"
@@ -1979,8 +1984,8 @@ introSequence:
   .include "graphics/introSequence.asm"
 
 attribute:
-  ; .include "graphics/attributes.asm"
-  .incbin "graphics/tesla-arrives/attribute.dat"
+  .include "graphics/attributes.asm"
+  ; .incbin "graphics/tesla-arrives/attribute.dat"
 
 attributeTitle:
   .incbin "graphics/title/attribute.dat"

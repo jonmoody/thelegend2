@@ -30,6 +30,22 @@ LoadFuturePalettes:
   BNE .Loop
   RTS
 
+LoadSpritePalettes:
+  LDA $2002
+  LDA #$3F
+  STA $2006
+  LDA #$10
+  STA $2006
+
+  LDX #$00
+.Loop:
+  LDA spritePalette, x
+  STA $2007
+  INX
+  CPX #$10
+  BNE .Loop
+  RTS
+
 LoadTitlePalettes:
   LDA $2002
   LDA #$3F
