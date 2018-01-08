@@ -1861,6 +1861,9 @@ RollCredits:
 
   .inesmir 0
 
+  LDA #$00
+  STA scroll
+
   JSR HideSprites
   JSR HidePlayerSprite
   JSR HideTravelerSprite
