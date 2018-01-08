@@ -1656,7 +1656,8 @@ ApproachingTheForge:
 
   JSR LoadAttribute
   JSR LoadAttribute2
-  JSR LoadTeslaLandingPalette
+  ; JSR LoadTeslaLandingPalette
+  JSR LoadTeslaArrivingPalette
   JSR LoadSpritePalettes
 
   JSR EnableGraphics
