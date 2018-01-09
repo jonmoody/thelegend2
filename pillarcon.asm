@@ -1654,7 +1654,7 @@ ApproachingTheForge:
   STA pointerBackgroundHighByte
   JSR LoadBackground2
 
-  JSR LoadAttribute
+  JSR LoadTeslaAttribute
   JSR LoadAttribute2
   ; JSR LoadTeslaLandingPalette
   JSR LoadTeslaArrivingPalette
