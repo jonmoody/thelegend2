@@ -398,24 +398,24 @@ CheckScreenCollisionLeft:
   CPX #$00
   BEQ ReadLeftDone
 
-  LDA playerSprite1X
-  SEC
-  SBC movementSpeed
-  STA playerSprite1X
-  STA playerSprite4X
-  STA playerSprite7X
-  LDA playerSprite2X
-  SEC
-  SBC movementSpeed
-  STA playerSprite2X
-  STA playerSprite5X
-  STA playerSprite8X
-  LDA playerSprite3X
-  SEC
-  SBC movementSpeed
-  STA playerSprite3X
-  STA playerSprite6X
-  STA playerSprite9X
+  ; LDA playerSprite1X
+  ; SEC
+  ; SBC movementSpeed
+  ; STA playerSprite1X
+  ; STA playerSprite4X
+  ; STA playerSprite7X
+  ; LDA playerSprite2X
+  ; SEC
+  ; SBC movementSpeed
+  ; STA playerSprite2X
+  ; STA playerSprite5X
+  ; STA playerSprite8X
+  ; LDA playerSprite3X
+  ; SEC
+  ; SBC movementSpeed
+  ; STA playerSprite3X
+  ; STA playerSprite6X
+  ; STA playerSprite9X
 ReadLeftDone:
 
 ReadRight:
@@ -536,22 +536,22 @@ CheckScreenCollisionRight:
   CPX #$E8
   BEQ ReadRightDone
 
-  LDA playerSprite1X
-  CLC
-  ADC movementSpeed
-  STA playerSprite1X
-  STA playerSprite4X
-  STA playerSprite7X
-  LDA playerSprite2X
-  CLC
-  ADC movementSpeed
-  STA playerSprite2X
-  STA playerSprite5X
-  STA playerSprite8X
-  LDA playerSprite3X
-  CLC
-  ADC movementSpeed
-  STA playerSprite3X
-  STA playerSprite6X
-  STA playerSprite9X
+  ; LDA playerSprite1X
+  ; CLC
+  ; ADC movementSpeed
+  ; STA playerSprite1X
+  ; STA playerSprite4X
+  ; STA playerSprite7X
+  ; LDA playerSprite2X
+  ; CLC
+  ; ADC movementSpeed
+  ; STA playerSprite2X
+  ; STA playerSprite5X
+  ; STA playerSprite8X
+  ; LDA playerSprite3X
+  ; CLC
+  ; ADC movementSpeed
+  ; STA playerSprite3X
+  ; STA playerSprite6X
+  ; STA playerSprite9X
 ReadRightDone:
