@@ -64,6 +64,20 @@ ShowPlayerSprite:
   STA playerSprite7Y
   STA playerSprite8Y
   STA playerSprite9Y
+
+  LDA #$78
+  STA playerSprite1X
+  STA playerSprite4X
+  STA playerSprite7X
+  LDA #$80
+  STA playerSprite2X
+  STA playerSprite5X
+  STA playerSprite8X
+  LDA #$88
+  STA playerSprite3X
+  STA playerSprite6X
+  STA playerSprite9X
+
   RTS
 
 HideTravelerSprite:
