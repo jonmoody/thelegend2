@@ -1,5 +1,5 @@
   .inesprg 2
-  .ineschr 4
+  .ineschr 5
   .inesmap 3
   .inesmir 1
 
@@ -1618,9 +1618,6 @@ ApproachingTheForge:
   LDA approachingTheForgeLoaded
   BNE EndApproachingTheForge
 
-  ; LDA #$01
-  ; JSR Bankswitch
-
   JSR LoadSprites
   JSR ShowPlayerSprite
   JSR DisableGraphics
@@ -1743,6 +1740,9 @@ MoodyBattleSequence:
   LDA moodyBattleSequenceLoaded
   BNE EndMoodyBattleSequence
 
+  LDA #$04
+  JSR Bankswitch
+
   JSR LoadPlayerSprite
   JSR LoadTravelerSprite
   JSR ShowTravelerSprite
@@ -1786,6 +1786,9 @@ LoadLincRescueScene:
 .LoadScene:
   LDA lincRescueSceneLoaded
   BNE EndLoadLincRescueScene
+
+  LDA #$01
+  JSR Bankswitch
 
   JSR HideSprites
   JSR HidePlayerSprite
@@ -1920,7 +1923,9 @@ palette:
   .include "graphics/palette.asm"
 
 futurePalette:
-  .include "graphics/futurePalette.asm"
+  .db $0F,$27,$08,$16,  $0F,$30,$00,$22,  $0F,$0F,$0F,$0F,  $0F,$0F,$0F,$0F
+  .db $0F,$21,$15,$14,  $0F,$37,$30,$0F,  $0F,$16,$10,$0F,  $0F,$0F,$37,$11 ; Sprites: Unused, Traveler, Enemy, Player
+  ; .include "graphics/futurePalette.asm"
   ; .incbin "graphics/tesla-arrives/palette.dat"
 
 titlePalette:
@@ -1933,7 +1938,7 @@ sprites:
   .include "graphics/sprites.asm"
 
 background:
-  .include "graphics/background.asm"
+  .incbin "graphics/forge-interior/nametable.dat"
 
 backgroundGameOver:
   .include "graphics/backgroundGameOver.asm"
@@ -1972,7 +1977,8 @@ introSequence:
   .include "graphics/introSequence.asm"
 
 attribute:
-  .include "graphics/attributes.asm"
+  .incbin "graphics/forge-interior/attribute.dat"
+  ; .include "graphics/attributes.asm"
   ; .incbin "graphics/tesla-arrives/attribute.dat"
 
 attributeTitle:
@@ -2006,3 +2012,7 @@ attributeDialog:
   .bank 7
   .org $0000
   .incbin "graphics/tesla-arrives/chr.dat"
+
+  .bank 8
+  .org $0000
+  .incbin "graphics/forge-interior/chr.dat"
