@@ -1311,15 +1311,7 @@ IFramesCheck:
   CMP #$01
   BEQ .SkipKnockBackLeft
 
-  DEC playerSprite1X
-  DEC playerSprite2X
-  DEC playerSprite3X
-  DEC playerSprite4X
-  DEC playerSprite5X
-  DEC playerSprite6X
-  DEC playerSprite7X
-  DEC playerSprite8X
-  DEC playerSprite9X
+  JSR ScrollBackgroundLeft
 
 .SkipKnockBackLeft:
   JMP EndIFramesCheck
@@ -1329,15 +1321,7 @@ IFramesCheck:
   CMP #$F0
   BEQ .SkipKnockBackRight
 
-  INC playerSprite1X
-  INC playerSprite2X
-  INC playerSprite3X
-  INC playerSprite4X
-  INC playerSprite5X
-  INC playerSprite6X
-  INC playerSprite7X
-  INC playerSprite8X
-  INC playerSprite9X
+  JSR ScrollBackgroundRight
 
 .SkipKnockBackRight:
   JMP EndIFramesCheck
