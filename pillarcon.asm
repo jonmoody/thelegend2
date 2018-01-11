@@ -147,7 +147,7 @@ ClearAudio:
   STA playerHealth
   STA projectileSpeed
 
-  LDA #$03
+  LDA #$01
   STA enemyHealth
 
   LDA #$02
@@ -1122,7 +1122,7 @@ EnemyDie:
   JMP CheckGameVictory
 
 .RespawnEnemy:
-  LDA #$03
+  LDA #$01
   STA enemyHealth
 
   LDA #$3C
