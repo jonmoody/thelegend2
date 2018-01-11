@@ -398,6 +398,9 @@ CheckScreenCollisionLeft:
   CPX #$00
   BEQ ReadLeftDone
 
+  LDA approachingTheForge
+  BNE ReadLeftDone
+
   LDA playerSprite1X
   SEC
   SBC movementSpeed
@@ -535,6 +538,9 @@ CheckScreenCollisionRight:
   TAX
   CPX #$E8
   BEQ ReadRightDone
+
+  LDA approachingTheForge
+  BNE ReadRightDone
 
   LDA playerSprite1X
   CLC

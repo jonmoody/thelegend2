@@ -147,7 +147,7 @@ ClearAudio:
   STA playerHealth
   STA projectileSpeed
 
-  LDA #$03
+  LDA #$01
   STA enemyHealth
 
   LDA #$02
@@ -190,6 +190,15 @@ teslaLandingAttribute:
 
 teslaLandingPalette:
   .incbin "graphics/tesla-arrives/palette.dat"
+
+levelSecondBackground:
+  .incbin "graphics/level-second-background/nametable.dat"
+
+levelSecondAttribute:
+  .incbin "graphics/level-second-background/attribute.dat"
+
+levelSecondPalette:
+  .incbin "graphics/level-second-background/palette.dat"
 
 insideTheForgeBackground:
   .include "graphics/insideTheForgeBackground.asm"
@@ -293,6 +302,9 @@ GameOver:
 
   LDA gameOverLoaded
   BNE EndGameOver
+
+  LDA #$01
+  JSR Bankswitch
 
   JSR HideSprites
 
@@ -1110,7 +1122,7 @@ EnemyDie:
   JMP CheckGameVictory
 
 .RespawnEnemy:
-  LDA #$03
+  LDA #$01
   STA enemyHealth
 
   LDA #$3C
@@ -1299,15 +1311,7 @@ IFramesCheck:
   CMP #$01
   BEQ .SkipKnockBackLeft
 
-  DEC playerSprite1X
-  DEC playerSprite2X
-  DEC playerSprite3X
-  DEC playerSprite4X
-  DEC playerSprite5X
-  DEC playerSprite6X
-  DEC playerSprite7X
-  DEC playerSprite8X
-  DEC playerSprite9X
+  JSR ScrollBackgroundLeft
 
 .SkipKnockBackLeft:
   JMP EndIFramesCheck
@@ -1317,15 +1321,7 @@ IFramesCheck:
   CMP #$F0
   BEQ .SkipKnockBackRight
 
-  INC playerSprite1X
-  INC playerSprite2X
-  INC playerSprite3X
-  INC playerSprite4X
-  INC playerSprite5X
-  INC playerSprite6X
-  INC playerSprite7X
-  INC playerSprite8X
-  INC playerSprite9X
+  JSR ScrollBackgroundRight
 
 .SkipKnockBackRight:
   JMP EndIFramesCheck
@@ -1622,29 +1618,31 @@ ApproachingTheForge:
   LDA approachingTheForgeLoaded
   BNE EndApproachingTheForge
 
-  LDA #$01
-  JSR Bankswitch
+  ; LDA #$01
+  ; JSR Bankswitch
 
   JSR LoadSprites
   JSR ShowPlayerSprite
   JSR DisableGraphics
   JSR ClearBackground
 
-  LDA #LOW(background)
+  LDA #LOW(teslaLandingBackground)
   STA pointerBackgroundLowByte
-  LDA #HIGH(background)
+  LDA #HIGH(teslaLandingBackground)
   STA pointerBackgroundHighByte
   JSR LoadBackground
 
-  LDA #LOW(background)
+  LDA #LOW(levelSecondBackground)
   STA pointerBackgroundLowByte
-  LDA #HIGH(background)
+  LDA #HIGH(levelSecondBackground)
   STA pointerBackgroundHighByte
   JSR LoadBackground2
 
-  JSR LoadAttribute
+  JSR LoadTeslaAttribute
   JSR LoadAttribute2
-  JSR LoadFuturePalettes
+  ; JSR LoadTeslaLandingPalette
+  JSR LoadTeslaArrivingPalette
+  JSR LoadSpritePalettes
 
   JSR EnableGraphics
 
@@ -1673,6 +1671,9 @@ MoodyAppearsScene:
 .LoadScene:
   LDA moodyAppearsSceneLoaded
   BNE EndMoodyAppearsScene
+
+  LDA #$01
+  JSR Bankswitch
 
   JSR HideSprites
   JSR HidePlayerSprite
@@ -1844,6 +1845,9 @@ RollCredits:
 
   .inesmir 0
 
+  LDA #$00
+  STA scroll
+
   JSR HideSprites
   JSR HidePlayerSprite
   JSR HideTravelerSprite
@@ -1909,11 +1913,15 @@ Bankvalues:
   .bank 3
   .org $E000
 
+spritePalette:
+  .db $0F,$21,$15,$14,  $0F,$37,$30,$0F,  $0F,$16,$10,$0F,  $0F,$0F,$37,$11 ; Sprites: Unused, Traveler, Enemy, Player
+
 palette:
   .include "graphics/palette.asm"
 
 futurePalette:
   .include "graphics/futurePalette.asm"
+  ; .incbin "graphics/tesla-arrives/palette.dat"
 
 titlePalette:
   .incbin "graphics/title/palette.dat"
@@ -1965,6 +1973,7 @@ introSequence:
 
 attribute:
   .include "graphics/attributes.asm"
+  ; .incbin "graphics/tesla-arrives/attribute.dat"
 
 attributeTitle:
   .incbin "graphics/title/attribute.dat"
