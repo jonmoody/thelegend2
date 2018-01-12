@@ -1723,6 +1723,8 @@ MoodyBattleSequence:
   LDA moodyBattleSequenceLoaded
   BEQ .LoadScene
 
+  JSR ExecuteBossMovement
+
   LDA playerSprite1X
   CMP #$B0
   BCC .LoadScene
@@ -1886,7 +1888,7 @@ Bankswitch:
   RTS
 
 Bankvalues:
-  .db $00, $01, $02, $03
+  .db $00, $01, $02, $03, $04
 
   .include "functions/enableGraphics.asm"
   .include "functions/disableGraphics.asm"
@@ -1910,6 +1912,7 @@ Bankvalues:
   .include "functions/sounds.asm"
   .include "functions/enemyMovement.asm"
   .include "functions/scrolling.asm"
+  .include "functions/bossMovement.asm"
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
