@@ -101,39 +101,63 @@ enemySprite9Attr = $036A
 enemySprite9X = $036B
 
 travelerSprite1Y = $036C
+travelerSprite1Tile = $036D
+travelerSprite1Attr = $036E
 travelerSprite1X = $036F
 
 travelerSprite2Y = $0370
+travelerSprite2Tile = $0371
+travelerSprite2Attr = $0372
 travelerSprite2X = $0373
 
 travelerSprite3Y = $0374
+travelerSprite3Tile = $0375
+travelerSprite3Attr = $0376
 travelerSprite3X = $0377
 
 travelerSprite4Y = $0378
+travelerSprite4Tile = $0379
+travelerSprite4Attr = $037A
 travelerSprite4X = $037B
 
 travelerSprite5Y = $037C
+travelerSprite5Tile = $037D
+travelerSprite5Attr = $037E
 travelerSprite5X = $037F
 
 travelerSprite6Y = $0380
+travelerSprite6Tile = $0381
+travelerSprite6Attr = $0382
 travelerSprite6X = $0383
 
 travelerSprite7Y = $0384
+travelerSprite7Tile = $0385
+travelerSprite7Attr = $0386
 travelerSprite7X = $0387
 
 travelerSprite8Y = $0388
+travelerSprite8Tile = $0389
+travelerSprite8Attr = $038A
 travelerSprite8X = $038B
 
 travelerSprite9Y = $038C
+travelerSprite9Tile = $038D
+travelerSprite9Attr = $038E
 travelerSprite9X = $038F
 
 travelerSprite10Y = $0390
+travelerSprite10Tile = $0391
+travelerSprite10Attr = $0392
 travelerSprite10X = $0393
 
 travelerSprite11Y = $0394
+travelerSprite11Tile = $0395
+travelerSprite11Attr = $0396
 travelerSprite11X = $0397
 
 travelerSprite12Y = $0398
+travelerSprite12Tile = $0399
+travelerSprite12Attr = $039A
 travelerSprite12X = $039B
 
 playerBubble1Y = $03CC
