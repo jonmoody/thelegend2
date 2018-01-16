@@ -78,13 +78,11 @@ TurnBossRight:
 
   LDA #%01000001
   JSR StoreBossAttributeData
-  JSR FlipBossSprite
-
-  LDA #$30
-  STA bossMovementWaitTimer
 
   LDA #$01
-  STA bossDirection
+  JSR FlipBossSprite
+
+  JSR ResetBossMovementTimer
 
 .End:
   RTS
@@ -93,13 +91,10 @@ TurnBossLeft:
   LDA #%00000001
   JSR StoreBossAttributeData
 
+  LDA #$00
   JSR FlipBossSprite
 
-  LDA #$30
-  STA bossMovementWaitTimer
-
-  LDA #$00
-  STA bossDirection
+  JSR ResetBossMovementTimer
 
 .End:
   RTS
@@ -120,6 +115,8 @@ StoreBossAttributeData:
   RTS
 
 FlipBossSprite:
+  STA bossDirection
+
   LDX travelerSprite1Tile
   LDA travelerSprite3Tile
   STA travelerSprite1Tile
@@ -139,4 +136,9 @@ FlipBossSprite:
   LDA travelerSprite12Tile
   STA travelerSprite10Tile
   STX travelerSprite12Tile
+  RTS
+
+ResetBossMovementTimer:
+  LDA #$30
+  STA bossMovementWaitTimer
   RTS
