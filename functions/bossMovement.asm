@@ -1,5 +1,29 @@
 ExecuteBossMovement:
 
+  LDA bossMovementWaitTimer
+  BEQ .BeginMovement
+
+  DEC bossMovementWaitTimer
+  JMP EndExecuteBossMovement
+
+.BeginMovement:
+  LDA bossDirection
+  BEQ .BeginLeftMovement
+
+.BeginRightMovement:
+  LDA travelerSprite1X
+  CMP #$B0
+  BCC .MoveBossRight
+
+  JSR TurnBossLeft
+  JMP EndExecuteBossMovement
+
+.MoveBossRight:
+  JSR MoveBossRight
+  JSR MoveBossRight
+  JMP EndExecuteBossMovement
+
+.BeginLeftMovement:
   LDA travelerSprite1X
   CMP #$18
   BCS .MoveBossLeft
@@ -10,6 +34,7 @@ ExecuteBossMovement:
 .MoveBossLeft:
   JSR MoveBossLeft
   JSR MoveBossLeft
+  JMP EndExecuteBossMovement
 
 EndExecuteBossMovement:
   RTS
@@ -55,6 +80,9 @@ TurnBossRight:
   JSR StoreBossAttributeData
   JSR FlipBossSprite
 
+  LDA #$30
+  STA bossMovementWaitTimer
+
   LDA #$01
   STA bossDirection
 
@@ -64,6 +92,16 @@ TurnBossRight:
 TurnBossLeft:
   LDA #%00000001
   JSR StoreBossAttributeData
+
+  JSR FlipBossSprite
+
+  LDA #$30
+  STA bossMovementWaitTimer
+
+  LDA #$00
+  STA bossDirection
+
+.End:
   RTS
 
 StoreBossAttributeData:

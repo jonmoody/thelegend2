@@ -81,7 +81,7 @@ lincDialogSequenceLoaded  .rs 1
 numberOfEnemySpawns  .rs 1
 scroll  .rs 1
 moveCreditsUp  .rs 1
-enemyMovementWaitTimer  .rs 1
+bossMovementWaitTimer  .rs 1
 bossDirection  .rs 1
 
   .include "reference/spriteMemoryLocations.asm"
