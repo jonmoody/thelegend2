@@ -1532,14 +1532,16 @@ LoadTeslaScene:
   STA teslaScene
   LDA #$01
   STA teslaLandingScene
+  LDA #$03
+  JSR Bankswitch
   JMP EndLoadTeslaScene
 
 .LoadScene:
   LDA teslaSceneLoaded
   BNE EndLoadTeslaScene
 
-  LDA #$02
-  JSR Bankswitch
+  ; LDA #$02
+  ; JSR Bankswitch
 
   JSR HideSprites
   JSR HidePlayerSprite
@@ -1580,8 +1582,8 @@ LoadTeslaLandingScene:
   LDA teslaLandingSceneLoaded
   BNE EndLoadTeslaLandingScene
 
-  LDA #$03
-  JSR Bankswitch
+  ; LDA #$03
+  ; JSR Bankswitch
 
   JSR HideSprites
   JSR HidePlayerSprite
@@ -1615,6 +1617,8 @@ ApproachingTheForge:
   STA approachingTheForge
   LDA #$01
   STA moodyAppearsScene
+  LDA #$01
+  JSR Bankswitch
 
 .LoadScene:
   LDA approachingTheForgeLoaded
@@ -1671,8 +1675,8 @@ MoodyAppearsScene:
   LDA moodyAppearsSceneLoaded
   BNE EndMoodyAppearsScene
 
-  LDA #$01
-  JSR Bankswitch
+  ; LDA #$01
+  ; JSR Bankswitch
 
   JSR HideSprites
   JSR HidePlayerSprite
@@ -1734,6 +1738,8 @@ MoodyBattleSequence:
   ; LDA gameInProgress ; fix this
   ; BNE .LoadScene
 
+  LDA #$01
+  JSR Bankswitch
   LDA #$00
   STA moodyBattleSequence
   LDA #$01
@@ -1744,8 +1750,8 @@ MoodyBattleSequence:
   LDA moodyBattleSequenceLoaded
   BNE EndMoodyBattleSequence
 
-  LDA #$04
-  JSR Bankswitch
+  ; LDA #$04
+  ; JSR Bankswitch
 
   JSR LoadPlayerSprite
   JSR LoadTravelerSprite
@@ -1791,8 +1797,8 @@ LoadLincRescueScene:
   LDA lincRescueSceneLoaded
   BNE EndLoadLincRescueScene
 
-  LDA #$01
-  JSR Bankswitch
+  ; LDA #$01
+  ; JSR Bankswitch
 
   JSR HideSprites
   JSR HidePlayerSprite

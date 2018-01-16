@@ -89,6 +89,8 @@ LeaveIntroDialog:
   STA currentDialogScreen
   LDA #$01
   STA teslaScene
+  LDA #$02
+  JSR Bankswitch
 
 EndLoadingDialogBackground:
   JSR EnableGraphics
@@ -264,6 +266,8 @@ LeaveMoodyDialog:
   STA currentDialogScreen
   LDA #$01
   STA moodyBattleSequence
+  LDA #$04
+  JSR Bankswitch
 
 EndDrawNextMoodyDialogScreen:
   JSR EnableGraphics
