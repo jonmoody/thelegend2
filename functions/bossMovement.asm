@@ -53,26 +53,7 @@ TurnBossRight:
 
   LDA #%01000001
   JSR StoreBossAttributeData
-
-  LDX travelerSprite1Tile
-  LDA travelerSprite3Tile
-  STA travelerSprite1Tile
-  STX travelerSprite3Tile
-
-  LDX travelerSprite4Tile
-  LDA travelerSprite6Tile
-  STA travelerSprite4Tile
-  STX travelerSprite6Tile
-
-  LDX travelerSprite7Tile
-  LDA travelerSprite9Tile
-  STA travelerSprite7Tile
-  STX travelerSprite9Tile
-
-  LDX travelerSprite10Tile
-  LDA travelerSprite12Tile
-  STA travelerSprite10Tile
-  STX travelerSprite12Tile
+  JSR FlipBossSprite
 
   LDA #$01
   STA bossDirection
@@ -98,4 +79,26 @@ StoreBossAttributeData:
   STA travelerSprite10Attr
   STA travelerSprite11Attr
   STA travelerSprite12Attr
+  RTS
+
+FlipBossSprite:
+  LDX travelerSprite1Tile
+  LDA travelerSprite3Tile
+  STA travelerSprite1Tile
+  STX travelerSprite3Tile
+
+  LDX travelerSprite4Tile
+  LDA travelerSprite6Tile
+  STA travelerSprite4Tile
+  STX travelerSprite6Tile
+
+  LDX travelerSprite7Tile
+  LDA travelerSprite9Tile
+  STA travelerSprite7Tile
+  STX travelerSprite9Tile
+
+  LDX travelerSprite10Tile
+  LDA travelerSprite12Tile
+  STA travelerSprite10Tile
+  STX travelerSprite12Tile
   RTS
