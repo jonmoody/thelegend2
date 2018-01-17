@@ -280,7 +280,7 @@ DrawNextLincDialogScreen:
   JSR DisableGraphics
 
   JSR DrawTopSprite
-  JSR DrawBottomSprite
+  JSR DrawLincSprite
 
 LoadLincDialog1:
   LDA currentDialogScreen
@@ -419,6 +419,12 @@ DrawTopSprite:
   STA playerSprite9Y
 
 EndDrawTopSprite:
+  RTS
+
+DrawLincSprite:
+  JSR LoadLincSprite
+
+EndDrawLincSprite:
   RTS
 
 DrawBottomSprite:

@@ -38,6 +38,16 @@ LoadTravelerSprite:
   BNE .Loop
   RTS
 
+LoadLincSprite:
+  LDX #$00
+.Loop
+  LDA spriteLinc, x
+  STA $039C, x
+  INX
+  CPX #$20
+  BNE .Loop
+  RTS
+
 HidePlayerSprite:
   LDX #$00
 .Loop
