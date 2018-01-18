@@ -84,6 +84,7 @@ moveCreditsUp  .rs 1
 bossMovementWaitTimer  .rs 1
 bossDirection  .rs 1
 bossHealth  .rs 1
+timer  .rs 1
 
   .include "reference/spriteMemoryLocations.asm"
 
@@ -159,6 +160,9 @@ ClearAudio:
   LDA #$3C
   STA deathTimer
   STA enemyDeathTimer
+
+  LDA #$B0
+  STA timer
 
   LDA #$0A
   STA bossHealth
@@ -1606,8 +1610,8 @@ MoodyAppearsScene:
   LDA moodyAppearsScene
   BEQ EndMoodyAppearsScene
 
-  LDA buttonPressedA ; fix this
-  BEQ .LoadScene
+  DEC timer
+  BNE .LoadScene
 
   LDA #$00
   STA moodyAppearsScene
