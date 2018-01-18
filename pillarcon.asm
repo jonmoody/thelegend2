@@ -1645,23 +1645,6 @@ MoodyAppearsScene:
 
   JSR EnableGraphics
 
-  ; JSR HideSprites
-  ; JSR HidePlayerSprite
-  ; JSR HideTravelerSprite
-  ; JSR DisableGraphics
-  ; JSR ClearBackground
-  ;
-  ; LDA #LOW(insideTheForgeBackground)
-  ; STA pointerBackgroundLowByte
-  ; LDA #HIGH(insideTheForgeBackground)
-  ; STA pointerBackgroundHighByte
-  ; JSR LoadBackground
-  ;
-  ; JSR LoadAttributeTitle
-  ; JSR LoadTitlePalettes
-  ;
-  ; JSR EnableGraphics
-
   LDA #$01
   STA moodyAppearsSceneLoaded
 EndMoodyAppearsScene:
