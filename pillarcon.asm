@@ -1396,43 +1396,6 @@ CheckTitleScreen:
 
 EndCheckTitleScreen:
 
-; CheckGameInProgress:
-;   LDA titleScreen
-;   BNE EndCheckGameInProgress
-;
-;   LDA introDialog
-;   BNE EndCheckGameInProgress
-;
-;   LDA gameInProgress
-;   BNE EndCheckGameInProgress
-;
-;   LDA introScene
-;   BNE EndCheckGameInProgress
-;
-;   LDA introScene2
-;   BNE EndCheckGameInProgress
-;
-;   LDA travelTransition
-;   BNE EndCheckGameInProgress
-;
-;   JSR DisableGraphics
-;
-;   JSR LoadSprites
-;
-;   LDA #LOW(background)
-;   STA pointerBackgroundLowByte
-;   LDA #HIGH(background)
-;   STA pointerBackgroundHighByte
-;   JSR LoadBackground
-;
-;   JSR LoadAttribute
-;   JSR LoadFuturePalettes
-;
-;   LDA #$01
-;   STA gameInProgress
-;   STA movementEnabled
-; EndCheckGameInProgress:
-
 LoadIntroScene1:
   LDA introScene
   BEQ EndLoadIntroScene1
@@ -1974,8 +1937,6 @@ introSequence:
 
 attribute:
   .incbin "graphics/forge-interior/attribute.dat"
-  ; .include "graphics/attributes.asm"
-  ; .incbin "graphics/tesla-arrives/attribute.dat"
 
 attributeTitle:
   .incbin "graphics/title/attribute.dat"
