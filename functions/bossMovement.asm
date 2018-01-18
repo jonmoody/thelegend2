@@ -1,5 +1,7 @@
 ExecuteBossMovement:
 
+  JSR CheckProjectileBossCollision
+
   LDA bossMovementWaitTimer
   BEQ .BeginMovement
 
@@ -141,4 +143,116 @@ FlipBossSprite:
 ResetBossMovementTimer:
   LDA #$30
   STA bossMovementWaitTimer
+  RTS
+
+
+CheckProjectileBossCollision:
+
+.CheckCollision1:
+  LDA projectileX
+  CLC
+  ADC #$08
+  CMP travelerSprite1X
+  BCS .CheckCollision2
+
+  JMP CheckProjectile2BossCollision
+
+.CheckCollision2:
+  LDA projectileX
+  SEC
+  SBC #$08
+  CMP travelerSprite3X
+  BCC .CheckCollision3
+
+  JMP CheckProjectile2BossCollision
+
+.CheckCollision3:
+  LDA projectileY
+  CMP travelerSprite1Y
+  BCS .CheckCollision4
+
+  JMP CheckProjectile2BossCollision
+
+.CheckCollision4:
+  LDA projectileY
+  CMP travelerSprite11Y
+  BCS CheckProjectile2BossCollision
+
+  LDA #$FF
+  STA projectileY
+  ; JMP EnemyLoseHealth
+
+CheckProjectile2BossCollision:
+
+.CheckCollision1:
+  LDA projectile2X
+  CLC
+  ADC #$08
+  CMP travelerSprite1X
+  BCS .CheckCollision2
+
+  JMP CheckProjectile3BossCollision
+
+.CheckCollision2:
+  LDA projectile2X
+  SEC
+  SBC #$08
+  CMP travelerSprite3X
+  BCC .CheckCollision3
+
+  JMP CheckProjectile3BossCollision
+
+.CheckCollision3:
+  LDA projectile2Y
+  CMP travelerSprite1Y
+  BCS .CheckCollision4
+
+  JMP CheckProjectile3BossCollision
+
+.CheckCollision4:
+  LDA projectile2Y
+  CMP travelerSprite11Y
+  BCS CheckProjectile3BossCollision
+
+  LDA #$FF
+  STA projectile2Y
+  ; JMP EnemyLoseHealth
+
+CheckProjectile3BossCollision:
+
+.CheckCollision1:
+  LDA projectile3X
+  CLC
+  ADC #$08
+  CMP travelerSprite1X
+  BCS .CheckCollision2
+
+  JMP EndBossCollisionCheck
+
+.CheckCollision2:
+  LDA projectile3X
+  SEC
+  SBC #$08
+  CMP travelerSprite3X
+  BCC .CheckCollision3
+
+  JMP EndBossCollisionCheck
+
+.CheckCollision3:
+  LDA projectile3Y
+  CMP travelerSprite1Y
+  BCS .CheckCollision4
+
+  JMP EndBossCollisionCheck
+
+.CheckCollision4:
+  LDA projectile3Y
+  CMP travelerSprite11Y
+  BCS EndBossCollisionCheck
+
+  LDA #$FF
+  STA projectile3Y
+  ; JMP EnemyLoseHealth
+
+EndBossCollisionCheck:
   RTS
