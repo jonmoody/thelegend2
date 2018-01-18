@@ -295,13 +295,6 @@ ReadGameplayControls:
   .include "controls/gameplayControls.asm"
 EndReadController:
 
-; GameVictory:
-;   LDA gameWin
-;   BEQ EndGameVictory
-;
-;   JMP EndCurrentFrame
-; EndGameVictory:
-
 GameOver:
   LDA gameOver
   BEQ EndGameOver
@@ -333,13 +326,6 @@ GameOver:
 
   JMP EndCurrentFrame
 EndGameOver:
-
-; Credits:
-;   LDA creditsScreen
-;   BEQ EndCredits
-;
-;   JMP EndCurrentFrame
-; EndCredits:
 
   LDA playerHealth
   BNE MoveProjectile
