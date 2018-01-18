@@ -1621,6 +1621,7 @@ MoodyAppearsScene:
   STA moodyDialog
   LDA #$01
   JSR Bankswitch
+  JSR HideLincSprite
 
   JMP EndMoodyAppearsScene
 
@@ -1634,6 +1635,7 @@ MoodyAppearsScene:
   JSR LoadPlayerSprite
   JSR LoadTravelerSprite
   JSR ShowTravelerSprite
+  JSR DisplayLincInChamber
 
   JSR DisableGraphics
   JSR ClearBackground
@@ -1703,6 +1705,7 @@ MoodyBattleSequence:
   JSR LoadPlayerSprite
   JSR LoadTravelerSprite
   JSR ShowTravelerSprite
+  JSR DisplayLincInChamber
   LDA #$03
   STA enemyHealth
   LDA #$01

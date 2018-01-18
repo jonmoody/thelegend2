@@ -122,6 +122,29 @@ ShowTravelerSprite:
   STA travelerSprite12Y
   RTS
 
+DisplayLincInChamber:
+  LDX #$00
+.Loop
+  LDA spriteLincChamber, x
+  STA $039C, x
+  INX
+  CPX #$20
+  BNE .Loop
+  RTS
+
+HideLincSprite:
+  LDX #$00
+.Loop
+  LDA #$FF
+  STA $039C, x
+  INX
+  INX
+  INX
+  INX
+  CPX #$24
+  BNE .Loop
+  RTS
+
 HideSprites:
   LDX #$00
 .Loop
