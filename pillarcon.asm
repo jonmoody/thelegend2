@@ -83,6 +83,7 @@ scroll  .rs 1
 moveCreditsUp  .rs 1
 bossMovementWaitTimer  .rs 1
 bossDirection  .rs 1
+bossHealth  .rs 1
 
   .include "reference/spriteMemoryLocations.asm"
 
@@ -158,6 +159,9 @@ ClearAudio:
   LDA #$3C
   STA deathTimer
   STA enemyDeathTimer
+
+  LDA #$0A
+  STA bossHealth
 
   JSR LoadTitlePalettes
 
@@ -1540,9 +1544,6 @@ LoadTeslaScene:
   LDA teslaSceneLoaded
   BNE EndLoadTeslaScene
 
-  ; LDA #$02
-  ; JSR Bankswitch
-
   JSR HideSprites
   JSR HidePlayerSprite
   JSR HideTravelerSprite
@@ -1581,9 +1582,6 @@ LoadTeslaLandingScene:
 .LoadScene:
   LDA teslaLandingSceneLoaded
   BNE EndLoadTeslaLandingScene
-
-  ; LDA #$03
-  ; JSR Bankswitch
 
   JSR HideSprites
   JSR HidePlayerSprite
@@ -1675,9 +1673,6 @@ MoodyAppearsScene:
   LDA moodyAppearsSceneLoaded
   BNE EndMoodyAppearsScene
 
-  ; LDA #$01
-  ; JSR Bankswitch
-
   JSR HideSprites
   JSR HidePlayerSprite
   JSR HideTravelerSprite
@@ -1731,12 +1726,8 @@ MoodyBattleSequence:
 
   JSR ExecuteBossMovement
 
-  LDA playerSprite1X
-  CMP #$B0
-  BCC .LoadScene
-
-  ; LDA gameInProgress ; fix this
-  ; BNE .LoadScene
+  LDA bossHealth
+  BNE .LoadScene
 
   LDA #$01
   JSR Bankswitch
@@ -1749,9 +1740,6 @@ MoodyBattleSequence:
 .LoadScene:
   LDA moodyBattleSequenceLoaded
   BNE EndMoodyBattleSequence
-
-  ; LDA #$04
-  ; JSR Bankswitch
 
   JSR LoadPlayerSprite
   JSR LoadTravelerSprite
@@ -1796,9 +1784,6 @@ LoadLincRescueScene:
 .LoadScene:
   LDA lincRescueSceneLoaded
   BNE EndLoadLincRescueScene
-
-  ; LDA #$01
-  ; JSR Bankswitch
 
   JSR HideSprites
   JSR HidePlayerSprite

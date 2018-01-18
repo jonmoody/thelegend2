@@ -180,7 +180,7 @@ CheckProjectileBossCollision:
 
   LDA #$FF
   STA projectileY
-  ; JMP EnemyLoseHealth
+  JMP BossLoseHealth
 
 CheckProjectile2BossCollision:
 
@@ -216,7 +216,7 @@ CheckProjectile2BossCollision:
 
   LDA #$FF
   STA projectile2Y
-  ; JMP EnemyLoseHealth
+  JMP BossLoseHealth
 
 CheckProjectile3BossCollision:
 
@@ -252,7 +252,12 @@ CheckProjectile3BossCollision:
 
   LDA #$FF
   STA projectile3Y
-  ; JMP EnemyLoseHealth
+  JMP BossLoseHealth
 
 EndBossCollisionCheck:
+  RTS
+
+
+BossLoseHealth:
+  DEC bossHealth
   RTS
