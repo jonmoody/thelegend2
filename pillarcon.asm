@@ -1615,6 +1615,8 @@ MoodyAppearsScene:
   STA gameInProgress
   LDA #$01
   STA moodyDialog
+  LDA #$01
+  JSR Bankswitch
 
   JMP EndMoodyAppearsScene
 
@@ -1622,22 +1624,43 @@ MoodyAppearsScene:
   LDA moodyAppearsSceneLoaded
   BNE EndMoodyAppearsScene
 
-  JSR HideSprites
-  JSR HidePlayerSprite
-  JSR HideTravelerSprite
+  LDA #$04
+  JSR Bankswitch
+
+  JSR LoadPlayerSprite
+  JSR LoadTravelerSprite
+  JSR ShowTravelerSprite
+
   JSR DisableGraphics
   JSR ClearBackground
 
-  LDA #LOW(insideTheForgeBackground)
+  LDA #LOW(background)
   STA pointerBackgroundLowByte
-  LDA #HIGH(insideTheForgeBackground)
+  LDA #HIGH(background)
   STA pointerBackgroundHighByte
   JSR LoadBackground
 
-  JSR LoadAttributeTitle
-  JSR LoadTitlePalettes
+  JSR LoadAttribute
+  JSR LoadFuturePalettes
 
   JSR EnableGraphics
+
+  ; JSR HideSprites
+  ; JSR HidePlayerSprite
+  ; JSR HideTravelerSprite
+  ; JSR DisableGraphics
+  ; JSR ClearBackground
+  ;
+  ; LDA #LOW(insideTheForgeBackground)
+  ; STA pointerBackgroundLowByte
+  ; LDA #HIGH(insideTheForgeBackground)
+  ; STA pointerBackgroundHighByte
+  ; JSR LoadBackground
+  ;
+  ; JSR LoadAttributeTitle
+  ; JSR LoadTitlePalettes
+  ;
+  ; JSR EnableGraphics
 
   LDA #$01
   STA moodyAppearsSceneLoaded
