@@ -316,7 +316,6 @@ BossFireProjectile:
   CLC
 
   LDY bossDirection
-  CPY #$00
   BEQ .FacingLeft
 
   ADC #$10
@@ -340,7 +339,7 @@ MoveBossProjectile:
   CMP #$04
   BCC HideBossProjectile
 
-  LDA enemyDirection
+  LDA bossDirection
   BNE .MoveBossProjectileRight
 
   LDA enemyProjectileX
