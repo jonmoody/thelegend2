@@ -1,6 +1,8 @@
 ExecuteBossMovement:
 
   JSR CheckProjectileBossCollision
+  JSR CheckBossBulletCollision
+  JSR BossFireProjectile
 
   LDA bossMovementWaitTimer
   BEQ .BeginMovement
@@ -255,6 +257,109 @@ CheckProjectile3BossCollision:
   JMP BossLoseHealth
 
 EndBossCollisionCheck:
+  RTS
+
+
+CheckBossBulletCollision:
+  LDA enemyProjectileX
+  CLC
+  ADC #$08
+  CMP playerSprite1X
+  BCC EndCheckBossBulletCollision
+
+  LDA enemyProjectileX
+  SEC
+  SBC #$08
+  CMP playerSprite3X
+  BCS EndCheckBossBulletCollision
+
+  LDA enemyProjectileY
+  CMP playerSprite1Y
+  BCC EndCheckBossBulletCollision
+
+  LDA enemyProjectileY
+  CMP playerSprite8Y
+  BCS EndCheckBossBulletCollision
+
+  LDA iFrames
+  BNE EndCheckBossBulletCollision
+
+  LDA #$FF
+  STA enemyProjectileY
+
+  JSR LoseHealth
+EndCheckBossBulletCollision:
+  RTS
+
+BossFireProjectile:
+  LDA bossHealth
+  BEQ EndBossFireProjectile
+
+  LDA enemyFireTimer
+  BNE EndBossFireProjectile
+
+  LDA #$40
+  STA enemyFireTimer
+
+  LDA travelerSprite4Y
+  TAX
+  LDA enemyProjectileY
+  TXA
+  CLC
+  ADC #$0A
+  STA enemyProjectileY
+
+  LDA travelerSprite1X
+  TAX
+  LDA enemyProjectileX
+  TXA
+  CLC
+
+  LDY bossDirection
+  CPY #$00
+  BEQ .FacingLeft
+
+  ADC #$10
+  STA enemyProjectileX
+  JMP EndBossFireProjectile
+
+.FacingLeft:
+  ADC #$00
+  STA enemyProjectileX
+EndBossFireProjectile:
+
+  DEC enemyFireTimer
+
+MoveBossProjectile:
+  LDA enemyHealth
+  BEQ HideBossProjectile
+
+  LDA enemyProjectileX
+  CMP #$F8
+  BCS HideBossProjectile
+  CMP #$04
+  BCC HideBossProjectile
+
+  LDA enemyDirection
+  BNE .MoveBossProjectileRight
+
+  LDA enemyProjectileX
+  SEC
+  SBC projectileSpeed
+  STA enemyProjectileX
+  JMP HideBossProjectileEnd
+
+.MoveBossProjectileRight:
+  LDA enemyProjectileX
+  CLC
+  ADC projectileSpeed
+  STA enemyProjectileX
+  JMP HideBossProjectileEnd
+
+HideBossProjectile:
+  LDA #$FF
+  STA enemyProjectileY
+HideBossProjectileEnd:
   RTS
 
 
