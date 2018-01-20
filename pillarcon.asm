@@ -1502,7 +1502,7 @@ LoadTeslaScene:
   JSR HideSprites
   JSR HidePlayerSprite
   JSR HideTravelerSprite
-  JSR LoadStar
+  JSR LoadStars
 
   JSR DisableGraphics
   JSR ClearBackground

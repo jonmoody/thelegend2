@@ -155,7 +155,7 @@ HideSprites:
   BNE .Loop
   RTS
 
-LoadStar:
+LoadStars:
   LDX #$00
 .Loop:
   LDA star, x
