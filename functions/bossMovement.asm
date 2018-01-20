@@ -281,8 +281,9 @@ CheckBossBulletCollision:
   CMP playerSprite8Y
   BCS EndCheckBossBulletCollision
 
-  LDA iFrames
-  BNE EndCheckBossBulletCollision
+  ; The iFrames for some reason aren't getting reset and knockback isn't working
+  ; LDA iFrames
+  ; BNE EndCheckBossBulletCollision
 
   LDA #$FF
   STA enemyProjectileY
