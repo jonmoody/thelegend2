@@ -1482,6 +1482,8 @@ LoadTeslaScene:
   LDA teslaScene
   BEQ EndLoadTeslaScene
 
+  JSR MoveStars
+
   LDA buttonPressedB ; fix this
   BEQ .LoadScene
 
@@ -1500,7 +1502,7 @@ LoadTeslaScene:
   JSR HideSprites
   JSR HidePlayerSprite
   JSR HideTravelerSprite
-  ; JSR LoadStar
+  JSR LoadStar
 
   JSR DisableGraphics
   JSR ClearBackground
@@ -1513,7 +1515,7 @@ LoadTeslaScene:
 
   JSR LoadTeslaAttribute
   JSR LoadTeslaPalette
-  ; JSR LoadSpritePalettes
+  JSR LoadSpritePalettes
 
   JSR EnableGraphics
 

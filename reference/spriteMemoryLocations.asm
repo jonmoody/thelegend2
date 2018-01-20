@@ -159,3 +159,5 @@ travelerSprite12Y = $0398
 travelerSprite12Tile = $0399
 travelerSprite12Attr = $039A
 travelerSprite12X = $039B
+
+starX = $0303

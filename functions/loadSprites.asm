@@ -161,6 +161,21 @@ LoadStar:
   LDA star, x
   STA $0300, x
   INX
-  CPX #$04
+  CPX #$10
+  BNE .Loop
+  RTS
+
+MoveStars:
+  LDX #$00
+.Loop:
+  LDA starX, x
+  SEC
+  SBC #$08
+  STA starX, x
+  INX
+  INX
+  INX
+  INX
+  CPX #$10
   BNE .Loop
   RTS
