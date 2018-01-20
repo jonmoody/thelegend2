@@ -154,3 +154,13 @@ HideSprites:
   CPX #$FF
   BNE .Loop
   RTS
+
+LoadStar:
+  LDX #$00
+.Loop:
+  LDA star, x
+  STA $0300, x
+  INX
+  CPX #$04
+  BNE .Loop
+  RTS
