@@ -64,8 +64,6 @@ facingRight  .rs 1
 enemyAnimationTimer  .rs 1
 teslaScene  .rs 1
 teslaSceneLoaded  .rs 1
-teslaLandingScene  .rs 1
-teslaLandingSceneLoaded  .rs 1
 approachingTheForge  .rs 1
 approachingTheForgeLoaded  .rs 1
 moodyAppearsScene  .rs 1
@@ -1490,7 +1488,7 @@ LoadTeslaScene:
   LDA #$00
   STA teslaScene
   LDA #$01
-  STA teslaLandingScene
+  STA approachingTheForge
   LDA #$03
   JSR Bankswitch
   JMP EndLoadTeslaScene
@@ -1523,44 +1521,6 @@ LoadTeslaScene:
   STA teslaSceneLoaded
 EndLoadTeslaScene:
 
-LoadTeslaLandingScene:
-  LDA teslaLandingScene
-  BEQ EndLoadTeslaLandingScene
-
-  LDA buttonPressedA ; fix this
-  BEQ .LoadScene
-
-  LDA #$00
-  STA teslaLandingScene
-  LDA #$01
-  STA approachingTheForge
-  JMP EndLoadTeslaLandingScene
-
-.LoadScene:
-  LDA teslaLandingSceneLoaded
-  BNE EndLoadTeslaLandingScene
-
-  JSR HideSprites
-  JSR HidePlayerSprite
-  JSR HideTravelerSprite
-  JSR DisableGraphics
-  JSR ClearBackground
-
-  LDA #LOW(teslaLandingBackground)
-  STA pointerBackgroundLowByte
-  LDA #HIGH(teslaLandingBackground)
-  STA pointerBackgroundHighByte
-  JSR LoadBackground
-
-  JSR LoadTeslaLandingAttribute
-  JSR LoadTeslaLandingPalette
-
-  JSR EnableGraphics
-
-  LDA #$01
-  STA teslaLandingSceneLoaded
-EndLoadTeslaLandingScene:
-
 ApproachingTheForge:
   LDA approachingTheForge
   BEQ EndApproachingTheForge
@@ -1579,6 +1539,7 @@ ApproachingTheForge:
   LDA approachingTheForgeLoaded
   BNE EndApproachingTheForge
 
+  JSR HideSprites
   JSR LoadSprites
   JSR ShowPlayerSprite
   JSR DisableGraphics
@@ -1590,16 +1551,16 @@ ApproachingTheForge:
   STA pointerBackgroundHighByte
   JSR LoadBackground
 
-  LDA #LOW(levelSecondBackground)
-  STA pointerBackgroundLowByte
-  LDA #HIGH(levelSecondBackground)
-  STA pointerBackgroundHighByte
-  JSR LoadBackground2
+  ; LDA #LOW(levelSecondBackground)
+  ; STA pointerBackgroundLowByte
+  ; LDA #HIGH(levelSecondBackground)
+  ; STA pointerBackgroundHighByte
+  ; JSR LoadBackground2
 
-  JSR LoadTeslaAttribute
-  JSR LoadAttribute2
+  JSR LoadTeslaLandingAttribute
+  JSR LoadTeslaLandingPalette
+  ; JSR LoadAttribute2
   ; JSR LoadTeslaLandingPalette
-  JSR LoadTeslaArrivingPalette
   JSR LoadSpritePalettes
 
   JSR EnableGraphics
