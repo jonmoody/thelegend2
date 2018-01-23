@@ -48,6 +48,16 @@ LoadLincSprite:
   BNE .Loop
   RTS
 
+LoadMattSprite:
+  LDX #$00
+.Loop:
+  LDA spriteMatt, x
+  STA $03BC, x
+  INX
+  CPX #$20
+  BNE .Loop
+  RTS
+
 HidePlayerSprite:
   LDX #$00
 .Loop
@@ -142,6 +152,19 @@ HideLincSprite:
   INX
   INX
   CPX #$24
+  BNE .Loop
+  RTS
+
+HideMattSprite:
+  LDX #$00
+.Loop:
+  LDA #$FF
+  STA $03BC, x
+  INX
+  INX
+  INX
+  INX
+  CPX #$20
   BNE .Loop
   RTS
 
