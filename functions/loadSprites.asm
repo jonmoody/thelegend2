@@ -179,3 +179,13 @@ MoveStars:
   CPX #$30
   BNE .Loop
   RTS
+
+LoadBossProjectile:
+  LDX #$00
+.Loop:
+  LDA spriteBossProjectile, x
+  STA $03D3, x
+  INX
+  CPX #$10
+  BNE .Loop
+  RTS

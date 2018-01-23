@@ -1671,6 +1671,7 @@ MoodyBattleSequence:
   JSR LoadTravelerSprite
   JSR ShowTravelerSprite
   JSR DisplayLincInChamber
+  JSR LoadBossProjectile
   LDA #$03
   STA enemyHealth
   LDA #$01

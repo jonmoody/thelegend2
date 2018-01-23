@@ -261,23 +261,23 @@ EndBossCollisionCheck:
 
 
 CheckBossBulletCollision:
-  LDA enemyProjectileX
+  LDA bossProjectile1X
   CLC
   ADC #$08
   CMP playerSprite1X
   BCC EndCheckBossBulletCollision
 
-  LDA enemyProjectileX
+  LDA bossProjectile1X
   SEC
   SBC #$08
   CMP playerSprite3X
   BCS EndCheckBossBulletCollision
 
-  LDA enemyProjectileY
+  LDA bossProjectile1Y
   CMP playerSprite1Y
   BCC EndCheckBossBulletCollision
 
-  LDA enemyProjectileY
+  LDA bossProjectile1Y
   CMP playerSprite8Y
   BCS EndCheckBossBulletCollision
 
@@ -286,7 +286,10 @@ CheckBossBulletCollision:
   ; BNE EndCheckBossBulletCollision
 
   LDA #$FF
-  STA enemyProjectileY
+  STA bossProjectile1Y
+  STA bossProjectile2Y
+  STA bossProjectile3Y
+  STA bossProjectile4Y
 
   JSR LoseHealth
 EndCheckBossBulletCollision:
@@ -304,15 +307,15 @@ BossFireProjectile:
 
   LDA travelerSprite4Y
   TAX
-  LDA enemyProjectileY
+  LDA bossProjectile1Y
   TXA
   CLC
   ADC #$0A
-  STA enemyProjectileY
+  STA bossProjectile1Y
 
   LDA travelerSprite1X
   TAX
-  LDA enemyProjectileX
+  LDA bossProjectile1X
   TXA
   CLC
 
@@ -320,12 +323,12 @@ BossFireProjectile:
   BEQ .FacingLeft
 
   ADC #$10
-  STA enemyProjectileX
+  STA bossProjectile1X
   JMP EndBossFireProjectile
 
 .FacingLeft:
   ADC #$00
-  STA enemyProjectileX
+  STA bossProjectile1X
 EndBossFireProjectile:
 
   DEC enemyFireTimer
@@ -334,7 +337,7 @@ MoveBossProjectile:
   LDA enemyHealth
   BEQ HideBossProjectile
 
-  LDA enemyProjectileX
+  LDA bossProjectile1X
   CMP #$F8
   BCS HideBossProjectile
   CMP #$04
@@ -343,25 +346,27 @@ MoveBossProjectile:
   LDA bossDirection
   BNE .MoveBossProjectileRight
 
-  LDA enemyProjectileX
+  LDA bossProjectile1X
   SEC
   SBC projectileSpeed
-  STA enemyProjectileX
+  STA bossProjectile1X
   JMP HideBossProjectileEnd
 
 .MoveBossProjectileRight:
-  LDA enemyProjectileX
+  LDA bossProjectile1X
   CLC
   ADC projectileSpeed
-  STA enemyProjectileX
+  STA bossProjectile1X
   JMP HideBossProjectileEnd
 
 HideBossProjectile:
   LDA #$FF
-  STA enemyProjectileY
+  STA bossProjectile1Y
+  STA bossProjectile2Y
+  STA bossProjectile3Y
+  STA bossProjectile4Y
 HideBossProjectileEnd:
   RTS
-
 
 BossLoseHealth:
   DEC bossHealth

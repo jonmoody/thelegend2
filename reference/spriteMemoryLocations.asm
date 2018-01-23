@@ -161,3 +161,15 @@ travelerSprite12Attr = $039A
 travelerSprite12X = $039B
 
 starX = $03A3
+
+bossProjectile1Y = $03D3
+bossProjectile1X = $03D6
+
+bossProjectile2Y = $03D7
+bossProjectile2X = $03DA
+
+bossProjectile3Y = $03DB
+bossProjectile3X = $03DE
+
+bossProjectile4Y = $03DF
+bossProjectile4X = $03E2

@@ -82,3 +82,9 @@ star:
   .db $48, $80, $00, $08
   .db $68, $80, $00, $B0
   .db $68, $80, $00, $B8
+
+spriteBossProjectile:
+  .db $50, $EA, $00, $B0
+  .db $50, $EB, $00, $B8
+  .db $58, $EC, $00, $B0
+  .db $58, $ED, $00, $B8
