@@ -4,7 +4,7 @@ DrawNextDialogScreen:
   JSR DisableGraphics
 
   JSR DrawTopSprite
-  JSR DrawBottomSprite
+  JSR LoadMattSprite
 
 LoadIntro1:
   LDA currentDialogScreen
@@ -91,6 +91,7 @@ LeaveIntroDialog:
   STA teslaScene
   LDA #$02
   JSR Bankswitch
+  JSR HideMattSprite
 
 EndLoadingDialogBackground:
   JSR EnableGraphics
