@@ -1,6 +1,9 @@
 DrawNextDialogScreen:
   INC currentDialogScreen
 
+  LDA #$00
+  STA movementEnabled
+
   JSR DisableGraphics
 
   JSR DrawTopSprite
@@ -93,6 +96,9 @@ LeaveIntroDialog:
   JSR Bankswitch
   JSR HideMattSprite
 
+  LDA #$01
+  STA movementEnabled
+
 EndLoadingDialogBackground:
   JSR EnableGraphics
   RTS
@@ -101,6 +107,9 @@ EndLoadingDialogBackground:
 
 DrawNextMoodyDialogScreen:
   INC currentDialogScreen
+
+  LDA #$00
+  STA movementEnabled
 
   JSR DisableGraphics
 
@@ -270,6 +279,9 @@ LeaveMoodyDialog:
   LDA #$04
   JSR Bankswitch
 
+  LDA #$01
+  STA movementEnabled
+
 EndDrawNextMoodyDialogScreen:
   JSR EnableGraphics
   RTS
@@ -277,6 +289,9 @@ EndDrawNextMoodyDialogScreen:
 
 DrawNextLincDialogScreen:
   INC currentDialogScreen
+
+  LDA #$00
+  STA movementEnabled
 
   JSR DisableGraphics
 
