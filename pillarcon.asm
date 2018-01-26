@@ -1853,11 +1853,13 @@ palette:
   .include "graphics/palette.asm"
 
 futurePalette:
+  .db $0F,$27,$08,$16, $0F,$30,$2D,$21, $0F,$30,$2D,$11, $0F,$0F,$0F,$0F
+
   ; .db $0F,$27,$08,$16,  $0F,$30,$00,$22,  $0F,$0F,$0F,$0F,  $0F,$0F,$0F,$0F
   ; .db $0F,$30,$37,$3F,  $0F,$37,$16,$0F,  $0F,$16,$10,$0F,  $0F,$0F,$37,$30 ; Sprites: Linc, Traveler, Enemy, Player
   ; .include "graphics/futurePalette.asm"
   ; .incbin "graphics/tesla-arrives/palette.dat"
-  .incbin "graphics/forge-interior/palette.dat"
+  ; .incbin "graphics/forge-interior/palette.dat"
 
 titlePalette:
   .incbin "graphics/title/palette.dat"
