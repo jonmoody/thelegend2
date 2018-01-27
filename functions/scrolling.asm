@@ -41,6 +41,10 @@ ScrollBackgroundRight:
   RTS
 
 ScrollBackgroundUp:
+  LDA scroll
+  CMP #$E0
+  BEQ .End
+
   LDA moveCreditsUp
   BEQ .End
 
