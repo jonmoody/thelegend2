@@ -1,5 +1,5 @@
   .inesprg 2
-  .ineschr 6
+  .ineschr 7
   .inesmap 3
   .inesmir 1
 
@@ -213,7 +213,13 @@ insideTheForgeBackground:
   .include "graphics/insideTheForgeBackground.asm"
 
 lincRescueSceneBackground:
-  .include "graphics/lincRescueSceneBackground.asm"
+  .incbin "graphics/linc-rescued/nametable.dat"
+
+lincRescueScenePalette:
+  .incbin "graphics/linc-rescued/palette.dat"
+
+lincRescueSceneAttribute:
+  .incbin "graphics/linc-rescued/attribute.dat"
 
 bossBattleDialog1:
   .include "graphics/dialog/bossBattle01.asm"
@@ -1713,6 +1719,9 @@ LoadLincRescueScene:
   STA lincRescueScene
   LDA #$01
   STA lincDialogSequence
+  LDA #$01
+  JSR Bankswitch
+
   JMP EndLoadLincRescueScene
 
 .LoadScene:
@@ -1723,6 +1732,9 @@ LoadLincRescueScene:
   JSR HidePlayerSprite
   JSR HideTravelerSprite
 
+  LDA #$06
+  JSR Bankswitch
+
   JSR DisableGraphics
   JSR ClearBackground
 
@@ -1732,8 +1744,13 @@ LoadLincRescueScene:
   STA pointerBackgroundHighByte
   JSR LoadBackground
 
-  JSR LoadAttributeTitle
-  JSR LoadTitlePalettes
+  JSR LoadLincRescuedAttribute
+  JSR LoadFuturePalettes
+  JSR LoadSpritePalettes
+
+  JSR LoadPlayerSprite
+  JSR DisplayLincInChamber
+  JSR MoveLincToFrontOfChamber
 
   JSR EnableGraphics
 
@@ -1951,3 +1968,7 @@ attributeDialog:
   .bank 9
   .org $0000
   .incbin "graphics/level-second-background/chr.dat"
+
+  .bank 10
+  .org $0000
+  .incbin "graphics/linc-rescued/chr.dat"

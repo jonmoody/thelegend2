@@ -43,6 +43,21 @@ LoadTeslaLandingAttribute:
   BNE .Loop
   RTS
 
+LoadLincRescuedAttribute:
+  LDA $2002
+  LDA #$23
+  STA $2006
+  LDA #$C0
+  STA $2006
+  LDX #$00
+.Loop:
+  LDA lincRescueSceneAttribute, x
+  STA $2007
+  INX
+  CPX #$40
+  BNE .Loop
+  RTS
+
 LoadAttribute2:
   LDA $2002
   LDA #$27

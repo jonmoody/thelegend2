@@ -10,7 +10,7 @@ LoadSprites:
 
 LoadPlayerSprite:
   LDX #$00
-.Loop
+.Loop:
   LDA spritePlayer, x
   STA $0324, x
   INX
@@ -20,7 +20,7 @@ LoadPlayerSprite:
 
 LoadEnemySprite:
   LDX #$00
-.Loop
+.Loop:
   LDA spriteEnemy, x
   STA $0348, x
   INX
@@ -30,7 +30,7 @@ LoadEnemySprite:
 
 LoadTravelerSprite:
   LDX #$00
-.Loop
+.Loop:
   LDA spriteTraveler, x
   STA $036C, x
   INX
@@ -40,7 +40,7 @@ LoadTravelerSprite:
 
 LoadLincSprite:
   LDX #$00
-.Loop
+.Loop:
   LDA spriteLinc, x
   STA $039C, x
   INX
@@ -60,7 +60,7 @@ LoadMattSprite:
 
 HidePlayerSprite:
   LDX #$00
-.Loop
+.Loop:
   LDA #$FF
   STA $0324, x
   INX
@@ -102,7 +102,7 @@ ShowPlayerSprite:
 
 HideTravelerSprite:
   LDX #$00
-.Loop
+.Loop:
   LDA #$FF
   STA $036C, x
   INX
@@ -134,7 +134,7 @@ ShowTravelerSprite:
 
 DisplayLincInChamber:
   LDX #$00
-.Loop
+.Loop:
   LDA spriteLincChamber, x
   STA $039C, x
   INX
@@ -144,7 +144,7 @@ DisplayLincInChamber:
 
 HideLincSprite:
   LDX #$00
-.Loop
+.Loop:
   LDA #$FF
   STA $039C, x
   INX
@@ -153,6 +153,32 @@ HideLincSprite:
   INX
   CPX #$24
   BNE .Loop
+  RTS
+
+MoveLincToFrontOfChamber:
+  LDA #$A8
+  STA lincSprite1Y
+  STA lincSprite2Y
+  LDA #$B0
+  STA lincSprite3Y
+  STA lincSprite4Y
+  STA lincSprite5Y
+  LDA #$B8
+  STA lincSprite6Y
+  STA lincSprite7Y
+  STA lincSprite8Y
+
+  LDA #$B8
+  STA lincSprite2X
+  STA lincSprite5X
+  STA lincSprite8X
+  LDA #$B0
+  STA lincSprite1X
+  STA lincSprite4X
+  STA lincSprite7X
+  LDA #$A8
+  STA lincSprite3X
+  STA lincSprite6X
   RTS
 
 HideMattSprite:
@@ -170,7 +196,7 @@ HideMattSprite:
 
 HideSprites:
   LDX #$00
-.Loop
+.Loop:
   LDA #$00
   STA $0300, x
   INX
