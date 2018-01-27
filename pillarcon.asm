@@ -1,5 +1,5 @@
   .inesprg 2
-  .ineschr 5
+  .ineschr 6
   .inesmap 3
   .inesmir 1
 
@@ -206,7 +206,8 @@ levelSecondAttribute:
   .incbin "graphics/level-second-background/attribute.dat"
 
 levelSecondPalette:
-  .incbin "graphics/level-second-background/palette.dat"
+  .db $0F,$2D,$10,$06, $0F,$2D,$11,$06, $0F,$2D,$11,$10, $0F,$0F,$0F,$0F
+  ; .incbin "graphics/level-second-background/palette.dat"
 
 insideTheForgeBackground:
   .include "graphics/insideTheForgeBackground.asm"
@@ -1545,9 +1546,12 @@ ApproachingTheForge:
   JSR DisableGraphics
   JSR ClearBackground
 
-  LDA #LOW(teslaLandingBackground)
+  LDA #$05
+  JSR Bankswitch
+
+  LDA #LOW(levelSecondBackground)
   STA pointerBackgroundLowByte
-  LDA #HIGH(teslaLandingBackground)
+  LDA #HIGH(levelSecondBackground)
   STA pointerBackgroundHighByte
   JSR LoadBackground
 
@@ -1557,9 +1561,10 @@ ApproachingTheForge:
   ; STA pointerBackgroundHighByte
   ; JSR LoadBackground2
 
-  JSR LoadTeslaLandingAttribute
-  JSR LoadTeslaLandingPalette
-  ; JSR LoadAttribute2
+  ; JSR LoadTeslaLandingAttribute
+  ; JSR LoadTeslaLandingPalette
+  JSR LoadAttribute2
+  JSR LoadForgeExteriorPalette
   ; JSR LoadTeslaLandingPalette
   JSR LoadSpritePalettes
 
@@ -1848,11 +1853,13 @@ palette:
   .include "graphics/palette.asm"
 
 futurePalette:
+  .db $0F,$27,$08,$16, $0F,$30,$2D,$21, $0F,$30,$2D,$11, $0F,$0F,$0F,$0F
+
   ; .db $0F,$27,$08,$16,  $0F,$30,$00,$22,  $0F,$0F,$0F,$0F,  $0F,$0F,$0F,$0F
   ; .db $0F,$30,$37,$3F,  $0F,$37,$16,$0F,  $0F,$16,$10,$0F,  $0F,$0F,$37,$30 ; Sprites: Linc, Traveler, Enemy, Player
   ; .include "graphics/futurePalette.asm"
   ; .incbin "graphics/tesla-arrives/palette.dat"
-  .incbin "graphics/forge-interior/palette.dat"
+  ; .incbin "graphics/forge-interior/palette.dat"
 
 titlePalette:
   .incbin "graphics/title/palette.dat"
@@ -1940,3 +1947,7 @@ attributeDialog:
   .bank 8
   .org $0000
   .incbin "graphics/forge-interior/chr.dat"
+
+  .bank 9
+  .org $0000
+  .incbin "graphics/level-second-background/chr.dat"

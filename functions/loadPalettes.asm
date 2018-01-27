@@ -94,7 +94,7 @@ LoadTeslaLandingPalette:
   BNE .Loop
   RTS
 
-LoadTeslaArrivingPalette:
+LoadForgeExteriorPalette:
   LDA $2002
   LDA #$3F
   STA $2006
