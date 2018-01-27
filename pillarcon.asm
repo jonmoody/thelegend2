@@ -1489,8 +1489,8 @@ LoadTeslaScene:
 
   JSR MoveStars
 
-  LDA buttonPressedB ; fix this
-  BEQ .LoadScene
+  DEC timer
+  BNE .LoadScene
 
   LDA #$00
   STA teslaScene
@@ -1541,6 +1541,8 @@ ApproachingTheForge:
   STA moodyAppearsScene
   LDA #$01
   JSR Bankswitch
+  LDA #$B0
+  STA timer
 
 .LoadScene:
   LDA approachingTheForgeLoaded
