@@ -2,9 +2,6 @@ ScrollBackgroundLeft:
   LDA approachingTheForge
   BEQ .End
 
-  LDA gameOver
-  BNE .End
-
   LDA #$00
   STA $2006        ; clean up PPU address registers
   STA $2006
@@ -22,9 +19,6 @@ ScrollBackgroundLeft:
 ScrollBackgroundRight:
   LDA approachingTheForge
   BEQ .End
-
-  LDA gameOver
-  BNE .End
 
   LDA #$00
   STA $2006        ; clean up PPU address registers
