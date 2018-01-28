@@ -1,5 +1,6 @@
 EnableGraphics:
   LDA #%10000000   ; Enable NMI, sprites and background on table 0
+  ORA nametable
   STA $2000
   LDA #%00011110   ; Enable sprites, enable backgrounds
   STA $2001
