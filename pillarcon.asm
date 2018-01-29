@@ -84,6 +84,7 @@ bossDirection  .rs 1
 bossHealth  .rs 1
 timer  .rs 1
 nametable  .rs 1
+backgroundScrollCount  .rs 1
 
   .include "reference/spriteMemoryLocations.asm"
 
@@ -149,6 +150,7 @@ ClearAudio:
   LDA #$03
   STA playerHealth
   STA projectileSpeed
+  STA backgroundScrollCount
 
   LDA #$01
   STA enemyHealth
@@ -1533,7 +1535,7 @@ ApproachingTheForge:
   LDA approachingTheForge
   BEQ EndApproachingTheForge
 
-  ; JSR NTSwapCheck
+  JSR BackgroundSwap
 
   LDA gameWin
   BEQ .LoadScene
@@ -1569,17 +1571,18 @@ ApproachingTheForge:
   STA pointerBackgroundHighByte
   JSR LoadBackgroundExtra
 
-  LDA #LOW(levelSecondBackground)
+  LDA #LOW(teslaLandingBackground)
   STA pointerBackgroundLowByte
-  LDA #HIGH(levelSecondBackground)
+  LDA #HIGH(teslaLandingBackground)
   STA pointerBackgroundHighByte
-  JSR LoadBackground2
+  JSR LoadBackgroundExtra2
 
   JSR LoadForgeExteriorPalette
 
   JSR LoadTeslaLandingAttribute
   ; JSR LoadTeslaLandingPalette
-  JSR LoadAttribute2
+  JSR LoadAttributeExtra2
+  ; JSR LoadAttribute2
   ; JSR LoadTeslaLandingPalette
   JSR LoadSpritePalettes
 
