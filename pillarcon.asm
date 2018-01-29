@@ -1590,10 +1590,7 @@ ApproachingTheForge:
   JSR LoadForgeExteriorPalette
 
   JSR LoadTeslaLandingAttribute
-  ; JSR LoadTeslaLandingPalette
   JSR LoadAttributeExtra2
-  ; JSR LoadAttribute2
-  ; JSR LoadTeslaLandingPalette
   JSR LoadSpritePalettes
 
   JSR EnableGraphicsPattern2
