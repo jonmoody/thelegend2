@@ -161,3 +161,20 @@ travelerSprite12Attr = $039A
 travelerSprite12X = $039B
 
 starX = $03A3
+
+lincSprite1Y = $039C
+lincSprite1X = $039F
+lincSprite2Y = $03A0
+lincSprite2X = $03A3
+lincSprite3Y = $03A4
+lincSprite3X = $03A7
+lincSprite4Y = $03A8
+lincSprite4X = $03AB
+lincSprite5Y = $03AC
+lincSprite5X = $03AF
+lincSprite6Y = $03B0
+lincSprite6X = $03B3
+lincSprite7Y = $03B4
+lincSprite7X = $03B7
+lincSprite8Y = $03B8
+lincSprite8X = $03BB

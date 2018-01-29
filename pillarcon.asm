@@ -1,5 +1,5 @@
   .inesprg 2
-  .ineschr 6
+  .ineschr 7
   .inesmap 3
   .inesmir 1
 
@@ -83,6 +83,7 @@ bossMovementWaitTimer  .rs 1
 bossDirection  .rs 1
 bossHealth  .rs 1
 timer  .rs 1
+nametable  .rs 1
 
   .include "reference/spriteMemoryLocations.asm"
 
@@ -213,7 +214,13 @@ insideTheForgeBackground:
   .include "graphics/insideTheForgeBackground.asm"
 
 lincRescueSceneBackground:
-  .include "graphics/lincRescueSceneBackground.asm"
+  .incbin "graphics/linc-rescued/nametable.dat"
+
+lincRescueScenePalette:
+  .incbin "graphics/linc-rescued/palette.dat"
+
+lincRescueSceneAttribute:
+  .incbin "graphics/linc-rescued/attribute.dat"
 
 bossBattleDialog1:
   .include "graphics/dialog/bossBattle01.asm"
@@ -1181,7 +1188,7 @@ CheckEnemyBulletCollision:
   LDA #$FF
   STA enemyProjectileY
 
-  JSR LoseHealth
+  ; JSR LoseHealth
 EndCheckEnemyBulletCollision:
 
 CheckPlayerCollision:
@@ -1206,7 +1213,7 @@ CheckPlayerCollision:
   LDA iFrames
   BNE EndCheckPlayerCollision
 
-  JSR LoseHealth
+  ; JSR LoseHealth
 EndCheckPlayerCollision:
 
 EnemyFireProjectile:
@@ -1483,8 +1490,8 @@ LoadTeslaScene:
 
   JSR MoveStars
 
-  LDA buttonPressedB ; fix this
-  BEQ .LoadScene
+  DEC timer
+  BNE .LoadScene
 
   LDA #$00
   STA teslaScene
@@ -1526,6 +1533,8 @@ ApproachingTheForge:
   LDA approachingTheForge
   BEQ EndApproachingTheForge
 
+  ; JSR NTSwapCheck
+
   LDA gameWin
   BEQ .LoadScene
 
@@ -1535,6 +1544,8 @@ ApproachingTheForge:
   STA moodyAppearsScene
   LDA #$01
   JSR Bankswitch
+  LDA #$B0
+  STA timer
 
 .LoadScene:
   LDA approachingTheForgeLoaded
@@ -1546,25 +1557,29 @@ ApproachingTheForge:
   JSR DisableGraphics
   JSR ClearBackground
 
+  LDA #$01
+  STA scroll
+
   LDA #$05
   JSR Bankswitch
+
+  LDA #LOW(teslaLandingBackground)
+  STA pointerBackgroundLowByte
+  LDA #HIGH(teslaLandingBackground)
+  STA pointerBackgroundHighByte
+  JSR LoadBackground
 
   LDA #LOW(levelSecondBackground)
   STA pointerBackgroundLowByte
   LDA #HIGH(levelSecondBackground)
   STA pointerBackgroundHighByte
-  JSR LoadBackground
+  JSR LoadBackground2
 
-  ; LDA #LOW(levelSecondBackground)
-  ; STA pointerBackgroundLowByte
-  ; LDA #HIGH(levelSecondBackground)
-  ; STA pointerBackgroundHighByte
-  ; JSR LoadBackground2
+  JSR LoadForgeExteriorPalette
 
   ; JSR LoadTeslaLandingAttribute
   ; JSR LoadTeslaLandingPalette
   JSR LoadAttribute2
-  JSR LoadForgeExteriorPalette
   ; JSR LoadTeslaLandingPalette
   JSR LoadSpritePalettes
 
@@ -1667,6 +1682,9 @@ MoodyBattleSequence:
   STA moodyBattleSequence
   LDA #$01
   STA lincRescueScene
+  LDA #$B0
+  STA timer
+
   JMP EndMoodyBattleSequence
 
 .LoadScene:
@@ -1706,13 +1724,16 @@ LoadLincRescueScene:
   LDA lincRescueScene
   BEQ EndLoadLincRescueScene
 
-  LDA buttonPressedA ; fix this
-  BEQ .LoadScene
+  DEC timer
+  BNE .LoadScene
 
   LDA #$00
   STA lincRescueScene
   LDA #$01
   STA lincDialogSequence
+  LDA #$01
+  JSR Bankswitch
+
   JMP EndLoadLincRescueScene
 
 .LoadScene:
@@ -1723,6 +1744,9 @@ LoadLincRescueScene:
   JSR HidePlayerSprite
   JSR HideTravelerSprite
 
+  LDA #$06
+  JSR Bankswitch
+
   JSR DisableGraphics
   JSR ClearBackground
 
@@ -1732,8 +1756,13 @@ LoadLincRescueScene:
   STA pointerBackgroundHighByte
   JSR LoadBackground
 
-  JSR LoadAttributeTitle
-  JSR LoadTitlePalettes
+  JSR LoadLincRescuedAttribute
+  JSR LoadFuturePalettes
+  JSR LoadSpritePalettes
+
+  JSR LoadPlayerSprite
+  JSR DisplayLincInChamber
+  JSR MoveLincToFrontOfChamber
 
   JSR EnableGraphics
 
@@ -1775,7 +1804,7 @@ RollCredits:
   LDA creditsScreenLoaded
   BNE EndRollCredits
 
-  .inesmir 0
+  ; .inesmir 0 ; How do I change mirroring mid-game?
 
   LDA #$00
   STA scroll
@@ -1816,6 +1845,25 @@ Bankswitch:
 
 Bankvalues:
   .db $00, $01, $02, $03, $04
+
+NTSwapCheck:
+  LDA scroll            ; check if the scroll just wrapped from 255 to 0
+  BNE NTSwapCheckDone
+NTSwap:
+  LDA nametable         ; load current nametable number (0 or 1)
+  EOR #$01              ; exclusive OR of bit 0 will flip that bit
+  STA nametable         ; so if nametable was 0, now 1
+                        ;    if nametable was 1, now 0
+
+  JSR DisableGraphics
+  LDA #LOW(teslaLandingBackground)
+  STA pointerBackgroundLowByte
+  LDA #HIGH(teslaLandingBackground)
+  STA pointerBackgroundHighByte
+  JSR LoadBackground
+  JSR EnableGraphics
+NTSwapCheckDone:
+  RTS
 
   .include "functions/enableGraphics.asm"
   .include "functions/disableGraphics.asm"
@@ -1951,3 +1999,7 @@ attributeDialog:
   .bank 9
   .org $0000
   .incbin "graphics/level-second-background/chr.dat"
+
+  .bank 10
+  .org $0000
+  .incbin "graphics/linc-rescued/chr.dat"

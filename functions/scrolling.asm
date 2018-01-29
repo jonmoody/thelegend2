@@ -2,9 +2,6 @@ ScrollBackgroundLeft:
   LDA approachingTheForge
   BEQ .End
 
-  LDA gameOver
-  BNE .End
-
   LDA #$00
   STA $2006        ; clean up PPU address registers
   STA $2006
@@ -23,9 +20,6 @@ ScrollBackgroundRight:
   LDA approachingTheForge
   BEQ .End
 
-  LDA gameOver
-  BNE .End
-
   LDA #$00
   STA $2006        ; clean up PPU address registers
   STA $2006
@@ -41,6 +35,10 @@ ScrollBackgroundRight:
   RTS
 
 ScrollBackgroundUp:
+  LDA scroll
+  CMP #$E0
+  BEQ .End
+
   LDA moveCreditsUp
   BEQ .End
 
