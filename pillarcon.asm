@@ -1577,7 +1577,7 @@ ApproachingTheForge:
 
   JSR LoadForgeExteriorPalette
 
-  ; JSR LoadTeslaLandingAttribute
+  JSR LoadTeslaLandingAttribute
   ; JSR LoadTeslaLandingPalette
   JSR LoadAttribute2
   ; JSR LoadTeslaLandingPalette
