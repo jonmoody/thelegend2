@@ -166,8 +166,17 @@ BackgroundSwap:
   DEC backgroundScrollCount
 
   LDA backgroundScrollCount
+  CMP #$01
+  BEQ .DrawOffScreenBackground
+
+  LDA backgroundScrollCount
   BNE .End
 
+.Swap:
+  JSR SwapBackgrounds
+  JMP .End
+
+.DrawOffScreenBackground:
   JSR DisableGraphics
 
   LDA #LOW(levelSecondBackground)
@@ -183,4 +192,28 @@ BackgroundSwap:
   JSR EnableGraphicsPattern2
 
 .End:
+  RTS
+
+SwapBackgrounds:
+  JSR DisableGraphics
+
+  LDA #LOW(levelSecondBackground)
+  STA pointerBackgroundLowByte
+  LDA #HIGH(levelSecondBackground)
+  STA pointerBackgroundHighByte
+  JSR LoadBackground
+
+  LDA #LOW(teslaLandingBackground)
+  STA pointerBackgroundLowByte
+  LDA #HIGH(teslaLandingBackground)
+  STA pointerBackgroundHighByte
+  JSR LoadBackgroundExtra2
+
+  JSR LoadForgeExteriorPalette
+
+  JSR LoadAttribute2
+  JSR LoadAttributeExtra2
+  JSR LoadSpritePalettes
+
+  JSR EnableGraphicsPattern2
   RTS
