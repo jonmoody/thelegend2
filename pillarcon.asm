@@ -1567,7 +1567,7 @@ ApproachingTheForge:
   STA pointerBackgroundLowByte
   LDA #HIGH(teslaLandingBackground)
   STA pointerBackgroundHighByte
-  JSR LoadBackground
+  JSR LoadBackgroundExtra
 
   LDA #LOW(levelSecondBackground)
   STA pointerBackgroundLowByte
@@ -1583,7 +1583,7 @@ ApproachingTheForge:
   ; JSR LoadTeslaLandingPalette
   JSR LoadSpritePalettes
 
-  JSR EnableGraphics
+  JSR EnableGraphicsPattern2
 
   LDA #$01
   STA gameInProgress
