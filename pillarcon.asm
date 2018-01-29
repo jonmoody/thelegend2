@@ -1856,25 +1856,6 @@ Bankswitch:
 Bankvalues:
   .db $00, $01, $02, $03, $04
 
-NTSwapCheck:
-  LDA scroll            ; check if the scroll just wrapped from 255 to 0
-  BNE NTSwapCheckDone
-NTSwap:
-  LDA nametable         ; load current nametable number (0 or 1)
-  EOR #$01              ; exclusive OR of bit 0 will flip that bit
-  STA nametable         ; so if nametable was 0, now 1
-                        ;    if nametable was 1, now 0
-
-  JSR DisableGraphics
-  LDA #LOW(teslaLandingBackground)
-  STA pointerBackgroundLowByte
-  LDA #HIGH(teslaLandingBackground)
-  STA pointerBackgroundHighByte
-  JSR LoadBackground
-  JSR EnableGraphics
-NTSwapCheckDone:
-  RTS
-
   .include "functions/enableGraphics.asm"
   .include "functions/disableGraphics.asm"
   .include "functions/vBlank.asm"
