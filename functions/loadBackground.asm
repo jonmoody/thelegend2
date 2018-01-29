@@ -216,4 +216,8 @@ SwapBackgrounds:
   JSR LoadSpritePalettes
 
   JSR EnableGraphicsPattern2
+
+  LDA #$01
+  STA scrollCheck
+
   RTS

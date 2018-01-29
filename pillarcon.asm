@@ -85,6 +85,8 @@ bossHealth  .rs 1
 timer  .rs 1
 nametable  .rs 1
 backgroundScrollCount  .rs 1
+scrollCheck  .rs 1
+scrollCountEnterForge  .rs 1
 
   .include "reference/spriteMemoryLocations.asm"
 
@@ -1537,9 +1539,17 @@ ApproachingTheForge:
 
   JSR BackgroundSwap
 
-  LDA gameWin
+  LDA scrollCheck
   BEQ .LoadScene
 
+  LDA scrollCountEnterForge
+  CMP #$68
+  BNE .LoadScene
+
+  JSR HideSprites
+
+  LDA #$01
+  STA gameWin
   LDA #$00
   STA approachingTheForge
   LDA #$01

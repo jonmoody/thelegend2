@@ -292,6 +292,12 @@ ReadLeft:
 CheckMovementEnabledLeft:
   JSR ScrollBackgroundLeft
 
+  LDA scrollCheck
+  BEQ .MovePlayer
+
+  DEC scrollCountEnterForge
+
+.MovePlayer:
   LDA movementEnabled
   BNE MovePlayerLeft
 
@@ -434,6 +440,12 @@ ReadRight:
 CheckMovementEnabledRight:
   JSR ScrollBackgroundRight
 
+  LDA scrollCheck
+  BEQ .MovePlayer
+
+  INC scrollCountEnterForge
+
+.MovePlayer:
   LDA movementEnabled
   BNE MovePlayerRight
 
