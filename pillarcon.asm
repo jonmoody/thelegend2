@@ -84,6 +84,9 @@ bossDirection  .rs 1
 bossHealth  .rs 1
 timer  .rs 1
 nametable  .rs 1
+backgroundScrollCount  .rs 1
+scrollCheck  .rs 1
+scrollCountEnterForge  .rs 1
 
   .include "reference/spriteMemoryLocations.asm"
 
@@ -149,6 +152,7 @@ ClearAudio:
   LDA #$03
   STA playerHealth
   STA projectileSpeed
+  STA backgroundScrollCount
 
   LDA #$01
   STA enemyHealth
@@ -1533,11 +1537,19 @@ ApproachingTheForge:
   LDA approachingTheForge
   BEQ EndApproachingTheForge
 
-  ; JSR NTSwapCheck
+  JSR BackgroundSwap
 
-  LDA gameWin
+  LDA scrollCheck
   BEQ .LoadScene
 
+  LDA scrollCountEnterForge
+  CMP #$68
+  BNE .LoadScene
+
+  JSR HideSprites
+
+  LDA #$01
+  STA gameWin
   LDA #$00
   STA approachingTheForge
   LDA #$01
@@ -1567,23 +1579,21 @@ ApproachingTheForge:
   STA pointerBackgroundLowByte
   LDA #HIGH(teslaLandingBackground)
   STA pointerBackgroundHighByte
-  JSR LoadBackground
+  JSR LoadBackgroundExtra
 
-  LDA #LOW(levelSecondBackground)
+  LDA #LOW(teslaLandingBackground)
   STA pointerBackgroundLowByte
-  LDA #HIGH(levelSecondBackground)
+  LDA #HIGH(teslaLandingBackground)
   STA pointerBackgroundHighByte
-  JSR LoadBackground2
+  JSR LoadBackgroundExtra2
 
   JSR LoadForgeExteriorPalette
 
-  ; JSR LoadTeslaLandingAttribute
-  ; JSR LoadTeslaLandingPalette
-  JSR LoadAttribute2
-  ; JSR LoadTeslaLandingPalette
+  JSR LoadTeslaLandingAttribute
+  JSR LoadAttributeExtra2
   JSR LoadSpritePalettes
 
-  JSR EnableGraphics
+  JSR EnableGraphicsPattern2
 
   LDA #$01
   STA gameInProgress
@@ -1845,25 +1855,6 @@ Bankswitch:
 
 Bankvalues:
   .db $00, $01, $02, $03, $04
-
-NTSwapCheck:
-  LDA scroll            ; check if the scroll just wrapped from 255 to 0
-  BNE NTSwapCheckDone
-NTSwap:
-  LDA nametable         ; load current nametable number (0 or 1)
-  EOR #$01              ; exclusive OR of bit 0 will flip that bit
-  STA nametable         ; so if nametable was 0, now 1
-                        ;    if nametable was 1, now 0
-
-  JSR DisableGraphics
-  LDA #LOW(teslaLandingBackground)
-  STA pointerBackgroundLowByte
-  LDA #HIGH(teslaLandingBackground)
-  STA pointerBackgroundHighByte
-  JSR LoadBackground
-  JSR EnableGraphics
-NTSwapCheckDone:
-  RTS
 
   .include "functions/enableGraphics.asm"
   .include "functions/disableGraphics.asm"
