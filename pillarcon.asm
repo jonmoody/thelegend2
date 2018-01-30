@@ -281,7 +281,7 @@ awakeningDialog7:
 
   .bank 1
   .org musicLoad
-  .incbin "music/title-credits.bin";"music.bin"
+  .incbin "music/LincCredits.nsf";"music/title-credits.bin";"music.bin"
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -1844,7 +1844,7 @@ EndRollCredits:
 
 EndCurrentFrame:
   ; Figure out why the music makes the game crash
-  JSR musicPlay
+  ; JSR musicPlay
   RTI
 
 
