@@ -90,7 +90,7 @@ scrollCountEnterForge  .rs 1
 
   .include "reference/spriteMemoryLocations.asm"
 
-musicLoad = $A050
+musicLoad = $A5BA;$A050
 musicInit = $A999
 musicPlay = $A99C
 
@@ -281,7 +281,7 @@ awakeningDialog7:
 
   .bank 1
   .org musicLoad
-  .incbin "music.bin"
+  .incbin "music/title-credits.bin";"music.bin"
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -1844,7 +1844,7 @@ EndRollCredits:
 
 EndCurrentFrame:
   ; Figure out why the music makes the game crash
-  ; JSR musicPlay
+  JSR musicPlay
   RTI
 
 
