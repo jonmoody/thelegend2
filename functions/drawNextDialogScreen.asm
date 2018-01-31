@@ -29,7 +29,7 @@ LoadIntro2:
   CMP #$02
   BNE LoadIntro3
 
-  JSR DrawDialogBackground
+  JSR WipeTopDialog
 
   LDA #LOW(backgroundDialogIntro2)
   STA pointerBackgroundLowByte
@@ -44,7 +44,7 @@ LoadIntro3:
   CMP #$03
   BNE LoadIntro4
 
-  JSR DrawDialogBackground
+  JSR WipeBottomDialog
 
   LDA #LOW(backgroundDialogIntro3)
   STA pointerBackgroundLowByte
@@ -58,7 +58,7 @@ LoadIntro4:
   CMP #$04
   BNE LoadIntro5
 
-  JSR DrawDialogBackground
+  JSR WipeTopDialog
 
   LDA #LOW(backgroundDialogIntro4)
   STA pointerBackgroundLowByte
@@ -72,7 +72,7 @@ LoadIntro5:
   CMP #$05
   BNE LeaveIntroDialog
 
-  JSR DrawDialogBackground
+  JSR WipeBottomDialog
 
   LDA #LOW(backgroundDialogIntro5)
   STA pointerBackgroundLowByte
