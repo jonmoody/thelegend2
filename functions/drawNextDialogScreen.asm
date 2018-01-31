@@ -136,7 +136,7 @@ LoadMoodyDialog2:
   CMP #$02
   BNE LoadMoodyDialog3
 
-  JSR DrawDialogBackground
+  JSR WipeTopDialog
 
   LDA #LOW(bossBattleDialog2)
   STA pointerBackgroundLowByte
@@ -151,7 +151,7 @@ LoadMoodyDialog3:
   CMP #$03
   BNE LoadMoodyDialog4
 
-  JSR DrawDialogBackground
+  JSR WipeBottomDialog
 
   LDA #LOW(bossBattleDialog3)
   STA pointerBackgroundLowByte
@@ -166,7 +166,7 @@ LoadMoodyDialog4:
   CMP #$04
   BNE LoadMoodyDialog5
 
-  JSR DrawDialogBackground
+  JSR WipeTopDialog
 
   LDA #LOW(bossBattleDialog4)
   STA pointerBackgroundLowByte
@@ -181,8 +181,6 @@ LoadMoodyDialog5:
   CMP #$05
   BNE LoadMoodyDialog6
 
-  JSR DrawDialogBackground
-
   LDA #LOW(bossBattleDialog5)
   STA pointerBackgroundLowByte
   LDA #HIGH(bossBattleDialog5)
@@ -195,8 +193,6 @@ LoadMoodyDialog6:
   LDA currentDialogScreen
   CMP #$06
   BNE LoadMoodyDialog7
-
-  JSR DrawDialogBackground
 
   LDA #LOW(bossBattleDialog6)
   STA pointerBackgroundLowByte
@@ -211,8 +207,6 @@ LoadMoodyDialog7:
   CMP #$07
   BNE LoadMoodyDialog8
 
-  JSR DrawDialogBackground
-
   LDA #LOW(bossBattleDialog7)
   STA pointerBackgroundLowByte
   LDA #HIGH(bossBattleDialog7)
@@ -225,8 +219,6 @@ LoadMoodyDialog8:
   LDA currentDialogScreen
   CMP #$08
   BNE LoadMoodyDialog9
-
-  JSR DrawDialogBackground
 
   LDA #LOW(bossBattleDialog8)
   STA pointerBackgroundLowByte
@@ -241,8 +233,6 @@ LoadMoodyDialog9:
   CMP #$09
   BNE LoadMoodyDialog10
 
-  JSR DrawDialogBackground
-
   LDA #LOW(bossBattleDialog9)
   STA pointerBackgroundLowByte
   LDA #HIGH(bossBattleDialog9)
@@ -256,7 +246,7 @@ LoadMoodyDialog10:
   CMP #$0A
   BNE LeaveMoodyDialog
 
-  JSR DrawDialogBackground
+  JSR WipeBottomDialog
 
   LDA #LOW(bossBattleDialog10)
   STA pointerBackgroundLowByte
@@ -318,7 +308,7 @@ LoadLincDialog2:
   CMP #$02
   BNE LoadLincDialog3
 
-  JSR DrawDialogBackground
+  JSR WipeTopDialog
 
   LDA #LOW(awakeningDialog2)
   STA pointerBackgroundLowByte
@@ -333,7 +323,7 @@ LoadLincDialog3:
   CMP #$03
   BNE LoadLincDialog4
 
-  JSR DrawDialogBackground
+  JSR WipeBottomDialog
 
   LDA #LOW(awakeningDialog3)
   STA pointerBackgroundLowByte
@@ -348,7 +338,7 @@ LoadLincDialog4:
   CMP #$04
   BNE LoadLincDialog5
 
-  JSR DrawDialogBackground
+  JSR WipeTopDialog
 
   LDA #LOW(awakeningDialog4)
   STA pointerBackgroundLowByte
@@ -363,8 +353,6 @@ LoadLincDialog5:
   CMP #$05
   BNE LoadLincDialog6
 
-  JSR DrawDialogBackground
-
   LDA #LOW(awakeningDialog5)
   STA pointerBackgroundLowByte
   LDA #HIGH(awakeningDialog5)
@@ -378,8 +366,6 @@ LoadLincDialog6:
   CMP #$06
   BNE LoadLincDialog7
 
-  JSR DrawDialogBackground
-
   LDA #LOW(awakeningDialog6)
   STA pointerBackgroundLowByte
   LDA #HIGH(awakeningDialog6)
@@ -392,8 +378,6 @@ LoadLincDialog7:
   LDA currentDialogScreen
   CMP #$07
   BNE LeaveLincDialog
-
-  JSR DrawDialogBackground
 
   LDA #LOW(awakeningDialog7)
   STA pointerBackgroundLowByte
