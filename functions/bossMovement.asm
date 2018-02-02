@@ -23,6 +23,7 @@ ExecuteBossMovement:
   JMP EndExecuteBossMovement
 
 .MoveBossRight:
+  JSR TravelerDashTiles
   JSR MoveBossRight
   JSR MoveBossRight
   JMP EndExecuteBossMovement
@@ -36,6 +37,7 @@ ExecuteBossMovement:
   JMP EndExecuteBossMovement
 
 .MoveBossLeft:
+  JSR TravelerDashTiles
   JSR MoveBossLeft
   JSR MoveBossLeft
   JMP EndExecuteBossMovement
@@ -83,6 +85,8 @@ TurnBossRight:
   LDA #%01000001
   JSR StoreBossAttributeData
 
+  JSR TravelerStandingTiles
+
   LDA #$01
   JSR FlipBossSprite
 
@@ -94,6 +98,8 @@ TurnBossRight:
 TurnBossLeft:
   LDA #%00000001
   JSR StoreBossAttributeData
+
+  JSR TravelerStandingTiles
 
   LDA #$00
   JSR FlipBossSprite

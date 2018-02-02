@@ -142,6 +142,60 @@ ShowTravelerCombatSprite:
   STA travelerSprite10Tile
   RTS
 
+TravelerStandingTiles:
+  LDA #$A9
+  STA travelerSprite1Tile
+  LDA #$AA
+  STA travelerSprite2Tile
+  LDA #$AB
+  STA travelerSprite3Tile
+  LDA #$AC
+  STA travelerSprite4Tile
+  LDA #$AD
+  STA travelerSprite5Tile
+  LDA #$AE
+  STA travelerSprite6Tile
+  LDA #$A7
+  STA travelerSprite7Tile
+  LDA #$A8
+  STA travelerSprite8Tile
+  LDA #$AF
+  STA travelerSprite9Tile
+  LDA #$A6
+  STA travelerSprite10Tile
+  LDA #$B0
+  STA travelerSprite11Tile
+  LDA #$B1
+  STA travelerSprite12Tile
+  RTS
+
+TravelerDashTiles:
+  LDA #$9A
+  STA travelerSprite1Tile
+  LDA #$9B
+  STA travelerSprite2Tile
+  LDA #$9C
+  STA travelerSprite3Tile
+  LDA #$9D
+  STA travelerSprite4Tile
+  LDA #$9E
+  STA travelerSprite5Tile
+  LDA #$9F
+  STA travelerSprite6Tile
+  LDA #$A0
+  STA travelerSprite7Tile
+  LDA #$A1
+  STA travelerSprite8Tile
+  LDA #$A2
+  STA travelerSprite9Tile
+  LDA #$A3
+  STA travelerSprite10Tile
+  LDA #$A4
+  STA travelerSprite11Tile
+  LDA #$A5
+  STA travelerSprite12Tile
+  RTS
+
 DisplayLincInChamber:
   LDX #$00
 .Loop:
