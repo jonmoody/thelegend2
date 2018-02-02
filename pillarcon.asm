@@ -1510,9 +1510,6 @@ LoadTeslaScene:
   LDA teslaSceneLoaded
   BNE EndLoadTeslaScene
 
-  JSR HideSprites
-  JSR HidePlayerSprite
-  JSR HideTravelerSprite
   JSR LoadStars
 
   JSR DisableGraphics
@@ -1528,7 +1525,7 @@ LoadTeslaScene:
   JSR LoadTeslaPalette
   JSR LoadSpritePalettes
 
-  JSR EnableGraphics
+  JSR EnableGraphicsPattern2
 
   LDA #$01
   STA teslaSceneLoaded
