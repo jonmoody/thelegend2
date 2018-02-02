@@ -218,9 +218,6 @@ levelSecondAttribute:
 levelSecondPalette:
   .db $0F,$2D,$10,$06, $0F,$2D,$11,$06, $0F,$2D,$11,$10, $0F,$30,$10,$06
 
-insideTheForgeBackground:
-  .include "graphics/insideTheForgeBackground.asm"
-
 lincRescueSceneBackground:
   .incbin "graphics/linc-rescued/nametable.dat"
 
@@ -1917,9 +1914,6 @@ background:
 
 backgroundGameOver:
   .include "graphics/backgroundGameOver.asm"
-
-backgroundGameWin:
-  .include "graphics/backgroundGameWin.asm"
 
 backgroundTitle:
   .incbin "graphics/title/nametable.dat"
