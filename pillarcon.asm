@@ -216,8 +216,7 @@ levelSecondAttribute:
   .incbin "graphics/level-second-background/attribute.dat"
 
 levelSecondPalette:
-  .db $0F,$2D,$10,$06, $0F,$2D,$11,$06, $0F,$2D,$11,$10, $0F,$0F,$0F,$0F
-  ; .incbin "graphics/level-second-background/palette.dat"
+  .db $0F,$2D,$10,$06, $0F,$2D,$11,$06, $0F,$2D,$11,$10, $0F,$30,$10,$06
 
 insideTheForgeBackground:
   .include "graphics/insideTheForgeBackground.asm"
@@ -1896,7 +1895,7 @@ palette:
   .include "graphics/palette.asm"
 
 futurePalette:
-  .db $0F,$27,$08,$16, $0F,$30,$2D,$21, $0F,$30,$2D,$11, $0F,$0F,$0F,$0F
+  .db $0F,$27,$08,$16, $0F,$30,$2D,$21, $0F,$30,$2D,$11, $0F,$30,$11,$21
 
   ; .db $0F,$27,$08,$16,  $0F,$30,$00,$22,  $0F,$0F,$0F,$0F,  $0F,$0F,$0F,$0F
   ; .db $0F,$30,$37,$3F,  $0F,$37,$16,$0F,  $0F,$16,$10,$0F,  $0F,$0F,$37,$30 ; Sprites: Linc, Traveler, Enemy, Player
