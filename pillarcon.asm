@@ -1627,7 +1627,7 @@ MoodyAppearsScene:
 
   JSR LoadPlayerSprite
   JSR LoadTravelerSprite
-  JSR ShowTravelerSprite
+  JSR ShowTravelerCombatSprite
   JSR DisplayLincInChamber
 
   JSR DisableGraphics
@@ -1701,7 +1701,7 @@ MoodyBattleSequence:
 
   JSR LoadPlayerSprite
   JSR LoadTravelerSprite
-  JSR ShowTravelerSprite
+  JSR ShowTravelerCombatSprite
   JSR DisplayLincInChamber
   LDA #$03
   STA enemyHealth

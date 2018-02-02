@@ -132,6 +132,16 @@ ShowTravelerSprite:
   STA travelerSprite12Y
   RTS
 
+ShowTravelerCombatSprite:
+  JSR ShowTravelerSprite
+  LDA #$A7
+  STA travelerSprite7Tile
+  LDA #$A8
+  STA travelerSprite8Tile
+  LDA #$A6
+  STA travelerSprite10Tile
+  RTS
+
 DisplayLincInChamber:
   LDX #$00
 .Loop:
