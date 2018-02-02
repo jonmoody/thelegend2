@@ -142,7 +142,7 @@ ShowTravelerCombatSprite:
   STA travelerSprite10Tile
   RTS
 
-TravelerStandingTiles:
+TravelerStandingLeftTiles:
   LDA #$A9
   STA travelerSprite1Tile
   LDA #$AA
@@ -159,17 +159,44 @@ TravelerStandingTiles:
   STA travelerSprite7Tile
   LDA #$A8
   STA travelerSprite8Tile
-  LDA #$AF
+  LDA #$B1
   STA travelerSprite9Tile
   LDA #$A6
   STA travelerSprite10Tile
-  LDA #$B0
+  LDA #$B3
   STA travelerSprite11Tile
-  LDA #$B1
+  LDA #$B4
   STA travelerSprite12Tile
   RTS
 
-TravelerDashTiles:
+TravelerStandingRightTiles:
+  LDA #$AB
+  STA travelerSprite1Tile
+  LDA #$AA
+  STA travelerSprite2Tile
+  LDA #$A9
+  STA travelerSprite3Tile
+  LDA #$AE
+  STA travelerSprite4Tile
+  LDA #$AD
+  STA travelerSprite5Tile
+  LDA #$AC
+  STA travelerSprite6Tile
+  LDA #$B1
+  STA travelerSprite7Tile
+  LDA #$A8
+  STA travelerSprite8Tile
+  LDA #$A7
+  STA travelerSprite9Tile
+  LDA #$B4
+  STA travelerSprite10Tile
+  LDA #$B3
+  STA travelerSprite11Tile
+  LDA #$A6
+  STA travelerSprite12Tile
+  RTS
+
+TravelerDashLeftTiles:
   LDA #$9A
   STA travelerSprite1Tile
   LDA #$9B
@@ -193,6 +220,33 @@ TravelerDashTiles:
   LDA #$A4
   STA travelerSprite11Tile
   LDA #$A5
+  STA travelerSprite12Tile
+  RTS
+
+TravelerDashRightTiles:
+  LDA #$9C
+  STA travelerSprite1Tile
+  LDA #$9B
+  STA travelerSprite2Tile
+  LDA #$9A
+  STA travelerSprite3Tile
+  LDA #$9F
+  STA travelerSprite4Tile
+  LDA #$9E
+  STA travelerSprite5Tile
+  LDA #$9D
+  STA travelerSprite6Tile
+  LDA #$A2
+  STA travelerSprite7Tile
+  LDA #$A1
+  STA travelerSprite8Tile
+  LDA #$A0
+  STA travelerSprite9Tile
+  LDA #$A5
+  STA travelerSprite10Tile
+  LDA #$A4
+  STA travelerSprite11Tile
+  LDA #$A3
   STA travelerSprite12Tile
   RTS
 
