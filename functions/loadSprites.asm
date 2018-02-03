@@ -300,6 +300,33 @@ TravelerDeath:
 
   JSR HideBossProjectile
 
+  LDA bossDirection
+  BNE .FacingRight
+  JMP .End
+
+.FacingRight:
+
+  LDA travelerSprite1X
+  LDX travelerSprite4X
+  STA travelerSprite4X
+  STX travelerSPrite1X
+
+  LDA travelerSprite2X
+  LDX travelerSprite3X
+  STA travelerSprite3X
+  STX travelerSPrite2X
+
+  LDA travelerSprite5X
+  LDX travelerSprite8X
+  STA travelerSprite8X
+  STX travelerSPrite5X
+
+  LDA travelerSprite6X
+  LDX travelerSprite7X
+  STA travelerSprite7X
+  STX travelerSPrite6X
+
+.End:
   RTS
 
 DisplayLincInChamber:
