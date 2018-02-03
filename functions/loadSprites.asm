@@ -298,6 +298,8 @@ TravelerDeath:
   STA travelerSprite11Y
   STA travelerSprite12Y
 
+  JSR HideBossProjectile
+
   RTS
 
 DisplayLincInChamber:
