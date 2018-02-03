@@ -3,7 +3,6 @@ ExecuteBossMovement:
   LDA bossHealth
   BNE .Move
 
-  DEC timer
   JMP EndExecuteBossMovement
 
 .Move:
@@ -389,8 +388,159 @@ BossLoseHealth:
   BNE .End
 
   JSR TravelerDeath
+
+.End:
+  RTS
+
+
+CheckChamberCollision:
+
+  LDA bossHealth
+  BEQ .CheckCollision1
+
+  JMP EndChamberCollisionCheck
+
+.CheckCollision1:
+  LDA projectileX
+  CLC
+  ADC #$08
+  CMP lincSprite1X
+  BCS .CheckCollision2
+
+  JMP CheckChamber2Collision
+
+.CheckCollision2:
+  LDA projectileX
+  SEC
+  SBC #$08
+  CMP lincSprite2X
+  BCC .CheckCollision3
+
+  JMP CheckChamber2Collision
+
+.CheckCollision3:
+  LDA projectileY
+  CMP lincSprite1Y
+  BCS .CheckCollision4
+
+  JMP CheckChamber2Collision
+
+.CheckCollision4:
+  LDA projectileY
+  CMP lincSprite6Y
+  BCS CheckChamber2Collision
+
+  LDA #$FF
+  STA projectileY
+  JMP DamageStasisChamber
+
+CheckChamber2Collision:
+
+.CheckCollision1:
+  LDA projectile2X
+  CLC
+  ADC #$08
+  CMP lincSprite1X
+  BCS .CheckCollision2
+
+  JMP CheckChamber3Collision
+
+.CheckCollision2:
+  LDA projectile2X
+  SEC
+  SBC #$08
+  CMP lincSprite2X
+  BCC .CheckCollision3
+
+  JMP CheckChamber3Collision
+
+.CheckCollision3:
+  LDA projectile2Y
+  CMP lincSprite1Y
+  BCS .CheckCollision4
+
+  JMP CheckChamber3Collision
+
+.CheckCollision4:
+  LDA projectile2Y
+  CMP lincSprite6Y
+  BCS CheckChamber3Collision
+
+  LDA #$FF
+  STA projectile2Y
+  JMP DamageStasisChamber
+
+CheckChamber3Collision:
+
+.CheckCollision1:
+  LDA projectile3X
+  CLC
+  ADC #$08
+  CMP lincSprite1X
+  BCS .CheckCollision2
+
+  JMP EndChamberCollisionCheck
+
+.CheckCollision2:
+  LDA projectile3X
+  SEC
+  SBC #$08
+  CMP lincSprite2X
+  BCC .CheckCollision3
+
+  JMP EndChamberCollisionCheck
+
+.CheckCollision3:
+  LDA projectile3Y
+  CMP lincSprite1Y
+  BCS .CheckCollision4
+
+  JMP EndChamberCollisionCheck
+
+.CheckCollision4:
+  LDA projectile3Y
+  CMP lincSprite6Y
+  BCS EndChamberCollisionCheck
+
+  LDA #$FF
+  STA projectile3Y
+  JMP DamageStasisChamber
+
+EndChamberCollisionCheck:
+  RTS
+
+
+DamageStasisChamber:
+  LDA stasisChamberHealth
+  BEQ .End
+
+  DEC stasisChamberHealth
+
+  LDA stasisChamberHealth
+  BNE .End
+
   LDA #$C0
   STA timer
+
+  LDA #$06
+  JSR Bankswitch
+
+  JSR DisableGraphics
+  JSR ClearBackground
+
+  LDA #LOW(lincRescueSceneBackground)
+  STA pointerBackgroundLowByte
+  LDA #HIGH(lincRescueSceneBackground)
+  STA pointerBackgroundHighByte
+  JSR LoadBackground
+
+  JSR LoadLincRescuedAttribute
+  JSR LoadFuturePalettes
+  JSR LoadSpritePalettes
+
+  JSR DisplayLincInChamber
+
+  JSR EnableGraphics
 
 .End:
   RTS

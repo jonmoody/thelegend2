@@ -87,6 +87,7 @@ nametable  .rs 1
 backgroundScrollCount  .rs 1
 scrollCheck  .rs 1
 scrollCountEnterForge  .rs 1
+stasisChamberHealth  .rs 1
 
   .include "reference/spriteMemoryLocations.asm"
 
@@ -158,6 +159,7 @@ ClearAudio:
   STA playerHealth
   STA projectileSpeed
   STA backgroundScrollCount
+  STA stasisChamberHealth
 
   LDA #$01
   STA enemyHealth
@@ -1676,16 +1678,24 @@ MoodyBattleSequence:
   BEQ .LoadScene
 
   JSR ExecuteBossMovement
+  JSR CheckChamberCollision
 
+  LDA stasisChamberHealth
+  BNE .TransitionScene
+
+  DEC timer
+
+.TransitionScene:
   LDA timer
   BNE .LoadScene
 
   LDA #$00
   STA moodyBattleSequence
   LDA #$01
-  STA lincRescueScene
-  LDA #$B0
-  STA timer
+  STA lincDialogSequence
+  LDA #$01
+  JSR Bankswitch
+  JSR HideTravelerSprite
 
   JMP EndMoodyBattleSequence
 
@@ -1724,54 +1734,6 @@ MoodyBattleSequence:
   STA moodyBattleSequenceLoaded
 
 EndMoodyBattleSequence:
-
-LoadLincRescueScene:
-  LDA lincRescueScene
-  BEQ EndLoadLincRescueScene
-
-  DEC timer
-  BNE .LoadScene
-
-  LDA #$00
-  STA lincRescueScene
-  LDA #$01
-  STA lincDialogSequence
-
-  JMP EndLoadLincRescueScene
-
-.LoadScene:
-  LDA lincRescueSceneLoaded
-  BNE EndLoadLincRescueScene
-
-  JSR HideTravelerSprite
-
-  JSR SetProjectileTiles
-
-  LDA #$06
-  JSR Bankswitch
-
-  JSR DisableGraphics
-  JSR ClearBackground
-
-  LDA #LOW(lincRescueSceneBackground)
-  STA pointerBackgroundLowByte
-  LDA #HIGH(lincRescueSceneBackground)
-  STA pointerBackgroundHighByte
-  JSR LoadBackground
-
-  JSR LoadLincRescuedAttribute
-  JSR LoadFuturePalettes
-  JSR LoadSpritePalettes
-
-  JSR LoadPlayerSprite
-  JSR DisplayLincInChamber
-  JSR MoveLincToFrontOfChamber
-
-  JSR EnableGraphics
-
-  LDA #$01
-  STA lincRescueSceneLoaded
-EndLoadLincRescueScene:
 
 LincDialogSequence:
   LDA lincDialogSequence
