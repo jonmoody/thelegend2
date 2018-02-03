@@ -1630,6 +1630,8 @@ MoodyAppearsScene:
   JSR ShowTravelerCombatSprite
   JSR DisplayLincInChamber
 
+  JSR SetProjectileTiles
+
   JSR DisableGraphics
   JSR ClearBackground
 
@@ -1708,6 +1710,8 @@ MoodyBattleSequence:
   LDA #$01
   STA gameInProgress
 
+  JSR SetProjectileTiles
+
   JSR DisableGraphics
   JSR ClearBackground
 
@@ -1751,6 +1755,8 @@ LoadLincRescueScene:
   JSR HideSprites
   JSR HidePlayerSprite
   JSR HideTravelerSprite
+
+  JSR SetProjectileTiles
 
   LDA #$06
   JSR Bankswitch

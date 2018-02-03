@@ -1,13 +1,17 @@
 projectile3Y = $0308
+projectile3Tile = $0309
 projectile3X = $030B
 
 projectile2Y = $030C
+projectile2Tile = $030D
 projectile2X = $030F
 
 projectileY = $0310
+projectileTile = $0311
 projectileX = $0313
 
 enemyProjectileY = $0314
+enemyProjectileTile = $0315
 enemyProjectileX = $0317
 
 playerSprite1Y = $0324

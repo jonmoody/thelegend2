@@ -299,6 +299,14 @@ MoveLincToFrontOfChamber:
   STA lincSprite6X
   RTS
 
+SetProjectileTiles:
+  LDA #$74
+  STA enemyProjectileTile
+  STA projectileTile
+  STA projectile2Tile
+  STA projectile3Tile
+  RTS
+
 HideMattSprite:
   LDX #$00
 .Loop:
