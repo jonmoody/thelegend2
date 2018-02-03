@@ -1686,8 +1686,6 @@ MoodyBattleSequence:
   LDA timer
   BNE .LoadScene
 
-  LDA #$01
-  JSR Bankswitch
   LDA #$00
   STA moodyBattleSequence
   LDA #$01
@@ -1753,8 +1751,8 @@ LoadLincRescueScene:
   LDA lincRescueSceneLoaded
   BNE EndLoadLincRescueScene
 
-  JSR HideSprites
-  JSR HidePlayerSprite
+  ; JSR HideSprites
+  ; JSR HidePlayerSprite
   JSR HideTravelerSprite
 
   JSR SetProjectileTiles
@@ -1824,9 +1822,7 @@ RollCredits:
   LDA #$00
   STA scroll
 
-  JSR HideSprites
-  JSR HidePlayerSprite
-  JSR HideTravelerSprite
+  JSR HideLincSprite
 
   JSR DisableGraphics
   JSR ClearBackground
