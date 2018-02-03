@@ -309,22 +309,22 @@ TravelerDeath:
   LDA travelerSprite1X
   LDX travelerSprite4X
   STA travelerSprite4X
-  STX travelerSPrite1X
+  STX travelerSprite1X
 
   LDA travelerSprite2X
   LDX travelerSprite3X
   STA travelerSprite3X
-  STX travelerSPrite2X
+  STX travelerSprite2X
 
   LDA travelerSprite5X
   LDX travelerSprite8X
   STA travelerSprite8X
-  STX travelerSPrite5X
+  STX travelerSprite5X
 
   LDA travelerSprite6X
   LDX travelerSprite7X
   STA travelerSprite7X
-  STX travelerSPrite6X
+  STX travelerSprite6X
 
 .End:
   RTS
