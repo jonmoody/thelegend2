@@ -305,6 +305,14 @@ SetProjectileTiles:
   STA projectileTile
   STA projectile2Tile
   STA projectile3Tile
+
+  LDA #$03
+  STA projectileAttr
+  STA projectile2Attr
+  STA projectile3Attr
+  LDA #$02
+  STA enemyProjectileAttr
+
   RTS
 
 HideMattSprite:
