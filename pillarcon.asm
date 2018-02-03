@@ -1415,7 +1415,7 @@ LoadIntroScene1:
 
   LDA introSceneLoaded
   BNE EndLoadIntroScene1
-  
+
   LDA #$01
   JSR Bankswitch
 

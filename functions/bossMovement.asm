@@ -30,6 +30,9 @@ ExecuteBossMovement:
   JMP EndExecuteBossMovement
 
 .MoveBossRight:
+  LDA bossHealth
+  BEQ EndExecuteBossMovement
+
   JSR TravelerDashRightTiles
   JSR MoveBossRight
   JSR MoveBossRight
@@ -44,6 +47,9 @@ ExecuteBossMovement:
   JMP EndExecuteBossMovement
 
 .MoveBossLeft:
+  LDA bossHealth
+  BEQ EndExecuteBossMovement
+
   JSR TravelerDashLeftTiles
   JSR MoveBossLeft
   JSR MoveBossLeft
