@@ -1625,6 +1625,7 @@ MoodyAppearsScene:
   JSR LoadTravelerSprite
   JSR ShowTravelerCombatSprite
   JSR DisplayLincInChamber
+  JSR HideBossProjectile
 
   JSR SetProjectileTiles
 
