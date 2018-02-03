@@ -1751,8 +1751,6 @@ LoadLincRescueScene:
   LDA lincRescueSceneLoaded
   BNE EndLoadLincRescueScene
 
-  ; JSR HideSprites
-  ; JSR HidePlayerSprite
   JSR HideTravelerSprite
 
   JSR SetProjectileTiles
