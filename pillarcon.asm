@@ -1415,7 +1415,7 @@ LoadIntroScene1:
 
   LDA introSceneLoaded
   BNE EndLoadIntroScene1
-
+  
   LDA #$01
   JSR Bankswitch
 
@@ -1502,8 +1502,6 @@ LoadTeslaScene:
   STA teslaScene
   LDA #$01
   STA approachingTheForge
-  LDA #$03
-  JSR Bankswitch
   JMP EndLoadTeslaScene
 
 .LoadScene:
@@ -1552,8 +1550,6 @@ ApproachingTheForge:
   STA approachingTheForge
   LDA #$01
   STA moodyAppearsScene
-  LDA #$01
-  JSR Bankswitch
   LDA #$B0
   STA timer
 
@@ -1612,8 +1608,6 @@ MoodyAppearsScene:
   STA gameInProgress
   LDA #$01
   STA moodyDialog
-  LDA #$01
-  JSR Bankswitch
   JSR HideLincSprite
 
   JMP EndMoodyAppearsScene
@@ -1742,8 +1736,6 @@ LoadLincRescueScene:
   STA lincRescueScene
   LDA #$01
   STA lincDialogSequence
-  LDA #$01
-  JSR Bankswitch
 
   JMP EndLoadLincRescueScene
 

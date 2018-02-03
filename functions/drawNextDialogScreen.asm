@@ -14,6 +14,9 @@ LoadIntro1:
   CMP #$01
   BNE LoadIntro2
 
+  LDA #$01
+  JSR Bankswitch
+
   JSR DrawDialogBackground
 
   LDA #LOW(backgroundDialogIntro1)
@@ -120,6 +123,9 @@ LoadMoodyDialog1:
   LDA currentDialogScreen
   CMP #$01
   BNE LoadMoodyDialog2
+
+  LDA #$01
+  JSR Bankswitch
 
   JSR DrawDialogBackground
 
@@ -292,6 +298,9 @@ LoadLincDialog1:
   LDA currentDialogScreen
   CMP #$01
   BNE LoadLincDialog2
+
+  LDA #$01
+  JSR Bankswitch
 
   JSR DrawDialogBackground
 
