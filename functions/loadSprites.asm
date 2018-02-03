@@ -250,6 +250,56 @@ TravelerDashRightTiles:
   STA travelerSprite12Tile
   RTS
 
+TravelerDeath:
+  LDA #$70
+  STA travelerSprite1Tile
+  LDA #$71
+  STA travelerSprite2Tile
+  LDA #$72
+  STA travelerSprite3Tile
+  LDA #$73
+  STA travelerSprite4Tile
+  LDA #$76
+  STA travelerSprite5Tile
+  LDA #$77
+  STA travelerSprite6Tile
+  LDA #$78
+  STA travelerSprite7Tile
+  LDA #$79
+  STA travelerSprite8Tile
+
+  LDA #$B0
+  STA travelerSprite1Y
+  STA travelerSprite2Y
+  STA travelerSprite3Y
+  STA travelerSprite4Y
+  LDA #$B8
+  STA travelerSprite5Y
+  STA travelerSprite6Y
+  STA travelerSprite7Y
+  STA travelerSprite8Y
+
+  LDA travelerSprite1X
+  STA travelerSprite5X
+  LDA travelerSprite2X
+  STA travelerSprite6X
+  LDA travelerSprite3X
+  STA travelerSprite7X
+
+  LDA travelerSprite3X
+  CLC
+  ADC #$08
+  STA travelerSprite4X
+  STA travelerSprite8X
+
+  LDA #$FF
+  STA travelerSprite9Y
+  STA travelerSprite10Y
+  STA travelerSprite11Y
+  STA travelerSprite12Y
+
+  RTS
+
 DisplayLincInChamber:
   LDX #$00
 .Loop:

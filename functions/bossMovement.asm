@@ -1,5 +1,12 @@
 ExecuteBossMovement:
 
+  LDA bossHealth
+  BNE .Move
+
+  DEC timer
+  JMP EndExecuteBossMovement
+
+.Move:
   JSR CheckProjectileBossCollision
   JSR CheckBossBulletCollision
   JSR BossFireProjectile
@@ -371,4 +378,13 @@ HideBossProjectileEnd:
 
 BossLoseHealth:
   DEC bossHealth
+
+  LDA bossHealth
+  BNE .End
+
+  JSR TravelerDeath
+  LDA #$C0
+  STA timer
+
+.End:
   RTS

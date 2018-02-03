@@ -1683,7 +1683,7 @@ MoodyBattleSequence:
 
   JSR ExecuteBossMovement
 
-  LDA bossHealth
+  LDA timer
   BNE .LoadScene
 
   LDA #$01
@@ -1709,6 +1709,7 @@ MoodyBattleSequence:
   STA enemyHealth
   LDA #$01
   STA gameInProgress
+  STA timer
 
   JSR SetProjectileTiles
 
