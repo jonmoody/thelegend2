@@ -1,6 +1,6 @@
   .inesprg 2
   .ineschr 7
-  .inesmap 3
+  .inesmap 4
   .inesmir 1
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -1771,6 +1771,8 @@ RollCredits:
   BNE EndRollCredits
 
   ; .inesmir 0 ; How do I change mirroring mid-game?
+  LDA #$01
+  STA $A000
 
   LDA #$00
   STA scroll
