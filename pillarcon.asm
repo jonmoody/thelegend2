@@ -1,4 +1,4 @@
-  .inesprg 2
+  .inesprg 4
   .ineschr 7
   .inesmap 4
   .inesmir 1
@@ -283,12 +283,29 @@ awakeningDialog7:
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
   .bank 1
+  .org $A000
   .org musicTitleLoad
   .incbin "music/LincCredits.nsf"
 
+  .bank 2
+  .org $8000
+
+  .bank 3
+  .org $A000
+  .org musicDialogLoad
+  .incbin "music/LincDialogue.nsf"
+
+  .bank 4
+  .org $8000
+
+  .bank 5
+  .org $A000
+  .org musicDialogLoad
+  .incbin "music/LincDialogue.nsf"
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-  .bank 2
+  .bank 6
   .org $C000
 
 NMI:
@@ -1418,8 +1435,32 @@ LoadIntroScene1:
   LDA introSceneLoaded
   BNE EndLoadIntroScene1
 
-  LDA #$01
-  JSR Bankswitch
+  ; bank 3 for music
+  LDA #%00000111
+  STA $8000
+  LDA #3
+  STA $8001
+
+.ClearAudio:
+  STA $4000, x
+  INX
+  CPX #$0F
+  BNE .ClearAudio
+  LDA #$10
+  STA $4010
+  LDA #$00
+  STA $4011
+  STA $4012
+  STA $4013
+  LDA #%00001111
+  STA $4015
+  LDA #$00
+  LDX #$00
+  JSR musicInit
+  JSR musicPlay
+
+  ; LDA #$01
+  ; JSR Bankswitch
 
   JSR DisableGraphics
   JSR ClearBackground
@@ -1456,6 +1497,29 @@ LoadIntroScene2:
 .LoadScene:
   LDA introSceneLoaded2
   BNE EndLoadIntroScene2
+
+  LDA #%00000111
+  STA $8000
+  LDA #1
+  STA $8001
+
+.ClearAudio:
+  STA $4000, x
+  INX
+  CPX #$0F
+  BNE .ClearAudio
+  LDA #$10
+  STA $4010
+  LDA #$00
+  STA $4011
+  STA $4012
+  STA $4013
+  LDA #%00001111
+  STA $4015
+  LDA #$00
+  LDX #$00
+  JSR musicInit
+  JSR musicPlay
 
   JSR DisableGraphics
   JSR ClearBackground
@@ -1770,7 +1834,6 @@ RollCredits:
   LDA creditsScreenLoaded
   BNE EndRollCredits
 
-  ; .inesmir 0 ; How do I change mirroring mid-game?
   LDA #$01
   STA $A000
 
@@ -1837,7 +1900,7 @@ Bankvalues:
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-  .bank 3
+  .bank 7
   .org $E000
 
 spritePalette:
@@ -1913,30 +1976,35 @@ attributeDialog:
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-  .bank 4
+  .bank 8
   .org $0000
   .incbin "graphics/title/chr.dat"
 
-  .bank 5
+  .bank 9
   .org $0000
   .incbin "sprites.chr"
 
-  .bank 6
+  .bank 10
   .org $0000
   .incbin "graphics/tesla/chr.dat"
 
-  .bank 7
+  .bank 11
   .org $0000
   .incbin "graphics/tesla-arrives/chr.dat"
 
-  .bank 8
+  .bank 12
   .org $0000
   .incbin "graphics/forge-interior/chr.dat"
 
-  .bank 9
+  .bank 13
   .org $0000
   .incbin "graphics/level-second-background/chr.dat"
 
-  .bank 10
+  .bank 14
   .org $0000
   .incbin "graphics/linc-rescued/chr.dat"
+
+  ; .bank 11
+  ; .org $A000
+  ; .org musicDialogLoad
+  ; .incbin "music/LincDialogue.nsf"
