@@ -1519,10 +1519,10 @@ LoadIntroScene2:
   LDA #3
   JSR AudioBankSwitch
 
-  LDA #%00000000
-  STA $8000
-  LDA #13
-  STA $8001
+  ; LDA #%00000000
+  ; STA $8000
+  ; LDA #13
+  ; STA $8001
 
   JMP LoadForgeDialogSequence
 
@@ -1592,26 +1592,6 @@ LoadTeslaScene:
   STA $8000
   LDA #16
   STA $8001
-
-  ; LDA #%00000010
-  ; STA $8000
-  ; LDA #16
-  ; STA $8001
-  ;
-  ; LDA #%00000011
-  ; STA $8000
-  ; LDA #16
-  ; STA $8001
-  ;
-  ; LDA #%00000100
-  ; STA $8000
-  ; LDA #16
-  ; STA $8001
-  ;
-  ; LDA #%00000101
-  ; STA $8000
-  ; LDA #16
-  ; STA $8001
 
   JSR DisableGraphics
   JSR ClearBackground
@@ -1884,6 +1864,11 @@ RollCredits:
 
   LDA #1
   JSR AudioBankSwitch
+
+  LDA #%00000000
+  STA $8000
+  LDA #13
+  STA $8001
 
   LDA #$01
   STA $A000
