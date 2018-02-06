@@ -14,8 +14,8 @@ falling  .rs 1
 jumpingVelocity  .rs 1
 movementSpeed  .rs 1
 projectileSpeed  .rs 1
-playerHealth  .rs 1
 enemyHealth  .rs 1
+playerHealth  .rs 1
 iFrames  .rs 1
 enemyIFrames  .rs 1
 deathSpeed  .rs 1
@@ -1454,8 +1454,37 @@ LoadIntroScene1:
   LDA #5
   JSR AudioBankSwitch
 
-  ; LDA #$01
+  ; LDA #13 ; figure this out
   ; JSR Bankswitch
+  ; LDA #%00000000
+  ; STA $8000
+  ; LDA #16
+  ; STA $8001
+
+  ; LDA #%00000001
+  ; STA $8000
+  ; LDA #14
+  ; STA $8001
+  ;
+  ; LDA #2
+  ; STA $8000
+  ; LDA #15
+  ; STA $8001
+  ;
+  ; LDA #3
+  ; STA $8000
+  ; LDA #16
+  ; STA $8001
+  ;
+  ; LDA #4
+  ; STA $8000
+  ; LDA #17
+  ; STA $8001
+  ;
+  ; LDA #5
+  ; STA $8000
+  ; LDA #18
+  ; STA $8001
 
   JSR DisableGraphics
   JSR ClearBackground
@@ -1553,6 +1582,11 @@ LoadTeslaScene:
 
   LDA #9
   JSR AudioBankSwitch
+
+  LDA #%00000000
+  STA $8000
+  LDA #16
+  STA $8001
 
   JSR DisableGraphics
   JSR ClearBackground
