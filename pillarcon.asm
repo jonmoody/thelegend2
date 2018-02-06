@@ -1718,8 +1718,11 @@ EndLoadMoodyDialogSequence:
 
 MoodyBattleSequence:
   LDA moodyBattleSequence
-  BEQ EndMoodyBattleSequence
+  BNE .Continue
 
+  JMP EndMoodyBattleSequence
+
+.Continue:
   LDA #$00
   STA endOfDialog
 
