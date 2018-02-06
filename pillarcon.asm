@@ -1451,29 +1451,8 @@ LoadIntroScene1:
   LDA introSceneLoaded
   BNE EndLoadIntroScene1
 
-  ; bank 3 for music
-  LDA #%00000111
-  STA $8000
   LDA #3
-  STA $8001
-
-.ClearAudio:
-  STA $4000, x
-  INX
-  CPX #$0F
-  BNE .ClearAudio
-  LDA #$10
-  STA $4010
-  LDA #$00
-  STA $4011
-  STA $4012
-  STA $4013
-  LDA #%00001111
-  STA $4015
-  LDA #$00
-  LDX #$00
-  JSR musicInit
-  JSR musicPlay
+  JSR AudioBankSwitch
 
   ; LDA #$01
   ; JSR Bankswitch
@@ -1514,28 +1493,8 @@ LoadIntroScene2:
   LDA introSceneLoaded2
   BNE EndLoadIntroScene2
 
-  LDA #%00000111
-  STA $8000
   LDA #1
-  STA $8001
-
-.ClearAudio:
-  STA $4000, x
-  INX
-  CPX #$0F
-  BNE .ClearAudio
-  LDA #$10
-  STA $4010
-  LDA #$00
-  STA $4011
-  STA $4012
-  STA $4013
-  LDA #%00001111
-  STA $4015
-  LDA #$00
-  LDX #$00
-  JSR musicInit
-  JSR musicPlay
+  JSR AudioBankSwitch
 
   JSR DisableGraphics
   JSR ClearBackground
@@ -1881,7 +1840,6 @@ EndCurrentFrame:
   JSR musicPlay
   RTI
 
-
 Bankswitch:
   TAX
   STA Bankvalues, X
@@ -2019,8 +1977,3 @@ attributeDialog:
   .bank 18
   .org $0000
   .incbin "graphics/linc-rescued/chr.dat"
-
-  ; .bank 11
-  ; .org $A000
-  ; .org musicDialogLoad
-  ; .incbin "music/LincDialogue.nsf"
