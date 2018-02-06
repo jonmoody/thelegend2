@@ -1451,7 +1451,7 @@ LoadIntroScene1:
   LDA introSceneLoaded
   BNE EndLoadIntroScene1
 
-  LDA #3
+  LDA #5
   JSR AudioBankSwitch
 
   ; LDA #$01
@@ -1487,6 +1487,9 @@ LoadIntroScene2:
 
   LDA #$01
   STA forgeScene
+  LDA #3
+  JSR AudioBankSwitch
+
   JMP LoadForgeDialogSequence
 
 .LoadScene:
@@ -1550,6 +1553,9 @@ LoadTeslaScene:
   BNE EndLoadTeslaScene
 
   JSR LoadStars
+
+  LDA #9
+  JSR AudioBankSwitch
 
   JSR DisableGraphics
   JSR ClearBackground
@@ -1651,6 +1657,9 @@ MoodyAppearsScene:
   STA moodyDialog
   JSR HideLincSprite
 
+  LDA #3
+  JSR AudioBankSwitch
+
   JMP EndMoodyAppearsScene
 
 .LoadScene:
@@ -1736,12 +1745,17 @@ MoodyBattleSequence:
   LDA #$01
   JSR Bankswitch
   JSR HideTravelerSprite
+  LDA #3
+  JSR AudioBankSwitch
 
   JMP EndMoodyBattleSequence
 
 .LoadScene:
   LDA moodyBattleSequenceLoaded
   BNE EndMoodyBattleSequence
+
+  LDA #7
+  JSR AudioBankSwitch
 
   JSR LoadPlayerSprite
   JSR LoadTravelerSprite
@@ -1808,6 +1822,9 @@ RollCredits:
 .LoadScene:
   LDA creditsScreenLoaded
   BNE EndRollCredits
+
+  LDA #1
+  JSR AudioBankSwitch
 
   LDA #$01
   STA $A000
