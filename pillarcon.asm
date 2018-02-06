@@ -1,4 +1,4 @@
-  .inesprg 4
+  .inesprg 6
   .ineschr 7
   .inesmap 4
   .inesmir 1
@@ -300,12 +300,28 @@ awakeningDialog7:
 
   .bank 5
   .org $A000
-  .org musicDialogLoad
-  .incbin "music/LincDialogue.nsf"
+  .org musicLogLoad
+  .incbin "music/LincBobsLog.nsf"
+
+  .bank 6
+  .org $8000
+
+  .bank 7
+  .org $A000
+  .org musicBossBattleLoad
+  .incbin "music/LincBossBattle.nsf"
+
+  .bank 8
+  .org $8000
+
+  .bank 9
+  .org $A000
+  .org musicLevelLoad
+  .incbin "music/LincLevelOne.nsf"
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-  .bank 6
+  .bank 10
   .org $C000
 
 NMI:
@@ -1900,7 +1916,7 @@ Bankvalues:
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-  .bank 7
+  .bank 11
   .org $E000
 
 spritePalette:
@@ -1976,31 +1992,31 @@ attributeDialog:
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-  .bank 8
+  .bank 12
   .org $0000
   .incbin "graphics/title/chr.dat"
 
-  .bank 9
+  .bank 13
   .org $0000
   .incbin "sprites.chr"
 
-  .bank 10
+  .bank 14
   .org $0000
   .incbin "graphics/tesla/chr.dat"
 
-  .bank 11
+  .bank 15
   .org $0000
   .incbin "graphics/tesla-arrives/chr.dat"
 
-  .bank 12
+  .bank 16
   .org $0000
   .incbin "graphics/forge-interior/chr.dat"
 
-  .bank 13
+  .bank 17
   .org $0000
   .incbin "graphics/level-second-background/chr.dat"
 
-  .bank 14
+  .bank 18
   .org $0000
   .incbin "graphics/linc-rescued/chr.dat"
 
