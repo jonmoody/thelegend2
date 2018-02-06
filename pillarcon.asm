@@ -1454,37 +1454,10 @@ LoadIntroScene1:
   LDA #5
   JSR AudioBankSwitch
 
-  ; LDA #13 ; figure this out
-  ; JSR Bankswitch
-  ; LDA #%00000000
-  ; STA $8000
-  ; LDA #16
-  ; STA $8001
-
-  ; LDA #%00000001
-  ; STA $8000
-  ; LDA #14
-  ; STA $8001
-  ;
-  ; LDA #2
-  ; STA $8000
-  ; LDA #15
-  ; STA $8001
-  ;
-  ; LDA #3
-  ; STA $8000
-  ; LDA #16
-  ; STA $8001
-  ;
-  ; LDA #4
-  ; STA $8000
-  ; LDA #17
-  ; STA $8001
-  ;
-  ; LDA #5
-  ; STA $8000
-  ; LDA #18
-  ; STA $8001
+  LDA #%00000000
+  STA $8000
+  LDA #13
+  STA $8001
 
   JSR DisableGraphics
   JSR ClearBackground
@@ -1902,8 +1875,8 @@ EndCurrentFrame:
   RTI
 
 Bankswitch:
-  TAX
-  STA Bankvalues, X
+  ; TAX
+  ; STA Bankvalues, X
   RTS
 
 Bankvalues:
