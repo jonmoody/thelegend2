@@ -1496,9 +1496,6 @@ LoadIntroScene2:
   LDA introSceneLoaded2
   BNE EndLoadIntroScene2
 
-  LDA #1
-  JSR AudioBankSwitch
-
   JSR DisableGraphics
   JSR ClearBackground
 
