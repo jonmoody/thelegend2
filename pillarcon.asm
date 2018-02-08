@@ -1620,7 +1620,7 @@ ApproachingTheForge:
 
   LDA #%00000001
   STA $8000
-  LDA #24
+  LDA #32
   STA $8001
 
   JSR HideSprites
@@ -1681,9 +1681,6 @@ MoodyAppearsScene:
 .LoadScene:
   LDA moodyAppearsSceneLoaded
   BNE EndMoodyAppearsScene
-
-  LDA #$04
-  JSR Bankswitch
 
   JSR LoadPlayerSprite
   JSR LoadTravelerSprite
@@ -1761,8 +1758,6 @@ MoodyBattleSequence:
   STA moodyBattleSequence
   LDA #$01
   STA lincDialogSequence
-  LDA #$01
-  JSR Bankswitch
   JSR HideTravelerSprite
   LDA #3
   JSR AudioBankSwitch
