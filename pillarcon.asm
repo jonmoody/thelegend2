@@ -1492,11 +1492,6 @@ LoadIntroScene2:
   LDA #3
   JSR AudioBankSwitch
 
-  ; LDA #%00000000
-  ; STA $8000
-  ; LDA #13
-  ; STA $8001
-
   JMP LoadForgeDialogSequence
 
 .LoadScene:
