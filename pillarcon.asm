@@ -1885,14 +1885,6 @@ EndCurrentFrame:
   JSR musicPlay
   RTI
 
-Bankswitch:
-  ; TAX
-  ; STA Bankvalues, X
-  RTS
-
-; Bankvalues:
-;   .db $00, $01, $02, $03, $04
-
   .include "functions/enableGraphics.asm"
   .include "functions/disableGraphics.asm"
   .include "functions/vBlank.asm"
@@ -1908,7 +1900,6 @@ Bankswitch:
   .include "functions/nextLineBottom.asm"
   .include "functions/loadTopDialog.asm"
   .include "functions/loadBottomDialog.asm"
-  ; .include "functions/drawHearts.asm"
   .include "functions/loseHealth.asm"
   .include "functions/drawNextDialogScreen.asm"
   .include "functions/wipeDialog.asm"
