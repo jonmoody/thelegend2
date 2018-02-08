@@ -1,5 +1,5 @@
   .inesprg 6
-  .ineschr 4
+  .ineschr 5
   .inesmap 4
   .inesmir 1
 
@@ -1581,8 +1581,11 @@ EndLoadTeslaScene:
 
 ApproachingTheForge:
   LDA approachingTheForge
-  BEQ EndApproachingTheForge
+  BNE .Continue
 
+  JMP EndApproachingTheForge
+
+.Continue:
   JSR BackgroundSwap
 
   LDA scrollCheck
@@ -1605,7 +1608,20 @@ ApproachingTheForge:
 
 .LoadScene:
   LDA approachingTheForgeLoaded
-  BNE EndApproachingTheForge
+  BEQ .ContinueLoadingScene
+
+  JMP EndApproachingTheForge
+
+.ContinueLoadingScene:
+  LDA #%00000000
+  STA $8000
+  LDA #24
+  STA $8001
+
+  LDA #%00000001
+  STA $8000
+  LDA #24
+  STA $8001
 
   JSR HideSprites
   JSR LoadSprites
@@ -1615,11 +1631,6 @@ ApproachingTheForge:
 
   LDA #$01
   STA scroll
-
-  LDA #%00000000
-  STA $8000
-  LDA #24
-  STA $8001
 
   LDA #LOW(teslaLandingBackground)
   STA pointerBackgroundLowByte
@@ -1996,9 +2007,6 @@ attributeDialog:
   .org $0000
   .incbin "graphics/tesla/chr.dat"
 
-  ; .bank 15
-  ; .org $0000
-  ; .incbin "graphics/tesla-arrives/chr.dat"
   ;
   ; .bank 16
   ; .org $0000
@@ -2007,6 +2015,10 @@ attributeDialog:
   .bank 15
   .org $0000
   .incbin "graphics/level-second-background/chr.dat"
+
+  .bank 16
+  .org $0000
+  .incbin "graphics/tesla-arrives/chr.dat"
   ;
   ; .bank 18
   ; .org $0000
