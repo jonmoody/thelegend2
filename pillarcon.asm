@@ -1,5 +1,5 @@
   .inesprg 6
-  .ineschr 7
+  .ineschr 3
   .inesmap 4
   .inesmir 1
 
@@ -1459,11 +1459,6 @@ LoadIntroScene1:
   LDA #13
   STA $8001
 
-  LDA #%00000001
-  STA $8000
-  LDA #14
-  STA $8001
-
   JSR DisableGraphics
   JSR ClearBackground
 
@@ -1559,15 +1554,10 @@ LoadTeslaScene:
   LDA #9
   JSR AudioBankSwitch
 
-  ; LDA #%00000000
-  ; STA $8000
-  ; LDA #14
-  ; STA $8001
-  ;
-  ; LDA #%00000001
-  ; STA $8000
-  ; LDA #15
-  ; STA $8001
+  LDA #%00000000
+  STA $8000
+  LDA #16
+  STA $8001
 
   JSR DisableGraphics
   JSR ClearBackground
@@ -2003,19 +1993,19 @@ attributeDialog:
   .bank 14
   .org $0000
   .incbin "graphics/tesla/chr.dat"
-
-  .bank 15
-  .org $0000
-  .incbin "graphics/tesla-arrives/chr.dat"
-
-  .bank 16
-  .org $0000
-  .incbin "graphics/forge-interior/chr.dat"
-
-  .bank 17
-  .org $0000
-  .incbin "graphics/level-second-background/chr.dat"
-
-  .bank 18
-  .org $0000
-  .incbin "graphics/linc-rescued/chr.dat"
+  ;
+  ; .bank 15
+  ; .org $0000
+  ; .incbin "graphics/tesla-arrives/chr.dat"
+  ;
+  ; .bank 16
+  ; .org $0000
+  ; .incbin "graphics/forge-interior/chr.dat"
+  ;
+  ; .bank 17
+  ; .org $0000
+  ; .incbin "graphics/level-second-background/chr.dat"
+  ;
+  ; .bank 18
+  ; .org $0000
+  ; .incbin "graphics/linc-rescued/chr.dat"
