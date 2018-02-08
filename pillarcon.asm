@@ -31,7 +31,6 @@ projectile3Direction  .rs 1
 gameOver  .rs 1
 gameOverLoaded  .rs 1
 gameWin  .rs 1
-; gameWinLoaded  .rs 1
 titleScreen  .rs 1
 creditsScreen  .rs 1
 creditsScreenLoaded  .rs 1
@@ -1899,7 +1898,7 @@ Bankswitch:
   .include "functions/nextLineBottom.asm"
   .include "functions/loadTopDialog.asm"
   .include "functions/loadBottomDialog.asm"
-  .include "functions/drawHearts.asm"
+  ; .include "functions/drawHearts.asm"
   .include "functions/loseHealth.asm"
   .include "functions/drawNextDialogScreen.asm"
   .include "functions/wipeDialog.asm"
