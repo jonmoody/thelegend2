@@ -17,9 +17,19 @@ LoadIntro1:
   ; LDA #$01
   ; JSR Bankswitch
 
+  ; LDA #%00000000
+  ; STA $8000
+  ; LDA #13
+  ; STA $8001
+
   LDA #%00000000
   STA $8000
   LDA #13
+  STA $8001
+
+  LDA #%00000001
+  STA $8000
+  LDA #14
   STA $8001
 
   JSR DrawDialogBackground
@@ -100,8 +110,14 @@ LeaveIntroDialog:
   STA currentDialogScreen
   LDA #$01
   STA teslaScene
-  LDA #$02
-  JSR Bankswitch
+  ; LDA #$02
+  ; JSR Bankswitch
+
+  ; LDA #%00000000
+  ; STA $8000
+  ; LDA #15
+  ; STA $8001
+
   JSR HideMattSprite
 
   LDA #$01
@@ -129,8 +145,15 @@ LoadMoodyDialog1:
   CMP #$01
   BNE LoadMoodyDialog2
 
-  LDA #$01
-  JSR Bankswitch
+  LDA #%00000000
+  STA $8000
+  LDA #13
+  STA $8001
+
+  LDA #%00000001
+  STA $8000
+  LDA #14
+  STA $8001
 
   JSR DrawDialogBackground
 
@@ -304,8 +327,15 @@ LoadLincDialog1:
   CMP #$01
   BNE LoadLincDialog2
 
-  LDA #$01
-  JSR Bankswitch
+  LDA #%00000000
+  STA $8000
+  LDA #13
+  STA $8001
+
+  LDA #%00000001
+  STA $8000
+  LDA #14
+  STA $8001
 
   JSR DrawDialogBackground
 

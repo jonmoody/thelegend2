@@ -1459,6 +1459,11 @@ LoadIntroScene1:
   LDA #13
   STA $8001
 
+  LDA #%00000001
+  STA $8000
+  LDA #14
+  STA $8001
+
   JSR DisableGraphics
   JSR ClearBackground
 
@@ -1551,15 +1556,18 @@ LoadTeslaScene:
   LDA teslaSceneLoaded
   BNE EndLoadTeslaScene
 
-  JSR LoadStars
-
   LDA #9
   JSR AudioBankSwitch
 
-  LDA #%00000000
-  STA $8000
-  LDA #16
-  STA $8001
+  ; LDA #%00000000
+  ; STA $8000
+  ; LDA #14
+  ; STA $8001
+  ;
+  ; LDA #%00000001
+  ; STA $8000
+  ; LDA #15
+  ; STA $8001
 
   JSR DisableGraphics
   JSR ClearBackground
@@ -1573,6 +1581,7 @@ LoadTeslaScene:
   JSR LoadTeslaAttribute
   JSR LoadTeslaPalette
   JSR LoadSpritePalettes
+  JSR LoadStars
 
   JSR EnableGraphics
 
@@ -1874,8 +1883,8 @@ Bankswitch:
   ; STA Bankvalues, X
   RTS
 
-Bankvalues:
-  .db $00, $01, $02, $03, $04
+; Bankvalues:
+;   .db $00, $01, $02, $03, $04
 
   .include "functions/enableGraphics.asm"
   .include "functions/disableGraphics.asm"
@@ -1986,6 +1995,10 @@ attributeDialog:
   .bank 13
   .org $0000
   .incbin "sprites.chr"
+
+  ; .bank 14
+  ; .org $0000
+  ; .incbin "sprites2.chr"
 
   .bank 14
   .org $0000
