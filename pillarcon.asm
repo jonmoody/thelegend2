@@ -351,8 +351,10 @@ GameOver:
   LDA gameOverLoaded
   BNE EndGameOver
 
-  LDA #$01
-  JSR Bankswitch
+  LDA #%00000000
+  STA $8000
+  LDA #13
+  STA $8001
 
   JSR HideSprites
 

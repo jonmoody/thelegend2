@@ -102,13 +102,6 @@ LeaveIntroDialog:
   STA currentDialogScreen
   LDA #$01
   STA teslaScene
-  ; LDA #$02
-  ; JSR Bankswitch
-
-  ; LDA #%00000000
-  ; STA $8000
-  ; LDA #15
-  ; STA $8001
 
   JSR HideMattSprite
 
@@ -292,8 +285,6 @@ LeaveMoodyDialog:
   STA currentDialogScreen
   LDA #$01
   STA moodyBattleSequence
-  LDA #$04
-  JSR Bankswitch
 
   LDA #$01
   STA movementEnabled
