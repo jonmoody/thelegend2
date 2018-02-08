@@ -522,8 +522,10 @@ DamageStasisChamber:
   LDA #$C0
   STA timer
 
-  LDA #$06
-  JSR Bankswitch
+  LDA #%00000000
+  STA $8000
+  LDA #48
+  STA $8001
 
   JSR DisableGraphics
   JSR ClearBackground

@@ -1,5 +1,5 @@
   .inesprg 6
-  .ineschr 6
+  .ineschr 7
   .inesmap 4
   .inesmir 1
 
@@ -2025,7 +2025,7 @@ attributeDialog:
   .bank 17
   .org $0000
   .incbin "graphics/forge-interior/chr.dat"
-  ;
-  ; .bank 18
-  ; .org $0000
-  ; .incbin "graphics/linc-rescued/chr.dat"
+
+  .bank 18
+  .org $0000
+  .incbin "graphics/linc-rescued/chr.dat"
