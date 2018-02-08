@@ -1,5 +1,5 @@
   .inesprg 6
-  .ineschr 3
+  .ineschr 4
   .inesmap 4
   .inesmir 1
 
@@ -1616,8 +1616,10 @@ ApproachingTheForge:
   LDA #$01
   STA scroll
 
-  LDA #$05
-  JSR Bankswitch
+  LDA #%00000000
+  STA $8000
+  LDA #24
+  STA $8001
 
   LDA #LOW(teslaLandingBackground)
   STA pointerBackgroundLowByte
@@ -1993,7 +1995,7 @@ attributeDialog:
   .bank 14
   .org $0000
   .incbin "graphics/tesla/chr.dat"
-  ;
+
   ; .bank 15
   ; .org $0000
   ; .incbin "graphics/tesla-arrives/chr.dat"
@@ -2002,9 +2004,9 @@ attributeDialog:
   ; .org $0000
   ; .incbin "graphics/forge-interior/chr.dat"
   ;
-  ; .bank 17
-  ; .org $0000
-  ; .incbin "graphics/level-second-background/chr.dat"
+  .bank 15
+  .org $0000
+  .incbin "graphics/level-second-background/chr.dat"
   ;
   ; .bank 18
   ; .org $0000
