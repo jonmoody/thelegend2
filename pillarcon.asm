@@ -1,5 +1,5 @@
   .inesprg 6
-  .ineschr 5
+  .ineschr 6
   .inesmap 4
   .inesmir 1
 
@@ -1681,6 +1681,11 @@ MoodyAppearsScene:
   LDA moodyAppearsSceneLoaded
   BNE EndMoodyAppearsScene
 
+  LDA #%00000000
+  STA $8000
+  LDA #40
+  STA $8001
+
   JSR LoadPlayerSprite
   JSR LoadTravelerSprite
   JSR ShowTravelerCombatSprite
@@ -1769,6 +1774,11 @@ MoodyBattleSequence:
 
   LDA #7
   JSR AudioBankSwitch
+
+  LDA #%00000000
+  STA $8000
+  LDA #40
+  STA $8001
 
   JSR LoadPlayerSprite
   JSR LoadTravelerSprite
@@ -2002,9 +2012,7 @@ attributeDialog:
   .incbin "graphics/tesla/chr.dat"
 
   ;
-  ; .bank 16
-  ; .org $0000
-  ; .incbin "graphics/forge-interior/chr.dat"
+
   ;
   .bank 15
   .org $0000
@@ -2013,6 +2021,10 @@ attributeDialog:
   .bank 16
   .org $0000
   .incbin "graphics/tesla-arrives/chr.dat"
+
+  .bank 17
+  .org $0000
+  .incbin "graphics/forge-interior/chr.dat"
   ;
   ; .bank 18
   ; .org $0000
