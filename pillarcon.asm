@@ -1996,17 +1996,10 @@ attributeDialog:
   .org $0000
   .incbin "sprites.chr"
 
-  ; .bank 14
-  ; .org $0000
-  ; .incbin "sprites2.chr"
-
   .bank 14
   .org $0000
   .incbin "graphics/tesla/chr.dat"
 
-  ;
-
-  ;
   .bank 15
   .org $0000
   .incbin "graphics/level-second-background/chr.dat"
