@@ -1,10 +1,5 @@
 LoadAttribute:
-  LDA $2002
-  LDA #$23
-  STA $2006
-  LDA #$C0
-  STA $2006
-  LDX #$00
+  JSR PrimeAttribute1
 .Loop:
   LDA attribute, x
   STA $2007
@@ -14,12 +9,7 @@ LoadAttribute:
   RTS
 
 LoadTeslaAttribute:
-  LDA $2002
-  LDA #$23
-  STA $2006
-  LDA #$C0
-  STA $2006
-  LDX #$00
+  JSR PrimeAttribute1
 .Loop:
   LDA teslaAttribute, x
   STA $2007
@@ -29,12 +19,7 @@ LoadTeslaAttribute:
   RTS
 
 LoadTeslaLandingAttribute:
-  LDA $2002
-  LDA #$23
-  STA $2006
-  LDA #$C0
-  STA $2006
-  LDX #$00
+  JSR PrimeAttribute1
 .Loop:
   LDA teslaLandingAttribute, x
   STA $2007
@@ -44,12 +29,7 @@ LoadTeslaLandingAttribute:
   RTS
 
 LoadLincRescuedAttribute:
-  LDA $2002
-  LDA #$23
-  STA $2006
-  LDA #$C0
-  STA $2006
-  LDX #$00
+  JSR PrimeAttribute1
 .Loop:
   LDA lincRescueSceneAttribute, x
   STA $2007
@@ -59,12 +39,7 @@ LoadLincRescuedAttribute:
   RTS
 
 LoadAttribute2:
-  LDA $2002
-  LDA #$27
-  STA $2006
-  LDA #$C0
-  STA $2006
-  LDX #$00
+  JSR PrimeAttribute2
 .Loop:
   LDA levelSecondAttribute, x
   STA $2007
@@ -74,12 +49,7 @@ LoadAttribute2:
   RTS
 
 LoadAttributeExtra2:
-  LDA $2002
-  LDA #$27
-  STA $2006
-  LDA #$C0
-  STA $2006
-  LDX #$00
+  JSR PrimeAttribute2
 .Loop:
   LDA teslaLandingAttribute, x
   STA $2007
@@ -89,16 +59,29 @@ LoadAttributeExtra2:
   RTS
 
 LoadZeroAttribute:
-  LDA $2002
-  LDA #$23
-  STA $2006
-  LDA #$C0
-  STA $2006
-  LDX #$00
+  JSR PrimeAttribute1
 .Loop:
   LDA $00
   STA $2007
   INX
   CPX #$40
   BNE .Loop
+  RTS
+
+PrimeAttribute1:
+  LDA $2002
+  LDA #$23
+  STA $2006
+  LDA #$C0
+  STA $2006
+  LDX #$00
+  RTS
+
+PrimeAttribute2:
+  LDA $2002
+  LDA #$27
+  STA $2006
+  LDA #$C0
+  STA $2006
+  LDX #$00
   RTS

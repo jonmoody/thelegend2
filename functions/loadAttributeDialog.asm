@@ -1,10 +1,5 @@
 LoadAttributeDialog:
-  LDA $2002
-  LDA #$23
-  STA $2006
-  LDA #$C0
-  STA $2006
-  LDX #$00
+  JSR PrimeAttribute1
 .Loop:
   LDA attributeDialog, x
   STA $2007
