@@ -1,11 +1,5 @@
 LoadPalettes:
-  LDA $2002
-  LDA #$3F
-  STA $2006
-  LDA #$00
-  STA $2006
-
-  LDX #$00
+  JSR PrimePalette1
 .Loop:
   LDA palette, x
   STA $2007
@@ -15,13 +9,7 @@ LoadPalettes:
   RTS
 
 LoadFuturePalettes:
-  LDA $2002
-  LDA #$3F
-  STA $2006
-  LDA #$00
-  STA $2006
-
-  LDX #$00
+  JSR PrimePalette1
 .Loop:
   LDA futurePalette, x
   STA $2007
@@ -47,13 +35,7 @@ LoadSpritePalettes:
   RTS
 
 LoadTitlePalettes:
-  LDA $2002
-  LDA #$3F
-  STA $2006
-  LDA #$00
-  STA $2006
-
-  LDX #$00
+  JSR PrimePalette1
 .Loop:
   LDA titlePalette, x
   STA $2007
@@ -63,13 +45,7 @@ LoadTitlePalettes:
   RTS
 
 LoadTeslaPalette:
-  LDA $2002
-  LDA #$3F
-  STA $2006
-  LDA #$00
-  STA $2006
-
-  LDX #$00
+  JSR PrimePalette1
 .Loop:
   LDA teslaPalette, x
   STA $2007
@@ -79,13 +55,7 @@ LoadTeslaPalette:
   RTS
 
 LoadTeslaLandingPalette:
-  LDA $2002
-  LDA #$3F
-  STA $2006
-  LDA #$00
-  STA $2006
-
-  LDX #$00
+  JSR PrimePalette1
 .Loop:
   LDA teslaLandingPalette, x
   STA $2007
@@ -95,13 +65,7 @@ LoadTeslaLandingPalette:
   RTS
 
 LoadForgeExteriorPalette:
-  LDA $2002
-  LDA #$3F
-  STA $2006
-  LDA #$00
-  STA $2006
-
-  LDX #$00
+  JSR PrimePalette1
 .Loop:
   LDA levelSecondPalette, x
   STA $2007
@@ -111,6 +75,16 @@ LoadForgeExteriorPalette:
   RTS
 
 LoadLincRescuedPalette:
+  JSR PrimePalette1
+.Loop:
+  LDA lincRescueScenePalette, x
+  STA $2007
+  INX
+  CPX #$20
+  BNE .Loop
+  RTS
+
+PrimePalette1:
   LDA $2002
   LDA #$3F
   STA $2006
@@ -118,10 +92,4 @@ LoadLincRescuedPalette:
   STA $2006
 
   LDX #$00
-.Loop:
-  LDA lincRescueScenePalette, x
-  STA $2007
-  INX
-  CPX #$20
-  BNE .Loop
   RTS

@@ -14,14 +14,6 @@ LoadIntro1:
   CMP #$01
   BNE LoadIntro2
 
-  ; LDA #$01
-  ; JSR Bankswitch
-
-  ; LDA #%00000000
-  ; STA $8000
-  ; LDA #13
-  ; STA $8001
-
   LDA #%00000000
   STA $8000
   LDA #13
