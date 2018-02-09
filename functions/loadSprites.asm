@@ -410,7 +410,7 @@ HideMattSprite:
 HideSprites:
   LDX #$00
 .Loop:
-  LDA #$00
+  LDA #$FF
   STA $0300, x
   INX
   CPX #$FF
