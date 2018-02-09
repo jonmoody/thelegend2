@@ -339,11 +339,16 @@ BossFireProjectile:
 
   ADC #$10
   STA enemyProjectileX
+  LDA #$01
+  STA bossProjectileDirection
+
   JMP EndBossFireProjectile
 
 .FacingLeft:
   ADC #$00
   STA enemyProjectileX
+  LDA #$00
+  STA bossProjectileDirection
 EndBossFireProjectile:
 
   DEC enemyFireTimer
@@ -358,7 +363,7 @@ MoveBossProjectile:
   CMP #$04
   BCC HideBossProjectile
 
-  LDA bossDirection
+  LDA bossProjectileDirection
   BNE .MoveBossProjectileRight
 
   LDA enemyProjectileX

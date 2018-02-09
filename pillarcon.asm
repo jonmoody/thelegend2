@@ -87,6 +87,7 @@ backgroundScrollCount  .rs 1
 scrollCheck  .rs 1
 scrollCountEnterForge  .rs 1
 stasisChamberHealth  .rs 1
+bossProjectileDirection  .rs 1
 
   .include "reference/spriteMemoryLocations.asm"
 
