@@ -1630,6 +1630,7 @@ ApproachingTheForge:
   JSR HideSprites
   JSR LoadSprites
   JSR ShowPlayerSprite
+  JSR LoadMoonSprite
   JSR DisableGraphics
   JSR ClearBackground
 

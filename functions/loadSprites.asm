@@ -58,6 +58,16 @@ LoadMattSprite:
   BNE .Loop
   RTS
 
+LoadMoonSprite:
+  LDX #$00
+.Loop:
+  LDA spriteMoon, x
+  STA $03BC, x
+  INX
+  CPX #$20
+  BNE .Loop
+  RTS
+
 HidePlayerSprite:
   LDX #$00
 .Loop:
