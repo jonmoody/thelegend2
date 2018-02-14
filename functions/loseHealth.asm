@@ -8,6 +8,6 @@ LoseHealth:
 
   ; This is causing the background to jump around wildly
   ; JSR DrawHearts
-  DEC playerHealth
+  ; DEC playerHealth
 EndLoseHealth:
   RTS
