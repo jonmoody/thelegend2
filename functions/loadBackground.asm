@@ -221,3 +221,25 @@ SwapBackgrounds:
   STA scrollCheck
 
   RTS
+
+DrawTheEnd:
+  LDA #LOW(backgroundTheEnd)
+  STA pointerBackgroundLowByte
+  LDA #HIGH(backgroundTheEnd)
+  STA pointerBackgroundHighByte
+
+  LDA $2002
+  LDA #$21
+  STA $2006
+  LDA #$AC
+  STA $2006
+
+  LDY #$00
+.Loop:
+  LDA [pointerBackgroundLowByte], y
+  STA $2007
+
+  INY
+  CPY #$08
+  BNE .Loop
+  RTS
