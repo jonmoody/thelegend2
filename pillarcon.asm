@@ -1842,7 +1842,7 @@ EndLincDialogSequence:
 RollCredits:
   LDA creditsScreen
   BEQ EndRollCredits
-
+  
   LDA creditsScreenLoaded
   BEQ .LoadScene
 
@@ -1870,6 +1870,8 @@ RollCredits:
 
   JSR DisableGraphics
   JSR ClearBackground
+
+  JSR DrawTheEnd
 
   LDA #LOW(backgroundCredits)
   STA pointerBackgroundLowByte
@@ -1987,6 +1989,9 @@ attributeCredits:
 
 attributeDialog:
   .include "graphics/dialog/attributesIntro.asm"
+
+backgroundTheEnd:
+  .db $34,$28,$25,$00,$25,$2F,$24,$6D
 
   .org $FFFA
   .dw NMI
