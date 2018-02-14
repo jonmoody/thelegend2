@@ -231,15 +231,15 @@ DrawTheEnd:
   LDA $2002
   LDA #$21
   STA $2006
-  LDA #$80
+  LDA #$AC
   STA $2006
 
-  LDX #$00
+  LDY #$00
 .Loop:
-  LDA [pointerBackgroundLowByte], x
+  LDA [pointerBackgroundLowByte], y
   STA $2007
 
-  INX
-  CPX #$08
+  INY
+  CPY #$08
   BNE .Loop
   RTS

@@ -1842,9 +1842,19 @@ EndLincDialogSequence:
 RollCredits:
   LDA creditsScreen
   BEQ EndRollCredits
-  
+
   LDA creditsScreenLoaded
   BEQ .LoadScene
+
+  LDA timer
+  BEQ .TimerExpired
+
+  DEC timer
+  JMP EndRollCredits
+
+.TimerExpired:
+  LDA timer
+  BNE .LoadScene
 
   JSR ScrollBackgroundUp
 
@@ -1865,6 +1875,9 @@ RollCredits:
 
   LDA #$00
   STA scroll
+
+  LDA #$70
+  STA timer
 
   JSR HideLincSprite
 
@@ -1991,7 +2004,7 @@ attributeDialog:
   .include "graphics/dialog/attributesIntro.asm"
 
 backgroundTheEnd:
-  .db $34,$28,$25,$00,$25,$2F,$24,$6D
+  .db $34,$28,$25,$00,$25,$2E,$24,$1F
 
   .org $FFFA
   .dw NMI
