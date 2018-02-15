@@ -1540,8 +1540,10 @@ LoadTeslaScene:
 
   JSR MoveStars
 
-  DEC timer
-  BNE .LoadScene
+  ; DEC timer
+  ; BNE .LoadScene
+  LDA buttonPressedB ; fix this
+  BEQ .LoadScene
 
   LDA #$00
   STA teslaScene
